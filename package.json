@@ -8,8 +8,8 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint . --ext .ts,.vue --ignore-path .gitignore .",
     "lintfix": "eslint . --ext .ts,.vue --ignore-path .gitignore . --fix",
-    "format-check": "npx prettier --check ./",
-    "format-write": "npx prettier --write ./"
+    "format-check": "npx prettier --check ./ --ignore-path .gitignore",
+    "format-write": "npx prettier --write ./ --ignore-path .gitignore"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^11.0.0",
@@ -20,6 +20,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "nuxt": "3.0.0-rc.13",
     "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.13",
     "typescript": "^4.8.4"
   },
   "dependencies": {

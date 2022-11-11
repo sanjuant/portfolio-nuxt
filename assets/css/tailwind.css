@@ -2,24 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-/* # Scrollbar */
-/* ### Firefox*/
-:root,
-.overflow-y-auto,
-.overflow-x-auto {
-  scrollbar-color: theme('colors.indigo.400') theme('colors.indigo.600');
-  scrollbar-width: thin;
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: theme('colors.slate.900');
+  }
+
+  /* # Scrollbar */
+  /* ### Firefox*/
+  :root,
+  .overflow-y-auto,
+  .overflow-x-auto {
+    scrollbar-color: theme('colors.indigo.600') theme('colors.indigo.800');
+    scrollbar-width: thin;
+  }
+  /* ### Chromium */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme('colors.indigo.800');
+  }
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.indigo.600');
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.indigo.700');
+  }
 }
-/* ### Chromium */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: theme('colors.indigo.600');
-}
-::-webkit-scrollbar-thumb {
-  background: theme('colors.indigo.400');
-}
-::-webkit-scrollbar-thumb:hover {
-  background: theme('colors.indigo.500');
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: theme('colors.gray.50');
+  }
+
+  /* # Scrollbar */
+  /* ### Firefox*/
+  :root,
+  .overflow-y-auto,
+  .overflow-x-auto {
+    scrollbar-color: theme('colors.indigo.400') theme('colors.indigo.600');
+    scrollbar-width: thin;
+  }
+
+  /* ### Chromium */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: theme('colors.indigo.600');
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.indigo.400');
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.indigo.500');
+  }
 }
