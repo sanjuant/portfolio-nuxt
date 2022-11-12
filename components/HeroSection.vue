@@ -83,10 +83,11 @@
 
 <script setup>
 import VueWriterEsm from 'vue-writer'
-import { useFetch } from 'nuxt/app'
+import { useFetch, useRuntimeConfig } from 'nuxt/app'
+const config = useRuntimeConfig()
 
 const { data: hero, error } = await useFetch(
-  'http://strapi.sanjuant.local/api/hero?populate=*'
+  `${config.public.strapiUrl}/api/hero?populate=*`
 )
 
 const writer = computed(() => {

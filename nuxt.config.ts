@@ -4,4 +4,9 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@heroicons/vue'],
   },
+  runtimeConfig: {
+    public: {
+      strapiUrl: 'http://strapi.sanjuant.local',
+    }
+  },
 })

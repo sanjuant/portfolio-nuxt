@@ -35,11 +35,3 @@
     </svg>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'WorldMapOld.vue',
-}
-</script>
-
-<style scoped></style>

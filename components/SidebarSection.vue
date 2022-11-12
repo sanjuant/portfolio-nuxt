@@ -45,12 +45,13 @@
                         :src="
                           error
                             ? 'https://via.placeholder.com/224?text=Picture+224x224'
-                            : profilePictureUrl
+                            : `${config.public.strapiUrl}${identity.data.attributes.picture.data.attributes.url}`
                         "
                         alt=""
                       />
                     </div>
                   </div>
+
                   <h3
                     class="text-md mt-6 text-center font-bold font-medium text-gray-50 dark:text-slate-50"
                   >
@@ -173,7 +174,7 @@
                     :src="
                       error
                         ? 'https://via.placeholder.com/224?text=Picture+224x224'
-                        : profilePictureUrl
+                        : `${config.public.strapiUrl}${identity.data.attributes.picture.data.attributes.url}`
                     "
                     alt=""
                   />
@@ -283,7 +284,8 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { useFetch } from 'nuxt/app'
+import { useFetch, useRuntimeConfig } from 'nuxt/app'
+const config = useRuntimeConfig()
 
 const navigation = [
   { name: 'Accueil', href: '#home', icon: HomeIcon, current: true },
@@ -313,14 +315,9 @@ const navigation = [
 const sidebarOpen = ref(false)
 
 const { data: identity, error } = await useFetch(
-  'http://strapi.sanjuant.local/api/identity?populate=*'
+  `${config.public.strapiUrl}/api/identity?populate=*`
 )
 
-const profilePictureUrl = computed(() => {
-  if (identity.value) {
-    return `http://strapi.sanjuant.local${identity.value.data.attributes.picture.data.attributes.url}`
-  }
-})
 </script>
 
 <style scoped></style>
