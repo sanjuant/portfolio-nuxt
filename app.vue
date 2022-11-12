@@ -4,7 +4,7 @@
     <div class="flex flex-1 flex-col md:pl-64">
       <main>
         <!-- PLACE CONTENT HERE -->
-        <!--        <HeroSection />-->
+        <HeroSection />
         <!--        <AboutSection />-->
         <!--        <SkillsSection />-->
         <!--        <ResumeSection />-->
