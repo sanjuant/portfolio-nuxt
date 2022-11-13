@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss'
-// import defaultTheme from '@tailwindcss/defaultTheme'
+import tailwindTypography from '@tailwindcss/typography'
 
 export default <Partial<Config>>{
   theme: {
@@ -12,4 +12,5 @@ export default <Partial<Config>>{
       '2xl': '1536px',
     },
   },
+  plugins: [tailwindTypography],
 }

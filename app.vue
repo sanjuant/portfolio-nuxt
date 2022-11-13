@@ -5,7 +5,7 @@
       <main>
         <!-- PLACE CONTENT HERE -->
         <HeroSection />
-        <!--        <AboutSection />-->
+        <AboutSection />
         <!--        <SkillsSection />-->
         <!--        <ResumeSection />-->
         <!--        <PortfolioSection />-->

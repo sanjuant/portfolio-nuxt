@@ -1,11 +1,8 @@
 <template>
-  <div
-    id="home"
-    class="relative mb-8 overflow-hidden bg-white dark:bg-slate-900"
-  >
+  <div id="home" class="relative overflow-hidden bg-white dark:bg-slate-900">
     <div class="lg:h-152 max-w-7xl xl:ml-32">
       <div
-        class="relative z-10 mx-auto bg-white dark:bg-slate-900 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl xl:mx-0"
+        class="relative z-10 mx-auto bg-white pb-12 dark:bg-slate-900 lg:w-full lg:max-w-2xl xl:mx-0"
       >
         <svg
           class="absolute inset-y-0 right-[-32px] -z-10 hidden hidden h-full w-48 translate-x-1/2 transform text-white dark:text-slate-900 xl:block"
@@ -41,7 +38,7 @@
               </span>
             </h2>
             <p
-              class="mt-3 text-base text-gray-500 dark:text-slate-300 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0"
+              class="mt-3 text-base text-gray-500 dark:text-slate-200 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0"
             >
               {{
                 error

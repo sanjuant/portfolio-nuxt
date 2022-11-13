@@ -53,7 +53,7 @@
                   </div>
 
                   <h3
-                    class="text-md mt-6 text-center font-bold font-medium text-gray-50 dark:text-slate-50"
+                    class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
                   >
                     {{
                       error ? 'FirstName' : identity.data.attributes.first_name
@@ -181,7 +181,7 @@
                 </div>
               </div>
               <h3
-                class="text-md mt-6 text-center font-bold font-medium text-gray-50 dark:text-slate-50"
+                class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
               >
                 {{ error ? 'FirstName' : identity.data.attributes.first_name }}
                 {{ error ? 'LastName' : identity.data.attributes.last_name }}
@@ -317,7 +317,6 @@ const sidebarOpen = ref(false)
 const { data: identity, error } = await useFetch(
   `${config.public.strapiUrl}/api/identity?populate=*`
 )
-
 </script>
 
 <style scoped></style>
