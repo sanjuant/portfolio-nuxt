@@ -159,7 +159,6 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import 'swiper/css/grid'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
-import '~/assets/css/swiperjs.css'
 
 const config = useRuntimeConfig()
 
