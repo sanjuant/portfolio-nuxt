@@ -170,7 +170,7 @@
                     class="absolute -top-2 -right-2 h-[15rem] w-[15rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
                   />
                   <img
-                    class="relative mx-auto flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
+                    class="relative mx-auto h-[224px] w-[224px] flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
                     :src="
                       error
                         ? 'https://via.placeholder.com/224?text=Picture+224x224'

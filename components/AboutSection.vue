@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable vue/no-v-html -->
   <div
     id="about-me"
     class="divider overflow-hidden bg-gray-50 py-12 text-gray-500 dark:bg-slate-800 dark:text-slate-200 lg:py-16"
@@ -6,7 +7,7 @@
     <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-prose lg:max-w-none">
         <p
-          class="font-semibold uppercase leading-6 tracking-wide text-indigo-600 dark:text-slate-100"
+          class="font-semibold uppercase leading-6 tracking-wide text-indigo-600 dark:text-indigo-500"
         >
           A propos de moi
         </p>

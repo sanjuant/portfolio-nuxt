@@ -6,7 +6,7 @@
         <!-- PLACE CONTENT HERE -->
         <HeroSection />
         <AboutSection />
-        <!--        <SkillsSection />-->
+        <SkillsSection />
         <!--        <ResumeSection />-->
         <!--        <PortfolioSection />-->
         <!--                <ContactSection />-->
