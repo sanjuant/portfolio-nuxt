@@ -38,7 +38,7 @@
     max-height: 22rem !important;
   }
 }
-@media (max-width: 475px) {
+@media (max-width: 760px) {
   #skills .swiper-wrapper {
     max-height: 22rem !important;
   }

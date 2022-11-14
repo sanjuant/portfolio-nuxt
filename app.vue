@@ -7,8 +7,8 @@
         <HeroSection />
         <AboutSection />
         <SkillsSection />
-        <!--        <ResumeSection />-->
-        <!--        <PortfolioSection />-->
+        <ResumeSection />
+        <!--                <PortfolioSection />-->
         <!--                <ContactSection />-->
       </main>
     </div>
