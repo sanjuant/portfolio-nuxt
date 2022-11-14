@@ -8,7 +8,7 @@
         <AboutSection />
         <SkillsSection />
         <ResumeSection />
-        <!--                <PortfolioSection />-->
+        <PortfolioSection />
         <!--                <ContactSection />-->
       </main>
     </div>

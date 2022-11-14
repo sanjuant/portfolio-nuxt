@@ -2,7 +2,7 @@
   <!-- eslint-disable vue/no-v-html -->
   <div
     id="about-me"
-    class="divider overflow-hidden bg-gray-50 py-12 text-gray-500 dark:bg-slate-800 dark:text-slate-200 lg:py-16"
+    class="overflow-hidden bg-gray-50 py-12 text-gray-500 dark:bg-slate-800 dark:text-slate-400 lg:py-16"
   >
     <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-prose lg:max-w-none">
@@ -35,7 +35,7 @@
       <div class="lg:grid lg:grid-cols-2 lg:items-start lg:gap-8">
         <div class="relative z-10 mb-32 sm:mb-28 lg:mb-0">
           <div
-            class="prose prose-headings:mt-0 prose-headings:text-gray-900 dark:prose-headings:text-slate-100 mx-auto mb-10 text-justify text-gray-500 dark:text-slate-200 lg:max-w-none"
+            class="prose prose-headings:mt-0 prose-headings:text-gray-900 dark:prose-headings:text-slate-100 mx-auto mb-10 text-justify text-gray-500 dark:text-slate-400 lg:max-w-none"
             v-html="
               error
                 ? 'Data cannot be retrieved'

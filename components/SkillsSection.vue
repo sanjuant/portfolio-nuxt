@@ -1,7 +1,7 @@
 <template>
   <div
     id="skills"
-    class="divider overflow-hidden bg-white py-12 dark:bg-slate-900 lg:pt-16 lg:pb-20"
+    class="overflow-hidden bg-white py-12 dark:bg-slate-900 lg:pt-16 lg:pb-20"
   >
     <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-prose lg:max-w-none">
@@ -392,5 +392,4 @@ const skillsSample = [
 ]
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

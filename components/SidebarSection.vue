@@ -249,16 +249,25 @@
       </div>
     </div>
     <div
-      class="sticky top-0 z-40 bg-gray-100 pl-1 pt-1 dark:bg-slate-800 sm:pl-3 sm:pt-3 md:hidden"
+      class="sticky top-0 z-40 flex justify-between bg-gray-100 dark:bg-slate-800 md:hidden"
     >
       <button
         type="button"
-        class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:text-slate-500 dark:hover:text-slate-300"
+        class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 dark:text-slate-500 dark:hover:text-slate-300"
         @click="sidebarOpen = true"
       >
         <span class="sr-only">Open sidebar</span>
         <Bars3Icon class="h-6 w-6" aria-hidden="true" />
       </button>
+      <div
+        class="mr-2 flex flex-col items-end justify-center text-right text-xs dark:text-slate-500"
+      >
+        <div>
+          {{ error ? 'FirstName' : identity.data.attributes.first_name }}
+          {{ error ? 'LastName' : identity.data.attributes.last_name }}
+        </div>
+        <div>{{ error ? 'JobTitle' : identity.data.attributes.job }}</div>
+      </div>
     </div>
   </div>
 </template>
