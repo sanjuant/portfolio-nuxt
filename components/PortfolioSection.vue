@@ -63,7 +63,9 @@
           >
             <template #wrapper-start></template>
             <swiper-slide
-              v-for="(portfolio, index) in error ? portfoliosSample : portfolios.data"
+              v-for="(portfolio, index) in error
+                ? portfoliosSample
+                : portfolios.data"
               :key="portfolio.attributes.title"
               class="max-w-full"
             >
