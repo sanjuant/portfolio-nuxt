@@ -9,7 +9,7 @@
         <SkillsSection />
         <ResumeSection />
         <PortfolioSection />
-        <!--                <ContactSection />-->
+        <ContactSection />
       </main>
     </div>
   </div>
