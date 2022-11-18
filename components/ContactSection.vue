@@ -218,7 +218,13 @@
                       ref="protectedPhone"
                       class="ml-2 cursor-pointer text-sm"
                       @copy="copyProtected"
-                      @click="linkProtected($event, 'tel')"
+                      @click="
+                        linkProtected(
+                          $event,
+                          'tel',
+                          contact.data.attributes.protectedPhone
+                        )
+                      "
                     >
                       {{ contact.data.attributes.protectedPhone }}
                     </div>
@@ -240,7 +246,13 @@
                       ref="protectedEmail"
                       class="ml-2 cursor-pointer text-sm"
                       @copy="copyProtected"
-                      @click="linkProtected($event, 'mailto')"
+                      @click="
+                        linkProtected(
+                          $event,
+                          'mailto',
+                          contact.data.attributes.protectedEmail
+                        )
+                      "
                     >
                       {{ contact.data.attributes.protectedEmail }}
                     </div>
@@ -425,7 +437,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -489,15 +500,8 @@ onMounted(() => {
   }
 })
 
-const linkProtected = (e, protocol) => {
-  window.open(
-    protocol +
-      ':' +
-      deobfuscateString(
-        obfuscateString(contact.value.data.attributes.email)
-      ).replace(' ', ''),
-    '_blank'
-  )
+const linkProtected = (e, protocol, url) => {
+  window.open(protocol + ':' + deobfuscateString(url), '_blank')
   e.preventDefault()
 }
 
@@ -517,14 +521,6 @@ const copyProtected = (e) => {
     rot47(selection.focusNode.textContent.split('').reverse().join(''))
   )
   e.preventDefault()
-}
-
-function encodeBase64(string) {
-  if (process.client) {
-    return window.btoa(unescape(encodeURIComponent(string)))
-  } else {
-    return Buffer.from(string, 'ascii').toString('base64')
-  }
 }
 
 function decodeBase64(string) {
@@ -548,14 +544,6 @@ function rot47(data) {
   return result.join('')
 }
 
-function obfuscateString(string) {
-  let result = string.split('').reverse().join('')
-  result = encodeBase64(result)
-  result = rot47(result)
-  result = encodeBase64(result)
-  return result
-}
-
 function deobfuscateString(string) {
   let result = decodeBase64(string)
   result = rot47(result)
@@ -563,6 +551,24 @@ function deobfuscateString(string) {
   result = result.split('').reverse().join('')
   return result
 }
+
+/* Functions to obfuscate string
+function encodeBase64(string) {
+  if (process.client) {
+    return window.btoa(unescape(encodeURIComponent(string)))
+  } else {
+    return Buffer.from(string, 'ascii').toString('base64')
+  }
+}
+
+function obfuscateString(string) {
+  let result = string.split('').reverse().join('')
+  result = encodeBase64(result)
+  result = rot47(result)
+  result = encodeBase64(result)
+  return result
+}
+*/
 
 // TODO: https://vuejsexamples.com/build-simple-recaptcha-for-vuejs-without-server-need/
 // CloakingEmail https://github.com/martignoni/hugo-cloak-email
