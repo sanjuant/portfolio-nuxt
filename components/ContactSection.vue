@@ -220,7 +220,7 @@
                       @copy="copyProtected"
                       @click="linkProtected($event, 'tel')"
                     >
-                      {{ phone }}
+                      {{ contact.data.attributes.protectedPhone }}
                     </div>
                     <span v-else class="ml-2 text-sm uppercase"
                       >+33 6 12 34 57 89</span
@@ -242,7 +242,7 @@
                       @copy="copyProtected"
                       @click="linkProtected($event, 'mailto')"
                     >
-                      {{ email }}
+                      {{ contact.data.attributes.protectedEmail }}
                     </div>
                     <span v-else class="ml-2 text-sm uppercase"
                       >name@domain.tld</span
@@ -425,6 +425,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -562,9 +563,6 @@ function deobfuscateString(string) {
   result = result.split('').reverse().join('')
   return result
 }
-
-const email = 'M2J5SHs+ZDk1KEFGKil9cDV2fTk1dmRHKkhsbA=='
-const phone = 'fHN8OHxzdDh9O3Q4fiU0OH06cEt8SkRs'
 
 // TODO: https://vuejsexamples.com/build-simple-recaptcha-for-vuejs-without-server-need/
 // CloakingEmail https://github.com/martignoni/hugo-cloak-email
