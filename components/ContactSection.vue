@@ -213,11 +213,18 @@
                       class="h-5 w-5 flex-shrink-0"
                       aria-hidden="true"
                     />
-                    <span class="ml-2 text-sm uppercase">{{
-                      error
-                        ? '+33 6 12 34 57 89'
-                        : contact.data.attributes.phone
-                    }}</span>
+                    <div
+                      v-if="!error"
+                      ref="protectedPhone"
+                      class="ml-2 cursor-pointer text-sm"
+                      @copy="copyProtected"
+                      @click="linkProtected($event, 'tel')"
+                    >
+                      {{ phone }}
+                    </div>
+                    <span v-else class="ml-2 text-sm uppercase"
+                      >+33 6 12 34 57 89</span
+                    >
                   </dd>
                   <dt><span class="sr-only">Email</span></dt>
                   <dd
@@ -227,12 +234,21 @@
                       class="h-5 w-5 flex-shrink-0"
                       aria-hidden="true"
                     />
-                    <span class="ml-2 text-sm uppercase">{{
-                      error
-                        ? 'contact@domain.tld'
-                        : contact.data.attributes.email
-                    }}</span>
+
+                    <div
+                      v-if="!error"
+                      ref="protectedEmail"
+                      class="ml-2 cursor-pointer text-sm"
+                      @copy="copyProtected"
+                      @click="linkProtected($event, 'mailto')"
+                    >
+                      {{ email }}
+                    </div>
+                    <span v-else class="ml-2 text-sm uppercase"
+                      >name@domain.tld</span
+                    >
                   </dd>
+                  <dt><span class="sr-only">Email</span></dt>
                 </dl>
                 <ul
                   role="list"
@@ -419,15 +435,138 @@
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline'
 
 import { useFetch, useRuntimeConfig } from 'nuxt/app'
+import { onMounted, ref } from 'vue'
+
 const config = useRuntimeConfig()
+
+const protectedPhone = ref(null)
+const protectedEmail = ref(null)
 
 const { data: contact, error } = await useFetch(
   `${config.public.strapiUrl}/api/contact?populate=*`
 )
 
+onMounted(() => {
+  const elements = [protectedPhone.value, protectedEmail.value]
+  const pushedValue = []
+  const css = []
+  css.push('<style>')
+  css.push(
+    '.changedirection { unicode-bidi: bidi-override; direction: rtl; text-align: left; }'
+  )
+  css.push('.protected { white-space: nowrap; }')
+  css.push('.protected .letter span[class] span { color: transparent; }')
+  css.push('.protected span[class]:after { position: absolute; right: 0; }')
+  css.push('.letter { position:relative; display:inline-flex;  }')
+  css.push(
+    '.letter { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }'
+  )
+  elements.forEach((el) => {
+    const html = []
+    const string = deobfuscateString(el.innerText)
+    const strArray = string.split('').reverse().join('')
+    for (let i = 0; i < strArray.length; i++) {
+      let strRot47 = rot47(strArray[i])
+      if (strRot47 === ' ') {
+        strRot47 = '&nbsp;'
+      }
+      const cssClass = 'c-' + strArray[i].charCodeAt(0)
+      if (!pushedValue.includes(cssClass)) {
+        css.push(`.${cssClass}:after { content: "${strArray[i]}"; }`)
+        pushedValue.push(cssClass)
+      }
+      html.push(
+        `<span class="letter"><span class="${cssClass}"><span>${strRot47}</span></span></span>`
+      )
+    }
+    el.innerHTML = html.join('')
+    el.classList.add('uppercase', 'protected', 'changedirection')
+  })
+
+  if (process.client) {
+    document.head.insertAdjacentHTML('beforeend', css.join('\n'))
+  }
+})
+
+const linkProtected = (e, protocol) => {
+  window.open(
+    protocol +
+      ':' +
+      deobfuscateString(
+        obfuscateString(contact.value.data.attributes.email)
+      ).replace(' ', ''),
+    '_blank'
+  )
+  e.preventDefault()
+}
+
+const copyProtected = (e) => {
+  const selection = document.getSelection()
+  const range = new Range()
+  let nodeParent = e.srcElement
+  while (nodeParent.localName !== 'div') {
+    nodeParent = nodeParent.parentNode
+  }
+  range.selectNodeContents(nodeParent)
+  selection.removeAllRanges()
+  selection.addRange(range)
+
+  e.clipboardData.setData(
+    'text/plain',
+    rot47(selection.focusNode.textContent.split('').reverse().join(''))
+  )
+  e.preventDefault()
+}
+
+function encodeBase64(string) {
+  if (process.client) {
+    return window.btoa(unescape(encodeURIComponent(string)))
+  } else {
+    return Buffer.from(string, 'ascii').toString('base64')
+  }
+}
+
+function decodeBase64(string) {
+  if (process.client) {
+    return decodeURIComponent(escape(window.atob(string)))
+  } else {
+    return Buffer.from(string, 'base64').toString('ascii')
+  }
+}
+
+function rot47(data) {
+  const result = []
+  for (let i = 0; i < data.length; i++) {
+    const charCode = data.charCodeAt(i)
+    if (charCode >= 33 && charCode <= 126) {
+      result[i] = String.fromCharCode(33 + ((charCode + 14) % 94))
+    } else {
+      result[i] = String.fromCharCode(charCode)
+    }
+  }
+  return result.join('')
+}
+
+function obfuscateString(string) {
+  let result = string.split('').reverse().join('')
+  result = encodeBase64(result)
+  result = rot47(result)
+  result = encodeBase64(result)
+  return result
+}
+
+function deobfuscateString(string) {
+  let result = decodeBase64(string)
+  result = rot47(result)
+  result = decodeBase64(result)
+  result = result.split('').reverse().join('')
+  return result
+}
+
+const email = 'M2J5SHs+ZDk1KEFGKil9cDV2fTk1dmRHKkhsbA=='
+const phone = 'fHN8OHxzdDh9O3Q4fiU0OH06cEt8SkRs'
+
 // TODO: https://vuejsexamples.com/build-simple-recaptcha-for-vuejs-without-server-need/
 // CloakingEmail https://github.com/martignoni/hugo-cloak-email
 // Test scrapping mail with Antheta https://antheta.com/
 </script>
-
-<style scoped></style>
