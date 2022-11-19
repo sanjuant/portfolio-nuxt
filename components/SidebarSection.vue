@@ -260,7 +260,7 @@
         <Bars3Icon class="h-6 w-6" aria-hidden="true" />
       </button>
       <div
-        class="mr-2 flex flex-col items-end justify-center text-right text-xs dark:text-slate-500"
+        class="mr-2 flex flex-col items-end justify-center text-right text-xs text-gray-500 dark:text-slate-500"
       >
         <div>
           {{ error ? 'FirstName' : identity.data.attributes.first_name }}
