@@ -371,9 +371,8 @@
                   Laisser moi un message
                 </h3>
                 <form
-                  action="#"
-                  method="POST"
                   class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+                  @submit.prevent="submitForm"
                 >
                   <div class="sm:col-span-2">
                     <label
@@ -384,10 +383,12 @@
                     <div class="mt-1">
                       <input
                         id="email"
+                        v-model="email"
                         name="email"
                         type="email"
                         autocomplete="email"
-                        class="block w-full rounded-md border border-gray-100 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-600 focus:ring-indigo-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:focus:bg-slate-700 dark:focus:text-slate-100 dark:focus:outline-none dark:focus:ring-2"
+                        placeholder="name@domain.tld"
+                        class="block w-full rounded-md border border-gray-100 py-3 px-4 text-gray-900 shadow-sm placeholder:italic placeholder:text-gray-400 focus:border-indigo-600 focus:ring-indigo-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 placeholder:dark:text-slate-700 dark:focus:bg-slate-700 dark:focus:text-slate-100 dark:focus:outline-none dark:focus:ring-2"
                       />
                     </div>
                   </div>
@@ -396,14 +397,17 @@
                     <label
                       for="subject"
                       class="block text-sm font-medium text-gray-900 dark:text-slate-200"
-                      >Subject</label
+                      >Objet</label
                     >
                     <div class="mt-1">
                       <input
                         id="subject"
+                        v-model="subject"
                         type="text"
                         name="subject"
-                        class="block w-full rounded-md border border-gray-100 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-600 focus:ring-indigo-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:focus:bg-slate-700 dark:focus:text-slate-100 dark:focus:outline-none dark:focus:ring-2"
+                        required
+                        placeholder="Obfuscation des infos sensibles"
+                        class="block w-full rounded-md border border-gray-100 py-3 px-4 text-gray-900 shadow-sm placeholder:italic placeholder:text-gray-400 focus:border-indigo-600 focus:ring-indigo-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 placeholder:dark:text-slate-700 dark:focus:bg-slate-700 dark:focus:text-slate-100 dark:focus:outline-none dark:focus:ring-2"
                       />
                     </div>
                   </div>
@@ -415,26 +419,28 @@
                         >Message</label
                       >
                       <span id="message-max" class="text-sm text-gray-500"
-                        >Max. 500 characters</span
+                        >Max. 500 caractères</span
                       >
                     </div>
                     <div class="mt-1">
                       <textarea
                         id="message"
+                        v-model="message"
                         name="message"
+                        required
+                        placeholder="Sympa la façon de masquer les informations sensibles (tel, email) des robots ;)."
                         rows="4"
-                        class="block w-full rounded-md border border-gray-100 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-600 focus:ring-indigo-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:focus:bg-slate-700 dark:focus:text-slate-100 dark:focus:outline-none dark:focus:ring-2"
+                        class="block w-full rounded-md border border-gray-100 py-3 px-4 text-gray-900 shadow-sm placeholder:italic placeholder:text-gray-400 focus:border-indigo-600 focus:ring-indigo-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 placeholder:dark:text-slate-700 dark:focus:bg-slate-700 dark:focus:text-slate-100 dark:focus:outline-none dark:focus:ring-2"
                         aria-describedby="message-max"
                       />
                     </div>
                   </div>
                   <div class="flex justify-end md:col-span-2">
-                    <button
+                    <input
                       type="submit"
-                      class="rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-gray-50 transition duration-150 ease-in-out hover:bg-indigo-700 dark:bg-indigo-800 dark:text-slate-100 dark:hover:bg-indigo-900"
-                    >
-                      Envoyer
-                    </button>
+                      value="Envoyer"
+                      class="cursor-pointer rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-gray-50 transition duration-150 ease-in-out hover:bg-indigo-700 dark:bg-indigo-800 dark:text-slate-100 dark:hover:bg-indigo-900"
+                    />
                   </div>
                 </form>
               </div>
@@ -457,9 +463,23 @@ const config = useRuntimeConfig()
 const protectedPhone = ref(null)
 const protectedEmail = ref(null)
 
+const email = ref('')
+const subject = ref('')
+const message = ref('')
+
 const { data: contact, error } = await useFetch(
   `${config.public.strapiUrl}/api/contact?populate=*`
 )
+
+function submitForm(e) {
+  window.open(
+    `mailto:${deobfuscateString(
+      contact.value.data.attributes.protectedEmail
+    )}?subject=${subject.value}&body=${message.value}`,
+    '_blank'
+  )
+  e.preventDefault()
+}
 
 onMounted(() => {
   const elements = [protectedPhone.value, protectedEmail.value]
