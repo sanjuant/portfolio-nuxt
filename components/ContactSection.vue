@@ -85,10 +85,11 @@
             </svg>
             <h2 class="sr-only">Contact us</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3">
+            <!--            <div class="grid grid-cols-1 md:grid-cols-3">-->
+            <div class="flex flex-col lg:flex-row">
               <!-- Contact information -->
               <div
-                class="relative rounded-t-lg bg-gradient-to-b from-indigo-600 to-indigo-700 py-4 py-4 px-4 dark:from-indigo-800 dark:to-indigo-900 sm:px-6 md:rounded-l-lg md:rounded-tr-none md:py-8 xl:p-8"
+                class="relative flex w-fit flex-col rounded-t-lg bg-gradient-to-b from-indigo-600 to-indigo-700 py-4 py-4 px-4 dark:from-indigo-800 dark:to-indigo-900 sm:px-6 lg:max-w-min lg:rounded-l-lg lg:rounded-tr-none lg:py-8 xl:p-8"
               >
                 <!-- Decorative angle backgrounds -->
                 <div
@@ -190,7 +191,9 @@
                     </defs>
                   </svg>
                 </div>
-                <h3 class="mb-4 text-lg font-medium text-gray-50">
+                <h3
+                  class="mb-4 whitespace-nowrap text-lg font-medium text-gray-50"
+                >
                   Informations de contact
                 </h3>
                 <p
@@ -202,13 +205,10 @@
                       : contact.data.attributes.disclaimer
                   }}
                 </p>
-                <dl
-                  class="mt-8 flex flex-col break-all sm:flex-row md:flex-col"
+                <div
+                  class="mt-8 flex flex-col break-all sm:flex-row lg:flex-col"
                 >
-                  <dt>
-                    <span class="sr-only">Phone number</span>
-                  </dt>
-                  <dd class="flex text-gray-100 dark:text-slate-100">
+                  <div class="flex text-gray-100 dark:text-slate-100">
                     <PhoneIcon
                       class="h-5 w-5 flex-shrink-0"
                       aria-hidden="true"
@@ -231,10 +231,9 @@
                     <span v-else class="ml-2 text-sm uppercase"
                       >+33 6 12 34 57 89</span
                     >
-                  </dd>
-                  <dt><span class="sr-only">Email</span></dt>
-                  <dd
-                    class="mt-2 flex text-gray-100 dark:text-slate-100 sm:ml-8 sm:mt-0 md:ml-0 md:mt-2"
+                  </div>
+                  <div
+                    class="mt-2 flex text-gray-100 dark:text-slate-100 sm:ml-8 sm:mt-0 lg:ml-0 lg:mt-2"
                   >
                     <EnvelopeIcon
                       class="h-5 w-5 flex-shrink-0"
@@ -259,12 +258,16 @@
                     <span v-else class="ml-2 text-sm uppercase"
                       >name@domain.tld</span
                     >
-                  </dd>
-                  <dt><span class="sr-only">Email</span></dt>
-                </dl>
+                  </div>
+                </div>
+
+                <!--                <ul-->
+                <!--                    role="list"-->
+                <!--                    class="justify-self-end mt-8 flex justify-end space-x-4 md:mt-[100%] md:justify-between md:space-x-0"-->
+                <!--                >-->
                 <ul
                   role="list"
-                  class="mt-8 flex justify-end space-x-4 md:mt-[100%] md:justify-between md:space-x-0"
+                  class="mt-8 flex justify-end space-x-4 lg:mt-auto lg:justify-between lg:space-x-0"
                 >
                   <li>
                     <a
@@ -360,7 +363,7 @@
 
               <!-- Contact form -->
               <div
-                class="relative rounded-b-lg bg-white py-4 px-4 dark:bg-slate-900 sm:px-6 md:col-span-2 md:rounded-r-lg md:rounded-bl-none md:p-8 md:py-8 lg:px-8"
+                class="relative w-full rounded-b-lg bg-white py-4 px-4 dark:bg-slate-900 sm:px-6 lg:col-span-2 lg:rounded-r-lg lg:rounded-bl-none lg:p-8 lg:py-8 lg:px-8"
               >
                 <h3
                   class="text-lg font-medium text-gray-900 dark:text-slate-200"
@@ -425,10 +428,10 @@
                       />
                     </div>
                   </div>
-                  <div class="sm:col-span-2 sm:flex sm:justify-end">
+                  <div class="flex justify-end md:col-span-2">
                     <button
                       type="submit"
-                      class="rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-gray-50 transition duration-150 ease-in-out hover:bg-indigo-700 dark:bg-indigo-800 dark:text-slate-100 dark:hover:bg-indigo-900 sm:w-auto"
+                      class="rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-gray-50 transition duration-150 ease-in-out hover:bg-indigo-700 dark:bg-indigo-800 dark:text-slate-100 dark:hover:bg-indigo-900"
                     >
                       Envoyer
                     </button>
