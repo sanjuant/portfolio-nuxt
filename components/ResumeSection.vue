@@ -30,7 +30,9 @@
                 ref="educationsAndExperiences"
                 class="relative pl-8 before:absolute before:left-2 before:top-2 before:h-full before:w-0.5 before:bg-gray-300 lg:pl-0 lg:pr-8 lg:text-right lg:before:left-[unset] lg:before:right-2"
                 :class="[
-                  educationIdx !== educations.data.length - 1 ? 'pb-12' : 'pb-3',
+                  educationIdx !== educations.data.length - 1
+                    ? 'pb-12'
+                    : 'pb-3',
                 ]"
               >
                 <span
@@ -84,7 +86,7 @@
                 </div>
                 <div
                   v-if="education.attributes.description"
-                  class="has-read-more mt-3 text-gray-500 dark:text-slate-400 "
+                  class="has-read-more mt-3 text-gray-500 dark:text-slate-400"
                 >
                   <div v-html="education.attributes.description" />
                 </div>
@@ -134,7 +136,9 @@
                 ref="educationsAndExperiences"
                 class="relative w-full pl-8 before:absolute before:left-2 before:top-2 before:h-full before:w-0.5 before:bg-indigo-500"
                 :class="[
-                  experienceIdx !== experiences.data.length - 1 ? 'pb-12' : 'pb-3',
+                  experienceIdx !== experiences.data.length - 1
+                    ? 'pb-12'
+                    : 'pb-3',
                 ]"
               >
                 <span
@@ -305,20 +309,25 @@ onMounted(() => {
   font-weight: 700;
 }
 
-.has-read-more ul, .has-read-more ol {
+.has-read-more ul,
+.has-read-more ol {
   padding: 0 1.5rem;
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
 }
 
-.has-read-more ul, .has-read-more ol {
+.has-read-more ul,
+.has-read-more ol {
   padding: 0 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 @media (min-width: 1024px) {
-  #education-and-training .has-read-more ul, #education-and-training .has-read-more ol {
-    unicode-bidi: bidi-override; direction: rtl; text-align: right;
+  #education-and-training .has-read-more ul,
+  #education-and-training .has-read-more ol {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: right;
   }
 }
 
