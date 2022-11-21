@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 360 80">
+	<defs>
+        <style>
+          svg {
+            fill: #9ca3af;
+          }
+          @media (prefers-color-scheme:dark) {
+            svg {
+              fill: #94a3b8;
+            }
+          }
+        </style>
+    </defs>
+  <path d="M149.4 70h47.9V50h-27.9V30h27.9V10h-47.9zM206.4 48.6h27.4V52h-27.4v18h47.1V30.6h-27.4v-3.5h27.4V10h-47.1zM310.1 27.1V10h-47.2v38.6h27.5V52h-27.5v18h47.2V30.6h-27.5v-3.5zM56.3 72l28.8 8 28.9-8 6.4-72H49.9l6.4 72zm28.9-57.3h22.1l-1.6 17.9-.2 2.4-2.1 23.2-.1 1.5-18.1 5-18.1-5-1.2-13.9H74.8l.6 7 9.8 2.7 9.8-2.7 1-11.5H65.4l-.8-8.8h32.1l.8-9H63.9l-.8-8.8h22.1z"/>
+</svg>
