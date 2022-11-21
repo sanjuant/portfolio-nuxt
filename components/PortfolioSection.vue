@@ -103,9 +103,9 @@
                     </h5>
                   </a>
                   <span
-                    class="pb-1 pr-2 text-right text-xs dark:text-slate-500"
+                    class="pb-1 pr-2 text-right text-xs dark:text-slate-500 uppercase mt-4"
                   >
-                    {{ portfolio.attributes.date }}
+                    {{ formatDate(portfolio.attributes.date) }}
                   </span>
                 </div>
               </div>
@@ -310,7 +310,7 @@ const setControlledSwiper = (swiper) => {
 }
 
 const { data: portfolios, error } = await useFetch(
-  `${config.public.strapiUrl}/api/portfolios?populate=deep`
+  `${config.public.strapiUrl}/api/portfolios?populate=deep&sort=date:DESC`
 )
 
 const paginationCustom = {
@@ -323,6 +323,23 @@ const paginationCustom = {
 }
 
 const modules = [Navigation, Pagination, Scrollbar, A11y]
+
+const formatDate = (date) => {
+  if (null === date) return
+  date = new Date(date)
+  let month = date.getUTCMonth() + 1; //months from 1-12
+  let day = date.getUTCDate();
+  if (day === 1 && month === 1) {
+    return date.toLocaleString('fr-fr', {
+      year: 'numeric',
+    })
+  } else {
+    return date.toLocaleString('fr-fr', {
+      month: 'long',
+      year: 'numeric',
+    })
+  }
+}
 
 const portfoliosSample = [
   {
