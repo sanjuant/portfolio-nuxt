@@ -294,7 +294,7 @@ onMounted(() => {
     lightbox = new PhotoSwipeLightbox({
       gallery: '.gallery',
       children: 'a',
-      initialZoomLevel: 'fill',
+      initialZoomLevel: 'fit',
       pswpModule: () => import('photoswipe'),
     })
     lightbox.init()
