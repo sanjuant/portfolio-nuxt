@@ -43,3 +43,13 @@
     max-height: 22rem !important;
   }
 }
+
+.swiper-lazy-preloader {
+  --swiper-preloader-color: theme('colors.indigo.500');
+}
+
+@media (prefers-color-scheme: dark) {
+  .swiper-lazy-preloader {
+    --swiper-preloader-color: theme('colors.indigo.700');
+  }
+}
