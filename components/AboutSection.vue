@@ -88,7 +88,12 @@
                       .company_logo_is_colored
                   "
                   class="max-h-[3rem] dark:invert"
-                  :src="formatImageUrl(aboutMe.data.attributes.recommendation.company_logo.data.attributes.formats.thumbnail.url)"
+                  :src="
+                    formatImageUrl(
+                      aboutMe.data.attributes.recommendation.company_logo.data
+                        .attributes.formats.thumbnail.url
+                    )
+                  "
                   :alt="
                     aboutMe.data.attributes.recommendation.company_logo.data
                       .attributes.alternativeText

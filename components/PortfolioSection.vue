@@ -171,7 +171,7 @@
               >
                 {{ portfolio.attributes.title }}
               </div>
-              <div class="text-gray-500 dark:text-slate-400">
+              <div class="my-8 text-gray-500 dark:text-slate-400">
                 {{ portfolio.attributes.description }}
               </div>
               <swiper

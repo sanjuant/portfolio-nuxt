@@ -4,7 +4,7 @@
       <Dialog
         as="div"
         class="fixed inset-0 z-40 flex md:hidden"
-        @close="sidebarOpen=false"
+        @close="sidebarOpen = false"
       >
         <TransitionChild
           as="template"
@@ -138,7 +138,7 @@
                 <button
                   type="button"
                   class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                  @click="sidebarOpen=false"
+                  @click="sidebarOpen = false"
                 >
                   <span class="sr-only">Close sidebar</span>
                   <XMarkIcon
