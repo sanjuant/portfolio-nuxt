@@ -4,7 +4,7 @@
       <Dialog
         as="div"
         class="fixed inset-0 z-40 flex md:hidden"
-        @close="sidebarOpen = false"
+        @close="sidebarOpen=false"
       >
         <TransitionChild
           as="template"
@@ -45,7 +45,10 @@
                         :src="
                           error
                             ? 'https://via.placeholder.com/224?text=Picture+224x224'
-                            : `${config.public.strapiUrl}${identity.data.attributes.picture.data.attributes.url}`
+                            : formatImageUrl(
+                                identity.data.attributes.picture.data.attributes
+                                  .formats.large.url
+                              )
                         "
                         alt=""
                       />
@@ -135,7 +138,7 @@
                 <button
                   type="button"
                   class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                  @click="sidebarOpen = false"
+                  @click="sidebarOpen=false"
                 >
                   <span class="sr-only">Close sidebar</span>
                   <XMarkIcon
@@ -174,7 +177,9 @@
                     :src="
                       error
                         ? 'https://via.placeholder.com/224?text=Picture+224x224'
-                        : `${config.public.strapiUrl}${identity.data.attributes.picture.data.attributes.url}`
+                        : formatImageUrl(
+                            identity.data.attributes.picture.data.attributes.url
+                          )
                     "
                     alt=""
                   />
@@ -326,6 +331,20 @@ const sidebarOpen = ref(false)
 const { data: identity, error } = await useFetch(
   `${config.public.strapiUrl}/api/identity?populate=*`
 )
+
+const formatImageUrl = (url) => {
+  const isUrl = (string) => {
+    try {
+      return Boolean(new URL(string))
+    } catch (e) {
+      return false
+    }
+  }
+  if (isUrl(url)) {
+    return url
+  }
+  return config.public.strapiUrl + url
+}
 </script>
 
 <style scoped></style>

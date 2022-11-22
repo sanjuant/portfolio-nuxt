@@ -88,7 +88,7 @@
                       .company_logo_is_colored
                   "
                   class="max-h-[3rem] dark:invert"
-                  :src="`${config.public.strapiUrl}${aboutMe.data.attributes.recommendation.company_logo.data.attributes.url}`"
+                  :src="formatImageUrl(aboutMe.data.attributes.recommendation.company_logo.data.attributes.formats.thumbnail.url)"
                   :alt="
                     aboutMe.data.attributes.recommendation.company_logo.data
                       .attributes.alternativeText
@@ -100,7 +100,10 @@
                   :src="
                     error
                       ? 'https://tailwindui.com/img/logos/v1/workcation-color.svg'
-                      : `${config.public.strapiUrl}${aboutMe.data.attributes.recommendation.company_logo.data.attributes.url}`
+                      : formatImageUrl(
+                          aboutMe.data.attributes.recommendation.company_logo
+                            .data.attributes.formats.thumbnail.url
+                        )
                   "
                   :alt="
                     error
@@ -150,7 +153,10 @@
                   :src="
                     error
                       ? 'https://images.unsplash.com/flagged/photo-1553642618-de0381320ff3?ixlib=rb-1.2.1&amp;auto=format&amp;fit=facearea&amp;facepad=2.5&amp;w=160&amp;h=160&amp;q=80'
-                      : `${config.public.strapiUrl}${aboutMe.data.attributes.recommendation.picture.data.attributes.url}`
+                      : formatImageUrl(
+                          aboutMe.data.attributes.recommendation.picture.data
+                            .attributes.formats.thumbnail.url
+                        )
                   "
                   :alt="
                     error
@@ -200,6 +206,20 @@ const config = useRuntimeConfig()
 const { data: aboutMe, error } = await useFetch(
   `${config.public.strapiUrl}/api/about-me?populate=deep`
 )
+
+const formatImageUrl = (url) => {
+  const isUrl = (string) => {
+    try {
+      return Boolean(new URL(string))
+    } catch (e) {
+      return false
+    }
+  }
+  if (isUrl(url)) {
+    return url
+  }
+  return config.public.strapiUrl + url
+}
 </script>
 
 <style scoped></style>

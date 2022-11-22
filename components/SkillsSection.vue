@@ -108,7 +108,7 @@
                         :src="
                           error
                             ? skill.attributes.logo.data.attributes.url
-                            : `${config.public.strapiUrl}${skill.attributes.logo.data.attributes.url}`
+                            : `${skill.attributes.logo.data.attributes.url}`
                         "
                         alt=""
                       />

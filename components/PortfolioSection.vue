@@ -78,7 +78,10 @@
                     :src="
                       error
                         ? portfolio.attributes.cover.data.attributes.url
-                        : `${$config.public.strapiUrl}${portfolio.attributes.cover.data.attributes.url}`
+                        : formatImageUrl(
+                            portfolio.attributes.cover.data.attributes.formats
+                              .medium.url
+                          )
                     "
                     :alt="
                       error
@@ -103,7 +106,7 @@
                     </h5>
                   </a>
                   <span
-                    class="pb-1 pr-2 text-right text-xs dark:text-slate-500 uppercase mt-4"
+                    class="mt-4 pb-1 pr-2 text-right text-xs font-semibold uppercase text-gray-400 dark:text-slate-500 dark:text-slate-400"
                   >
                     {{ formatDate(portfolio.attributes.date) }}
                   </span>
@@ -214,7 +217,7 @@
                     :href="
                       error
                         ? pimg.attributes.url
-                        : `${$config.public.strapiUrl}${pimg.attributes.url}`
+                        : formatImageUrl(pimg.attributes.url)
                     "
                     :data-pswp-width="pimg.attributes.width"
                     :data-pswp-height="pimg.attributes.height"
@@ -226,7 +229,9 @@
                       :src="
                         error
                           ? pimg.attributes.url
-                          : `${$config.public.strapiUrl}${pimg.attributes.url}`
+                          : formatImageUrl(
+                              pimg.attributes.formats.thumbnail.url
+                            )
                       "
                       :alt="
                         error
@@ -325,10 +330,10 @@ const paginationCustom = {
 const modules = [Navigation, Pagination, Scrollbar, A11y]
 
 const formatDate = (date) => {
-  if (null === date) return
+  if (date === null) return
   date = new Date(date)
-  let month = date.getUTCMonth() + 1; //months from 1-12
-  let day = date.getUTCDate();
+  const month = date.getUTCMonth() + 1 // months from 1-12
+  const day = date.getUTCDate()
   if (day === 1 && month === 1) {
     return date.toLocaleString('fr-fr', {
       year: 'numeric',
@@ -339,6 +344,21 @@ const formatDate = (date) => {
       year: 'numeric',
     })
   }
+}
+
+
+const formatImageUrl = (url) => {
+  const isUrl = (string) => {
+    try {
+      return Boolean(new URL(string))
+    } catch (e) {
+      return false
+    }
+  }
+  if (isUrl(url)) {
+    return url
+  }
+  return config.public.strapiUrl + url
 }
 
 const portfoliosSample = [
