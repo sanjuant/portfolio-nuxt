@@ -50,7 +50,12 @@
                                   .formats.large.url
                               )
                         "
-                        alt=""
+                        :alt="
+                          error
+                            ? 'Photo de profil en 224*224 minimum, ratio de 1/1'
+                            : identity.data.attributes.picture.data.attributes
+                                .alternativeText
+                        "
                       />
                     </div>
                   </div>
@@ -181,7 +186,12 @@
                             identity.data.attributes.picture.data.attributes.url
                           )
                     "
-                    alt=""
+                    :alt="
+                      error
+                        ? 'Photo de profil en 224*224 minimum, ratio de 1/1'
+                        : identity.data.attributes.picture.data.attributes
+                            .alternativeText
+                    "
                   />
                 </div>
               </div>
