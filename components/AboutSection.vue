@@ -91,7 +91,7 @@
                   :src="
                     formatImageUrl(
                       aboutMe.data.attributes.recommendation.company_logo.data
-                        .attributes.formats.thumbnail.url
+                        .attributes.url
                     )
                   "
                   :alt="
@@ -107,7 +107,7 @@
                       ? 'https://tailwindui.com/img/logos/v1/workcation-color.svg'
                       : formatImageUrl(
                           aboutMe.data.attributes.recommendation.company_logo
-                            .data.attributes.formats.thumbnail.url
+                            .data.attributes.url
                         )
                   "
                   :alt="
