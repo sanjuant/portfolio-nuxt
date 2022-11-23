@@ -46,7 +46,8 @@
                           error
                             ? 'https://via.placeholder.com/224?text=Picture+224x224'
                             : formatImageUrl(
-                                identity.data.attributes.picture.data.attributes.url
+                                identity.data.attributes.picture.data.attributes
+                                  .url
                               )
                         "
                         :alt="
@@ -263,7 +264,7 @@
       </div>
     </div>
     <div
-      class="w-full top-0 z-40 flex justify-between bg-gray-100 dark:bg-slate-800 md:hidden"
+      class="top-0 z-40 flex w-full justify-between bg-gray-100 dark:bg-slate-800 md:hidden"
     >
       <button
         type="button"
@@ -287,7 +288,7 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import { onMounted, ref } from 'vue'
 
 import {
   BeakerIcon,
@@ -357,20 +358,18 @@ const formatImageUrl = (url) => {
 
 onMounted(() => {
   if (process.client) {
-    let prevScrollpos = window.pageYOffset;
-    window.onscroll = function() {
-      let currentScrollPos = window.pageYOffset;
+    let prevScrollpos = window.pageYOffset
+    window.onscroll = function () {
+      const currentScrollPos = window.pageYOffset
       if (prevScrollpos > currentScrollPos) {
-        document.getElementById("navbar").style.top = "0";
+        document.getElementById('navbar').style.top = '0'
       } else {
-        document.getElementById("navbar").style.top = "-3rem";
+        document.getElementById('navbar').style.top = '-3rem'
       }
-      prevScrollpos = currentScrollPos;
+      prevScrollpos = currentScrollPos
     }
   }
 })
-
-
 </script>
 
 <style scoped></style>
