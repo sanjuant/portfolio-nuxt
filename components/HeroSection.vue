@@ -49,7 +49,9 @@
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
               <div class="rounded-md shadow">
                 <a
-                  href="#"
+                  :href="
+                    error ? '#' : hero.data.attributes.cv.data.attributes.url
+                  "
                   class="flex w-full items-center justify-center overflow-hidden rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-gray-50 transition duration-150 ease-in-out hover:bg-indigo-700 dark:bg-indigo-800 dark:text-slate-100 dark:hover:bg-indigo-900 md:py-4 md:px-10 md:text-lg"
                 >
                   <span class="shrink-0 md:hidden lg:block"
@@ -59,7 +61,7 @@
               </div>
               <div class="mt-3 sm:mt-0 sm:ml-3">
                 <a
-                  href="#"
+                  href="#portfolio"
                   class="flex w-full items-center justify-center overflow-hidden rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-50 hover:text-indigo-600 dark:bg-indigo-400 dark:text-indigo-900 dark:hover:bg-indigo-300 dark:hover:text-indigo-800 md:py-4 md:px-10 md:text-lg"
                 >
                   <span class="shrink-0 md:hidden lg:block"
@@ -84,7 +86,7 @@ import { useFetch, useRuntimeConfig } from 'nuxt/app'
 const config = useRuntimeConfig()
 
 const { data: hero, error } = await useFetch(
-  `${config.public.strapiUrl}/api/hero?populate=*`
+  `${config.public.strapiUrl}/api/hero?populate=deep`
 )
 
 const writer = computed(() => {
