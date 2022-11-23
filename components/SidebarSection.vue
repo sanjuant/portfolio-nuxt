@@ -46,8 +46,7 @@
                           error
                             ? 'https://via.placeholder.com/224?text=Picture+224x224'
                             : formatImageUrl(
-                                identity.data.attributes.picture.data.attributes
-                                  .formats.large.url
+                                identity.data.attributes.picture.data.attributes.url
                               )
                         "
                         :alt="
