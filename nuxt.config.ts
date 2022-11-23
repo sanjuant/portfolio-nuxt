@@ -6,7 +6,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      strapiUrl: 'http://strapi.sanjuant.local',
+      strapiUrl: 'https://sanjuant-strapi.herokuapp.com',
     },
+  },
+  nitro: {
+    preset: 'node-server',
   },
 })
