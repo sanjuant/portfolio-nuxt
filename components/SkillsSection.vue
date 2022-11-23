@@ -163,7 +163,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
 const config = useRuntimeConfig()
 
 const { data: skills, error } = useFetch(
-  `${config.public.strapiUrl}/api/skills?populate=deep`
+  `${config.public.strapiUrl}/api/skills?populate=deep&sort=position:DESC`
 )
 
 const controlledSwiper = ref(null)
