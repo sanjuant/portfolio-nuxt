@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="navbar" class="sticky top-0 z-40 md:block">
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog
         as="div"
@@ -263,7 +263,7 @@
       </div>
     </div>
     <div
-      class="sticky top-0 z-40 flex justify-between bg-gray-100 dark:bg-slate-800 md:hidden"
+      class="w-full top-0 z-40 flex justify-between bg-gray-100 dark:bg-slate-800 md:hidden"
     >
       <button
         type="button"
@@ -287,7 +287,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 
 import {
   BeakerIcon,
@@ -354,6 +354,23 @@ const formatImageUrl = (url) => {
   }
   return config.public.strapiUrl + url
 }
+
+onMounted(() => {
+  if (process.client) {
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+      let currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar").style.top = "0";
+      } else {
+        document.getElementById("navbar").style.top = "-3rem";
+      }
+      prevScrollpos = currentScrollPos;
+    }
+  }
+})
+
+
 </script>
 
 <style scoped></style>
