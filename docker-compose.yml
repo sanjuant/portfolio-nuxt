@@ -1,7 +1,7 @@
 version: "3"
 services:
-  nuxt:
-    container_name: nuxt
+  portfolio:
+    container_name: portfolio
     build: .
     restart: unless-stopped
     networks:
