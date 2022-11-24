@@ -1,12 +1,18 @@
 FROM node:16.18.1-alpine
 
-RUN mkdir -p /usr/src/nuxt-app
-WORKDIR /usr/src/nuxt-app
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+
+WORKDIR /app
+
+# Files required by pnpm install
+COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
+
+RUN pnpm install --frozen-lockfile --prod
+
+# Bundle app source
 COPY . .
 
-RUN npm ci && npm cache clean --force
-RUN npm run build
-
+ENV NODE_ENV=production
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000
 
