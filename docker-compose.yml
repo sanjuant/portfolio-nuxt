@@ -1,0 +1,21 @@
+version: "3"
+services:
+  nuxt:
+    container_name: nuxt
+    build: .
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=web"
+      - "traefik.http.routers.analytics.rule=Host(`sanjuan.pro`)"
+      - "traefik.http.routers.analytics.entrypoints=websecure"
+      - "traefik.http.routers.analytics.tls.certresolver=myresolver"
+      - "traefik.tcp.routers.analytics.tls.passthrough=true"
+      - "traefik.http.services.analytics.loadbalancer.server.port=3000"
+
+networks:
+   web:
+    external:
+      name: web
