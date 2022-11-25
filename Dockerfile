@@ -12,7 +12,7 @@ WORKDIR /app
 # copy the app, note .dockerignore
 COPY package.json .
 COPY pnpm-lock.yaml .
-RUN pnpm install --frozen-lockfile --prod
+RUN pnpm install --shamefully-hoist --frozen-lockfile
 
 FROM dependency-base AS production-base
 

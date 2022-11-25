@@ -1,19 +1,19 @@
 version: '3'
 services:
-  app:
+  portfolio:
     build:
       context: ./
       dockerfile: Dockerfile
-    container_name: nuxt-docker-app
+    container_name: portfolio
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=web"
-      - "traefik.http.routers.analytics.rule=Host(`sanjuan.pro`)"
-      - "traefik.http.routers.analytics.entrypoints=websecure"
-      - "traefik.http.routers.analytics.tls.certresolver=myresolver"
-      - "traefik.tcp.routers.analytics.tls.passthrough=true"
-      - "traefik.http.services.analytics.loadbalancer.server.port=3000"
+      - "traefik.http.routers.portfolio.rule=Host(`sanjuan.pro`)"
+      - "traefik.http.routers.portfolio.entrypoints=websecure"
+      - "traefik.http.routers.portfolio.tls.certresolver=myresolver"
+      - "traefik.tcp.routers.portfolio.tls.passthrough=true"
+      - "traefik.http.services.portfolio.loadbalancer.server.port=3000"
 
 networks:
    web:
