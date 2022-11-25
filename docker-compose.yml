@@ -1,13 +1,11 @@
-version: "3"
+version: '3'
 services:
-  portfolio:
-    container_name: portfolio
-    build: .
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: nuxt-docker-app
     restart: unless-stopped
-    networks:
-      - web
-    volumes:
-      - ./:/app
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=web"

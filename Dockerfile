@@ -1,21 +1,39 @@
-FROM node:16.18.1-alpine
+ARG NODE_VERSION=node:16.18.1
 
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+FROM $NODE_VERSION AS dependency-base
 
+# install package manager
+RUN npm install -g pnpm
+
+# create destination directory
+RUN mkdir -p /app
 WORKDIR /app
 
-# Files required by pnpm install
-COPY .npmrc package.json pnpm-lock.yaml ./
-
+# copy the app, note .dockerignore
+COPY package.json .
+COPY pnpm-lock.yaml .
 RUN pnpm install --frozen-lockfile --prod
 
-# Bundle app source
+FROM dependency-base AS production-base
+
+# build will also take care of building
+# if necessary
 COPY . .
+RUN pnpm run build
 
-ENV NODE_ENV=production
+FROM $NODE_VERSION-slim AS production
+
+COPY --from=production-base /app/.output /app/.output
+
+# Service hostname
 ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=3000
 
-EXPOSE 3000
+# Service version
+ARG NUXT_APP_VERSION
+ENV NUXT_APP_VERSION=${NUXT_APP_VERSION}
 
-ENTRYPOINT ["node", ".output/server/index.mjs"]
+# Run in production mode
+ENV NODE_ENV=production
+
+# start the app
+CMD [ "node", "/app/.output/server/index.mjs" ]
