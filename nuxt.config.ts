@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      strapiUrl: 'https://sanjuant-strapi.herokuapp.com',
+      strapiUrl: 'https://strapi.sanjuant.fr',
     },
   },
   nitro: {
