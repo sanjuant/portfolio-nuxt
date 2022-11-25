@@ -21,7 +21,7 @@ FROM dependency-base AS production-base
 COPY . .
 RUN pnpm run build
 
-FROM $NODE_VERSION-slim AS production
+FROM $NODE_VERSION-alpine AS production
 
 COPY --from=production-base /app/.output /app/.output
 
@@ -34,6 +34,8 @@ ENV NUXT_APP_VERSION=${NUXT_APP_VERSION}
 
 # Run in production mode
 ENV NODE_ENV=production
+
+EXPOSE 3000
 
 # start the app
 CMD [ "node", "/app/.output/server/index.mjs" ]

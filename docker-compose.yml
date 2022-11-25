@@ -6,10 +6,12 @@ services:
       dockerfile: Dockerfile
     container_name: portfolio
     restart: unless-stopped
+    networks:
+      - web
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=web"
-      - "traefik.http.routers.portfolio.rule=Host(`sanjuan.pro`)"
+      - "traefik.http.routers.portfolio.rule=Host(`portfolio.sanjuan.pro`)"
       - "traefik.http.routers.portfolio.entrypoints=websecure"
       - "traefik.http.routers.portfolio.tls.certresolver=myresolver"
       - "traefik.tcp.routers.portfolio.tls.passthrough=true"
