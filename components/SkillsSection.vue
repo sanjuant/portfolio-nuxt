@@ -20,24 +20,25 @@
               @swiper="setControlledSwiper"
             >
               <swiper-slide
-                v-for="skill in error ? skillsSample : skills.data"
-                :key="skill.attributes.name"
+                v-for="(skill, index) in skills?.data.length > 0
+                  ? skills.data
+                  : skillsSample"
+                :key="index"
               >
                 <h2
                   class="text-3xl font-extrabold leading-9 text-gray-900 dark:text-slate-200 sm:text-4xl sm:leading-10"
                 >
-                  {{ skill.attributes.title }}
-                  <!--                  Used by the world's most average companies-->
+                  {{ skill.attributes.title ?? 'Title' }}
                 </h2>
                 <p
                   class="mt-3 max-w-3xl text-lg leading-7 text-gray-500 dark:text-slate-400"
                 >
-                  {{ skill.attributes.description }}
-                  <!--                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,-->
-                  <!--                  egestas tempus tellus etiam sed. Quam a scelerisque amet-->
-                  <!--                  ullamcorper eu enim et fermentum, augue.-->
+                  {{
+                    skill.attributes.description ??
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue.'
+                  }}
                 </p>
-                <div v-if="skill.attributes.url !== ''" class="mt-8 sm:flex">
+                <div v-if="skill.attributes.url" class="mt-8 sm:flex">
                   <div class="mt-3 sm:mt-0">
                     <a
                       class="focus:shadow-outline flex items-center justify-center rounded-md border border-transparent bg-indigo-100 px-5 py-3 text-base font-medium leading-6 text-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-50 hover:text-indigo-600 dark:bg-indigo-400 dark:text-indigo-900 dark:hover:bg-indigo-300 dark:hover:text-indigo-800"
@@ -95,8 +96,10 @@
                 >
                   <template #wrapper-start></template>
                   <swiper-slide
-                    v-for="(skill, index) in error ? skillsSample : skills.data"
-                    :key="skill.attributes.name"
+                    v-for="(skill, index) in skills?.data.length > 0
+                      ? skills.data
+                      : skillsSample"
+                    :key="index"
                     class=""
                   >
                     <div
@@ -106,11 +109,13 @@
                       <img
                         class="h-12 w-32"
                         :src="
-                          error
-                            ? skill.attributes.logo.data.attributes.url
-                            : `${skill.attributes.logo.data.attributes.url}`
+                          skill.attributes.logo.data?.attributes.url ??
+                          'https://tailwindui.com/img/logos/workcation-logo-gray-400.svg'
                         "
-                        alt=""
+                        :alt="
+                          skill.attributes.logo.data?.attributes
+                            .alternativeText ?? 'Logo Workcation avec filigrane'
+                        "
                       />
                     </div>
                   </swiper-slide>
@@ -162,7 +167,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
 
 const config = useRuntimeConfig()
 
-const { data: skills, error } = useFetch(
+const { data: skills } = useFetch(
   `${config.public.strapiUrl}/api/skills?populate=deep&sort=position:DESC`
 )
 
@@ -181,12 +186,6 @@ const paginationCustom = {
   clickable: true,
   renderCustom: renderCarouselVerticalPaginationBullets,
 }
-
-// onMounted(() => {
-//   if (controlledSwiper.value) {
-//     controlledSwiper.update()
-//   }
-// });
 
 /**
  * Generate custom pagination bullets.
@@ -278,6 +277,7 @@ const skillsSample = [
         },
       },
       slug: '0',
+      position: 0,
     },
   },
   {
@@ -296,6 +296,7 @@ const skillsSample = [
         },
       },
       slug: '1',
+      position: 1,
     },
   },
   {
@@ -314,6 +315,7 @@ const skillsSample = [
         },
       },
       slug: '2',
+      position: 2,
     },
   },
   {
@@ -332,6 +334,7 @@ const skillsSample = [
         },
       },
       slug: '3',
+      position: 3,
     },
   },
   {
@@ -350,6 +353,7 @@ const skillsSample = [
         },
       },
       slug: '4',
+      position: 4,
     },
   },
   {
@@ -368,6 +372,7 @@ const skillsSample = [
         },
       },
       slug: '5',
+      position: 5,
     },
   },
   {
@@ -386,6 +391,26 @@ const skillsSample = [
         },
       },
       slug: '6',
+      position: 6,
+    },
+  },
+  {
+    attributes: {
+      title: 'Workcation',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue. ',
+      name: 'Workcation',
+      url: '#',
+      logo: {
+        data: {
+          attributes: {
+            url: 'https://tailwindui.com/img/logos/workcation-logo-gray-400.svg',
+            alternativeText: 'Workcation',
+          },
+        },
+      },
+      slug: '7',
+      position: 7,
     },
   },
 ]

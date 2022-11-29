@@ -16,7 +16,7 @@
         >
           Bonjour, je suis
           <span class="text-indigo-600">{{
-            error ? 'FirstName LastName' : aboutMe.data.attributes.title
+            aboutMe?.data.attributes.title ?? 'FirstName LastName'
           }}</span
           >,
         </h1>
@@ -26,9 +26,8 @@
       >
         <p class="text-justify text-lg leading-7">
           {{
-            error
-              ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare dictum semper. Nunc condimentum, metus id sollicitudin ultrices, quam metus convallis eros, sit amet pulvinar leo justo vitae nibh. Maecenas ut diam tempus, congue lorem quis dapibus nam. '
-              : aboutMe.data.attributes.summary
+            aboutMe?.data.attributes.summary ??
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare dictum semper. Nunc condimentum, metus id sollicitudin ultrices, quam metus convallis eros, sit amet pulvinar leo justo vitae nibh. Maecenas ut diam tempus, congue lorem quis dapibus nam. '
           }}
         </p>
       </div>
@@ -37,9 +36,7 @@
           <div
             class="prose prose-headings:mt-0 prose-headings:text-gray-900 dark:prose-headings:text-slate-100 mx-auto mb-10 text-justify text-gray-500 dark:text-slate-400 lg:max-w-none"
             v-html="
-              error
-                ? 'Data cannot be retrieved'
-                : aboutMe.data.attributes.content
+              aboutMe?.data.attributes.content ?? 'Data cannot be retrieved'
             "
           ></div>
         </div>
@@ -83,47 +80,45 @@
               <div class="flex flex-row items-center">
                 <img
                   v-if="
-                    !error &&
-                    !aboutMe.data.attributes.recommendation
-                      .company_logo_is_colored
+                    !aboutMe?.data.attributes.recommendation
+                      ?.company_logo_is_colored
                   "
                   class="max-h-[3rem] dark:invert"
                   :src="
                     formatImageUrl(
-                      aboutMe.data.attributes.recommendation.company_logo.data
-                        .attributes.url
-                    )
+                      aboutMe?.data.attributes.recommendation?.company_logo.data
+                        ?.attributes.url
+                    ) ??
+                    'https://tailwindui.com/img/logos/v1/workcation-color.svg'
                   "
                   :alt="
-                    aboutMe.data.attributes.recommendation.company_logo.data
-                      .attributes.alternativeText
+                    aboutMe?.data.attributes.recommendation?.company_logo.data
+                      ?.attributes.alternativeText ??
+                    'Logo Workcation avec filigrane'
                   "
                 />
                 <img
                   v-else
                   class="max-h-[3rem]"
                   :src="
-                    error
-                      ? 'https://tailwindui.com/img/logos/v1/workcation-color.svg'
-                      : formatImageUrl(
-                          aboutMe.data.attributes.recommendation.company_logo
-                            .data.attributes.url
-                        )
+                    formatImageUrl(
+                      aboutMe?.data.attributes.recommendation?.company_logo.data
+                        ?.attributes.url
+                    ) ??
+                    'https://tailwindui.com/img/logos/v1/workcation-color.svg'
                   "
                   :alt="
-                    error
-                      ? ''
-                      : aboutMe.data.attributes.recommendation.company_logo.data
-                          .attributes.alternativeText
+                    aboutMe?.data.attributes.recommendation?.company_logo.data
+                      ?.attributes.alternativeText ??
+                    'Logo Workcation avec filigrane'
                   "
                 />
                 <div
-                  v-if="
-                    !error &&
-                    aboutMe.data.attributes.recommendation.company_title !== ''
-                  "
+                  v-if="aboutMe?.data.attributes.recommendation?.company_title"
                   class="ml-4 text-3xl font-bold text-gray-900 dark:text-slate-100"
-                  v-html="aboutMe.data.attributes.recommendation.company_title"
+                  v-html="
+                    aboutMe?.data.attributes.recommendation?.company_title
+                  "
                 ></div>
               </div>
               <div
@@ -140,9 +135,8 @@
                 </svg>
                 <p class="relative">
                   {{
-                    error
-                      ? 'Tincidunt integer commodo, cursus etiam aliquam neque, et. Consectetur pretium in volutpat, diam. Montes, magna cursus nulla feugiat dignissim id lobortis amet. Laoreet sem est phasellus eu proin massa, lectus.'
-                      : aboutMe.data.attributes.recommendation.message
+                    aboutMe?.data.attributes.recommendation?.message ??
+                    'Tincidunt integer commodo, cursus etiam aliquam neque, et. Consectetur pretium in volutpat, diam. Montes, magna cursus nulla feugiat dignissim id lobortis amet. Laoreet sem est phasellus eu proin massa, lectus.'
                   }}
                 </p>
               </div>
@@ -156,18 +150,15 @@
                 <img
                   class="h-12 w-12 max-w-none rounded-full bg-indigo-300 dark:bg-indigo-600 sm:h-20 sm:w-20"
                   :src="
-                    error
-                      ? 'https://images.unsplash.com/flagged/photo-1553642618-de0381320ff3?ixlib=rb-1.2.1&amp;auto=format&amp;fit=facearea&amp;facepad=2.5&amp;w=160&amp;h=160&amp;q=80'
-                      : formatImageUrl(
-                          aboutMe.data.attributes.recommendation.picture.data
-                            .attributes.formats.thumbnail.url
-                        )
+                    formatImageUrl(
+                      aboutMe?.data.attributes.recommendation?.picture.data
+                        ?.attributes.formats.thumbnail.url
+                    ) ??
+                    'https://images.unsplash.com/flagged/photo-1553642618-de0381320ff3?ixlib=rb-1.2.1&amp;auto=format&amp;fit=facearea&amp;facepad=2.5&amp;w=160&amp;h=160&amp;q=80'
                   "
                   :alt="
-                    error
-                      ? ''
-                      : aboutMe.data.attributes.recommendation.picture.data
-                          .attributes.alternativeText
+                    aboutMe?.data.attributes.recommendation?.picture.data
+                      ?.attributes.alternativeText ?? ''
                   "
                 />
               </span>
@@ -177,22 +168,19 @@
                 <strong
                   class="mr-1 font-semibold text-gray-50 dark:text-slate-100"
                   >{{
-                    error
-                      ? 'John Doe'
-                      : aboutMe.data.attributes.recommendation.author
+                    aboutMe?.data.attributes.recommendation?.author ??
+                    'John Doe'
                   }}</strong
                 >
                 <br class="sm:hidden lg:block xl:hidden" /><span
                   >{{
-                    error
-                      ? 'Job'
-                      : aboutMe.data.attributes.recommendation.company_job
+                    aboutMe?.data.attributes.recommendation?.company_job ??
+                    'Job'
                   }}
                   at
                   {{
-                    error
-                      ? 'Company'
-                      : aboutMe.data.attributes.recommendation.company_name
+                    aboutMe?.data.attributes.recommendation?.company_name ??
+                    'Company'
                   }}</span
                 >
               </span>
@@ -208,7 +196,7 @@
 import { useFetch, useRuntimeConfig } from 'nuxt/app'
 const config = useRuntimeConfig()
 
-const { data: aboutMe, error } = await useFetch(
+const { data: aboutMe } = await useFetch(
   `${config.public.strapiUrl}/api/about-me?populate=deep`
 )
 
@@ -219,6 +207,9 @@ const formatImageUrl = (url) => {
     } catch (e) {
       return false
     }
+  }
+  if (url === undefined) {
+    return null
   }
   if (isUrl(url)) {
     return url

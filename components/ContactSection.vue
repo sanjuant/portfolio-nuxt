@@ -200,9 +200,8 @@
                   class="max-w-3xl text-justify text-sm text-gray-100 dark:text-slate-100"
                 >
                   {{
-                    error
-                      ? "Je m'engage à respecter votre vie privée, en aucun cas votre adresse ne sera communiquée à un tiers."
-                      : contact.data.attributes.disclaimer
+                    contact?.data.attributes.disclaimer ??
+                    "Je m'engage à respecter votre vie privée, en aucun cas votre adresse ne sera communiquée à un tiers."
                   }}
                 </p>
                 <div
@@ -214,7 +213,7 @@
                       aria-hidden="true"
                     />
                     <div
-                      v-if="!error"
+                      v-if="contact?.data.attributes.protectedPhone"
                       ref="protectedPhone"
                       class="ml-2 cursor-pointer text-sm"
                       @copy="copyProtected"
@@ -222,11 +221,11 @@
                         linkProtected(
                           $event,
                           'tel',
-                          contact.data.attributes.protectedPhone
+                          contact?.data.attributes.protectedPhone
                         )
                       "
                     >
-                      {{ contact.data.attributes.protectedPhone }}
+                      {{ contact?.data.attributes.protectedPhone }}
                     </div>
                     <span v-else class="ml-2 text-sm uppercase"
                       >+33 6 12 34 57 89</span
@@ -241,7 +240,7 @@
                     />
 
                     <div
-                      v-if="!error"
+                      v-if="contact?.data.attributes.protectedEmail"
                       ref="protectedEmail"
                       class="ml-2 cursor-pointer text-sm"
                       @copy="copyProtected"
@@ -249,11 +248,11 @@
                         linkProtected(
                           $event,
                           'mailto',
-                          contact.data.attributes.protectedEmail
+                          contact?.data.attributes.protectedEmail
                         )
                       "
                     >
-                      {{ contact.data.attributes.protectedEmail }}
+                      {{ contact?.data.attributes.protectedEmail }}
                     </div>
                     <span v-else class="ml-2 text-sm uppercase"
                       >name@domain.tld</span
@@ -261,10 +260,6 @@
                   </div>
                 </div>
 
-                <!--                <ul-->
-                <!--                    role="list"-->
-                <!--                    class="justify-self-end mt-8 flex justify-end space-x-4 md:mt-[100%] md:justify-between md:space-x-0"-->
-                <!--                >-->
                 <ul
                   role="list"
                   class="mt-8 flex justify-end space-x-4 lg:mt-auto lg:justify-between lg:space-x-0"
@@ -273,7 +268,7 @@
                     <a
                       class="text-indigo-200 hover:text-indigo-100 dark:text-indigo-300 dark:hover:text-indigo-200"
                       :href="`https://github.com/${
-                        error ? '' : contact.data.attributes.github
+                        contact?.data.attributes.github ?? ''
                       }`"
                       target="_blank"
                     >
@@ -296,7 +291,7 @@
                     <a
                       class="text-indigo-200 hover:text-indigo-100 dark:text-indigo-300 dark:hover:text-indigo-200"
                       :href="`https://twitter.com/${
-                        error ? '' : contact.data.attributes.twitter
+                        contact?.data.attributes.twitter ?? ''
                       }`"
                       target="_blank"
                     >
@@ -317,7 +312,7 @@
                     <a
                       class="text-indigo-200 hover:text-indigo-100 dark:text-indigo-300 dark:hover:text-indigo-200"
                       :href="`https://discordapp.com/users/${
-                        error ? '' : contact.data.attributes.discord
+                        contact?.data.attributes.discord ?? ''
                       }`"
                       target="_blank"
                     >
@@ -341,7 +336,7 @@
                     <a
                       class="text-indigo-200 hover:text-indigo-100 dark:text-indigo-300 dark:hover:text-indigo-200"
                       :href="`https://www.root-me.org/${
-                        error ? '' : contact.data.attributes.rootme
+                        contact?.data.attributes.rootme ?? ''
                       }`"
                       target="_blank"
                     >
@@ -467,7 +462,7 @@ const email = ref('')
 const subject = ref('')
 const message = ref('')
 
-const { data: contact, error } = await useFetch(
+const { data: contact } = await useFetch(
   `${config.public.strapiUrl}/api/contact?populate=*`
 )
 
@@ -592,8 +587,4 @@ function obfuscateString(string) {
   return result
 }
 */
-
-// TODO: https://vuejsexamples.com/build-simple-recaptcha-for-vuejs-without-server-need/
-// CloakingEmail https://github.com/martignoni/hugo-cloak-email
-// Test scrapping mail with Antheta https://antheta.com/
 </script>

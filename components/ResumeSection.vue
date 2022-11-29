@@ -23,14 +23,14 @@
             >
               Formations Professionnelles
             </li>
-            <template v-if="!educationsError">
+            <template v-if="educations?.data.length > 0">
               <li
                 v-for="(education, educationIdx) in educations.data"
-                :key="education.attributes.slug"
+                :key="educationIdx"
                 ref="educationsAndExperiences"
                 class="relative pl-8 before:absolute before:left-2 before:top-2 before:h-full before:w-0.5 before:bg-gray-300 lg:pl-0 lg:pr-8 lg:text-right lg:before:left-[unset] lg:before:right-2"
                 :class="[
-                  educationIdx !== educations.data.length - 1
+                  educationIdx !== educations?.data.length - 1
                     ? 'pb-12'
                     : 'pb-3',
                 ]"
@@ -109,7 +109,7 @@
                   </div>
                 </div>
                 <span
-                  v-if="educationIdx === educations.data.length - 1"
+                  v-if="educationIdx === educations?.data.length - 1"
                   class="absolute left-0 -bottom-4 h-[1.125rem] w-[1.125rem] rounded-full bg-gray-300 lg:left-[unset] lg:right-0"
                 ></span>
               </li>
@@ -129,14 +129,14 @@
             >
               Expériences Professionnelles
             </li>
-            <template v-if="!experiencesError">
+            <template v-if="experiences?.data.length > 0">
               <li
                 v-for="(experience, experienceIdx) in experiences.data"
-                :key="experience.attributes.slug"
+                :key="experienceIdx"
                 ref="educationsAndExperiences"
                 class="relative w-full pl-8 before:absolute before:left-2 before:top-2 before:h-full before:w-0.5 before:bg-indigo-500"
                 :class="[
-                  experienceIdx !== experiences.data.length - 1
+                  experienceIdx !== experiences?.data.length - 1
                     ? 'pb-12'
                     : 'pb-3',
                 ]"
@@ -214,7 +214,7 @@
                 </div>
 
                 <span
-                  v-if="experienceIdx === experiences.data.length - 1"
+                  v-if="experienceIdx === experiences?.data.length - 1"
                   class="absolute left-0 -bottom-4 h-[1.125rem] w-[1.125rem] rounded-full bg-indigo-500"
                 ></span>
               </li>
@@ -238,11 +238,11 @@ import { useFetch, useRuntimeConfig } from 'nuxt/app'
 const config = useRuntimeConfig()
 const educationsAndExperiences = ref(null)
 
-const { data: educations, error: educationsError } = await useFetch(
+const { data: educations } = await useFetch(
   `${config.public.strapiUrl}/api/educations-and-trainings?populate=%2A&sort=start_date:DESC`
 )
 
-const { data: experiences, error: experiencesError } = await useFetch(
+const { data: experiences } = await useFetch(
   `${config.public.strapiUrl}/api/professionnal-experiences?populate=%2A&sort=start_date:DESC`
 )
 

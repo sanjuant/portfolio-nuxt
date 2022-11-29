@@ -65,10 +65,10 @@
           >
             <template #wrapper-start></template>
             <swiper-slide
-              v-for="(portfolio, index) in error
-                ? portfoliosSample
-                : portfolios.data"
-              :key="portfolio.attributes.title"
+              v-for="(portfolio, index) in portfolios?.data.length > 0
+                ? portfolios.data
+                : portfoliosSample"
+              :key="index"
               class="max-w-full"
             >
               <div
@@ -78,27 +78,24 @@
                   <img
                     class="swiper-lazy h-64 w-full rounded-t-lg object-cover"
                     :data-src="
-                      error
-                        ? portfolio.attributes.cover.data.attributes.url
-                        : formatImageUrl(
-                            portfolio.attributes.cover.data.attributes.formats
+                      portfolios?.data.length > 0
+                        ? formatImageUrl(
+                            portfolio.attributes.cover.data?.attributes.formats
                               .medium.url
                           )
+                        : portfolio.attributes.cover.data.attributes.url
                     "
                     :src="
-                      error
-                        ? portfolio.attributes.cover.data.attributes.url
-                        : formatImageUrl(
-                            portfolio.attributes.cover.data.attributes.formats
+                      portfolios?.data.length > 0
+                        ? formatImageUrl(
+                            portfolio.attributes.cover.data?.attributes.formats
                               .thumbnail.url
                           )
+                        : portfolio.attributes.cover.data.attributes.url
                     "
                     :alt="
-                      error
-                        ? portfolio.attributes.cover.data.attributes
-                            .alternativeText
-                        : portfolio.attributes.cover.data.attributes
-                            .alternativeText
+                      portfolio.attributes.cover.data?.attributes
+                        .alternativeText
                     "
                   />
                   <div class="swiper-lazy-preloader"></div>
@@ -107,19 +104,19 @@
                   <div
                     class="mt-4 max-w-fit rounded-r-md bg-indigo-600 py-1 px-4 text-[0.7rem] font-semibold uppercase leading-loose tracking-wider text-white dark:bg-indigo-700 dark:text-slate-100"
                   >
-                    {{ portfolio.attributes.category }}
+                    {{ portfolio.attributes.category ?? 'Cat.' }}
                   </div>
                   <a href="#">
                     <h5
                       class="mt-2 px-4 pt-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-slate-100"
                     >
-                      {{ portfolio.attributes.title }}
+                      {{ portfolio.attributes.title ?? 'Title' }}
                     </h5>
                   </a>
                   <span
                     class="mt-4 pb-1 pr-2 text-right text-xs font-semibold uppercase text-gray-400 dark:text-slate-500 dark:text-slate-400"
                   >
-                    {{ formatDate(portfolio.attributes.date) }}
+                    {{ formatDate(portfolio.attributes.date) ?? '1972' }}
                   </span>
                 </div>
               </div>
@@ -162,17 +159,22 @@
             @swiper="setControlledSwiper"
           >
             <swiper-slide
-              v-for="portfolio in error ? portfoliosSample : portfolios.data"
-              :key="portfolio.attributes.title"
+              v-for="(portfolio, index) in portfolios?.data.length > 0
+                ? portfolios.data
+                : portfoliosSample"
+              :key="index"
               class="max-w-full px-1 pb-1"
             >
               <div
                 class="text-3xl font-extrabold capitalize leading-tight text-gray-900 dark:text-slate-200 sm:text-4xl"
               >
-                {{ portfolio.attributes.title }}
+                {{ portfolio.attributes.title ?? 'Title' }}
               </div>
               <div class="my-8 text-gray-500 dark:text-slate-400">
-                {{ portfolio.attributes.description }}
+                {{
+                  portfolio.attributes.description ??
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et posuere nisl, non tincidunt nunc. Nullam tempor metus ac arcu cursus, sed dignissim quam ultrices. Mauris quis tellus libero. Morbi tincidunt nunc a mi ornare accumsan. Donec in felis ultricies libero dignissim feugiat in vel odio. Fusce ac nunc sapien. Curabitur non pulvinar enim. Vivamus eget odio augue. Integer mollis nisl in condimentum posuere. Nullam id diam sit amet ligula suscipit ornare.'
+                }}
               </div>
               <swiper
                 :modules="modules"
@@ -227,11 +229,7 @@
                 >
                   <a
                     :key="key"
-                    :href="
-                      error
-                        ? pimg.attributes.url
-                        : formatImageUrl(pimg.attributes.url)
-                    "
+                    :href="formatImageUrl(pimg.attributes.url)"
                     :data-pswp-width="pimg.attributes.width"
                     :data-pswp-height="pimg.attributes.height"
                     target="_blank"
@@ -240,17 +238,13 @@
                     <img
                       class="swiper-lazy h-24 w-full rounded-md border border-gray-100 object-cover dark:border-slate-800"
                       :src="
-                        error
-                          ? pimg.attributes.url
-                          : formatImageUrl(
+                        portfolios?.data.length > 0
+                          ? formatImageUrl(
                               pimg.attributes.formats.thumbnail.url
                             )
+                          : pimg.attributes.url
                       "
-                      :alt="
-                        error
-                          ? pimg.attributes.alternativeText
-                          : pimg.attributes.alternativeText
-                      "
+                      :alt="pimg.attributes.alternativeText"
                     />
                     <div class="swiper-lazy-preloader"></div>
                   </a>
@@ -329,7 +323,7 @@ const setControlledSwiper = (swiper) => {
   controlledSwiper.value = swiper
 }
 
-const { data: portfolios, error } = await useFetch(
+const { data: portfolios } = await useFetch(
   `${config.public.strapiUrl}/api/portfolios?populate=deep&sort=date:DESC`
 )
 
@@ -369,10 +363,85 @@ const formatImageUrl = (url) => {
       return false
     }
   }
+  if (url === undefined) {
+    return null
+  }
   if (isUrl(url)) {
     return url
   }
   return config.public.strapiUrl + url
+}
+
+/**
+ * Generate custom pagination bullets.
+ *
+ * @param {Swiper} swiper
+ * @param {number} current
+ * @param {number} total
+ *
+ * @return {string}
+ */
+function renderCarouselHorizontalPaginationBullets(swiper, current, total) {
+  const bullets = []
+
+  for (let index = 1; index <= total; index++) {
+    const liEl = document.createElement('li')
+    liEl.className =
+      'custom-pagination-item relative' +
+      (index !== total ? ' w-full max-w-[4rem] xl:max-w-[8rem]' : '')
+    const divEl = document.createElement('div')
+    divEl.className = 'absolute inset-0 flex items-center'
+    divEl.setAttribute('aria-hidden', 'true')
+
+    const nestedDivEl = document.createElement('div')
+    const spanEl = document.createElement('span')
+
+    if (index < current) {
+      nestedDivEl.className = 'h-0.5 w-full bg-indigo-600'
+      spanEl.className =
+        'relative flex h-4 w-4 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900 cursor-pointer'
+      const nestedSpanEl = document.createElement('span')
+      nestedSpanEl.className = 'sr-only'
+      const nestedSpanElTextNode = document.createTextNode('Step ' + index)
+      nestedSpanEl.appendChild(nestedSpanElTextNode)
+      spanEl.appendChild(nestedSpanEl)
+    } else if (index === current) {
+      nestedDivEl.className = 'h-0.5 w-full bg-gray-200 dark:bg-slate-700'
+      spanEl.className =
+        'relative flex h-4 w-4 items-center justify-center rounded-full border-2 border-indigo-600 bg-white dark:bg-slate-900 cursor-pointer'
+      const nestedSpanEl0 = document.createElement('span')
+      nestedSpanEl0.className = 'h-1.5 w-1.5 bg-indigo-600 rounded-full'
+      nestedSpanEl0.setAttribute('aria-hidden', 'true')
+      const nestedSpanEl1 = document.createElement('span')
+      nestedSpanEl1.className = 'sr-only'
+      const nestedSpanEl1TextNode = document.createTextNode('Step ' + index)
+      nestedSpanEl1.appendChild(nestedSpanEl1TextNode)
+      spanEl.appendChild(nestedSpanEl0)
+      spanEl.appendChild(nestedSpanEl1)
+    } else {
+      nestedDivEl.className = 'h-0.5 w-full bg-gray-200 dark:bg-slate-700'
+      spanEl.className =
+        'group relative flex h-4 w-4 items-center justify-center rounded-full border-2 border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-gray-400 dark:hover:border-slate-700 cursor-pointer'
+      const nestedSpanEl0 = document.createElement('span')
+      nestedSpanEl0.className =
+        'h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300 dark:group-hover:bg-slate-700'
+      nestedSpanEl0.setAttribute('aria-hidden', 'true')
+      const nestedSpanEl1 = document.createElement('span')
+      nestedSpanEl1.className = 'sr-only'
+      const nestedSpanEl1TextNode = document.createTextNode('Step ' + index)
+      nestedSpanEl1.appendChild(nestedSpanEl1TextNode)
+      spanEl.appendChild(nestedSpanEl0)
+      spanEl.appendChild(nestedSpanEl1)
+    }
+    divEl.appendChild(nestedDivEl)
+    liEl.appendChild(divEl)
+    liEl.appendChild(spanEl)
+    liEl.setAttribute('data-slide', index.toString())
+
+    bullets.push(liEl)
+  }
+
+  return bullets.map((bullet) => bullet.outerHTML).join(' ')
 }
 
 const portfoliosSample = [
@@ -776,78 +845,6 @@ const portfoliosSample = [
     },
   },
 ]
-
-/**
- * Generate custom pagination bullets.
- *
- * @param {Swiper} swiper
- * @param {number} current
- * @param {number} total
- *
- * @return {string}
- */
-function renderCarouselHorizontalPaginationBullets(swiper, current, total) {
-  const bullets = []
-
-  for (let index = 1; index <= total; index++) {
-    const liEl = document.createElement('li')
-    liEl.className =
-      'custom-pagination-item relative' +
-      (index !== total ? ' w-full max-w-[4rem] xl:max-w-[8rem]' : '')
-    const divEl = document.createElement('div')
-    divEl.className = 'absolute inset-0 flex items-center'
-    divEl.setAttribute('aria-hidden', 'true')
-
-    const nestedDivEl = document.createElement('div')
-    const spanEl = document.createElement('span')
-
-    if (index < current) {
-      nestedDivEl.className = 'h-0.5 w-full bg-indigo-600'
-      spanEl.className =
-        'relative flex h-4 w-4 items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-900 cursor-pointer'
-      const nestedSpanEl = document.createElement('span')
-      nestedSpanEl.className = 'sr-only'
-      const nestedSpanElTextNode = document.createTextNode('Step ' + index)
-      nestedSpanEl.appendChild(nestedSpanElTextNode)
-      spanEl.appendChild(nestedSpanEl)
-    } else if (index === current) {
-      nestedDivEl.className = 'h-0.5 w-full bg-gray-200 dark:bg-slate-700'
-      spanEl.className =
-        'relative flex h-4 w-4 items-center justify-center rounded-full border-2 border-indigo-600 bg-white dark:bg-slate-900 cursor-pointer'
-      const nestedSpanEl0 = document.createElement('span')
-      nestedSpanEl0.className = 'h-1.5 w-1.5 bg-indigo-600 rounded-full'
-      nestedSpanEl0.setAttribute('aria-hidden', 'true')
-      const nestedSpanEl1 = document.createElement('span')
-      nestedSpanEl1.className = 'sr-only'
-      const nestedSpanEl1TextNode = document.createTextNode('Step ' + index)
-      nestedSpanEl1.appendChild(nestedSpanEl1TextNode)
-      spanEl.appendChild(nestedSpanEl0)
-      spanEl.appendChild(nestedSpanEl1)
-    } else {
-      nestedDivEl.className = 'h-0.5 w-full bg-gray-200 dark:bg-slate-700'
-      spanEl.className =
-        'group relative flex h-4 w-4 items-center justify-center rounded-full border-2 border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-gray-400 dark:hover:border-slate-700 cursor-pointer'
-      const nestedSpanEl0 = document.createElement('span')
-      nestedSpanEl0.className =
-        'h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300 dark:group-hover:bg-slate-700'
-      nestedSpanEl0.setAttribute('aria-hidden', 'true')
-      const nestedSpanEl1 = document.createElement('span')
-      nestedSpanEl1.className = 'sr-only'
-      const nestedSpanEl1TextNode = document.createTextNode('Step ' + index)
-      nestedSpanEl1.appendChild(nestedSpanEl1TextNode)
-      spanEl.appendChild(nestedSpanEl0)
-      spanEl.appendChild(nestedSpanEl1)
-    }
-    divEl.appendChild(nestedDivEl)
-    liEl.appendChild(divEl)
-    liEl.appendChild(spanEl)
-    liEl.setAttribute('data-slide', index.toString())
-
-    bullets.push(liEl)
-  }
-
-  return bullets.map((bullet) => bullet.outerHTML).join(' ')
-}
 </script>
 
 <style scoped></style>

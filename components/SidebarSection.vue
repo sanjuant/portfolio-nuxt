@@ -43,18 +43,16 @@
                       <img
                         class="relative mx-auto h-[14rem] w-[14rem] flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
                         :src="
-                          error
-                            ? 'https://via.placeholder.com/224?text=Picture+224x224'
-                            : formatImageUrl(
-                                identity.data.attributes.picture.data.attributes
-                                  .url
-                              )
+                          formatImageUrl(
+                            identity?.data.attributes.picture.data?.attributes
+                              .url
+                          ) ??
+                          'https://via.placeholder.com/224?text=Picture+224x224'
                         "
                         :alt="
-                          error
-                            ? 'Photo de profil en 224*224 minimum, ratio de 1/1'
-                            : identity.data.attributes.picture.data.attributes
-                                .alternativeText
+                          identity?.data.attributes.picture.data?.attributes
+                            .alternativeText ??
+                          'Photo de profil en 224*224 minimum, ratio de 1/1'
                         "
                       />
                     </div>
@@ -63,32 +61,29 @@
                   <h3
                     class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
                   >
-                    {{
-                      error ? 'FirstName' : identity.data.attributes.first_name
-                    }}
-                    {{
-                      error ? 'LastName' : identity.data.attributes.last_name
-                    }}
+                    {{ identity?.data.attributes.first_name ?? 'FirstName' }}
+                    {{ identity?.data.attributes.last_name ?? 'LastName' }}
                   </h3>
                   <dl class="mt-1 flex flex-grow flex-col justify-between">
                     <!--                    <dt class="sr-only">Title</dt>-->
                     <dd
                       class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
                     >
-                      {{ error ? 'JobTitle' : identity.data.attributes.job }}
+                      {{ identity?.data.attributes.job ?? 'JobTitle' }}
                     </dd>
                     <!--                    <dt class="sr-only">Role</dt>-->
                     <dd class="mt-4 flex flex-wrap justify-center">
                       <span
-                        v-for="skill in error
-                          ? [
+                        v-for="skill in identity?.data.attributes.soft_skills
+                          .length > 0
+                          ? identity.data.attributes.soft_skills
+                          : [
                               { id: 1, quality: 'Quality' },
                               { id: 2, quality: 'Quality' },
                               { id: 3, quality: 'Quality' },
                               { id: 4, quality: 'Quality' },
                               { id: 5, quality: 'Quality' },
-                            ]
-                          : identity.data.attributes.soft_skills"
+                            ]"
                         :key="skill.id"
                         class="mx-1 mt-2 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800 dark:bg-purple-500 dark:text-slate-100"
                         >{{ skill.quality }}</span
@@ -108,6 +103,7 @@
                       : 'text-gray-100 hover:bg-indigo-600 hover:bg-opacity-75 dark:text-slate-100 dark:hover:bg-indigo-800',
                     'group flex items-center rounded-md px-2 py-2 text-base font-medium',
                   ]"
+                  @click="sidebarOpen = false"
                 >
                   <component
                     :is="item.icon"
@@ -180,17 +176,15 @@
                   <img
                     class="relative mx-auto h-[14rem] w-[14rem] flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
                     :src="
-                      error
-                        ? 'https://via.placeholder.com/224?text=Picture+224x224'
-                        : formatImageUrl(
-                            identity.data.attributes.picture.data.attributes.url
-                          )
+                      formatImageUrl(
+                        identity?.data.attributes.picture.data?.attributes.url
+                      ) ??
+                      'https://via.placeholder.com/224?text=Picture+224x224'
                     "
                     :alt="
-                      error
-                        ? 'Photo de profil en 224*224 minimum, ratio de 1/1'
-                        : identity.data.attributes.picture.data.attributes
-                            .alternativeText
+                      identity?.data.attributes.picture.data?.attributes
+                        .alternativeText ??
+                      'Photo de profil en 224*224 minimum, ratio de 1/1'
                     "
                   />
                 </div>
@@ -198,28 +192,29 @@
               <h3
                 class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
               >
-                {{ error ? 'FirstName' : identity.data.attributes.first_name }}
-                {{ error ? 'LastName' : identity.data.attributes.last_name }}
+                {{ identity?.data.attributes.first_name ?? 'FirstName' }}
+                {{ identity?.data.attributes.last_name ?? 'LastName' }}
               </h3>
               <dl class="mt-1 flex flex-grow flex-col justify-between">
                 <!--                <dt class="sr-only">Title</dt>-->
                 <dd
                   class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
                 >
-                  {{ error ? 'JobTitle' : identity.data.attributes.job }}
+                  {{ identity?.data.attributes.job ?? 'JobTitle' }}
                 </dd>
                 <!--                <dt class="sr-only">Role</dt>-->
                 <dd class="mt-4 flex flex-wrap justify-center">
                   <span
-                    v-for="skill in error
-                      ? [
+                    v-for="skill in identity?.data.attributes.soft_skills
+                      .length > 0
+                      ? identity.data.attributes.soft_skills
+                      : [
                           { id: 1, quality: 'Quality' },
                           { id: 2, quality: 'Quality' },
                           { id: 3, quality: 'Quality' },
                           { id: 4, quality: 'Quality' },
                           { id: 5, quality: 'Quality' },
-                        ]
-                      : identity.data.attributes.soft_skills"
+                        ]"
                     :key="skill.id"
                     class="mx-1 mt-2 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800 dark:bg-purple-500 dark:text-slate-100"
                     >{{ skill.quality }}</span
@@ -278,10 +273,10 @@
         class="mr-2 flex flex-col items-end justify-center text-right text-xs text-gray-500 dark:text-slate-500"
       >
         <div>
-          {{ error ? 'FirstName' : identity.data.attributes.first_name }}
-          {{ error ? 'LastName' : identity.data.attributes.last_name }}
+          {{ identity?.data.attributes.first_name ?? 'FirstName' }}
+          {{ identity?.data.attributes.last_name ?? 'LastName' }}
         </div>
-        <div>{{ error ? 'JobTitle' : identity.data.attributes.job }}</div>
+        <div>{{ identity?.data.attributes.job ?? 'JobTitle' }}</div>
       </div>
     </div>
   </div>
@@ -309,6 +304,7 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import { useFetch, useRuntimeConfig } from 'nuxt/app'
+
 const config = useRuntimeConfig()
 
 const navigation = [
@@ -338,8 +334,8 @@ const navigation = [
 
 const sidebarOpen = ref(false)
 
-const { data: identity, error } = await useFetch(
-  `${config.public.strapiUrl}/api/identity?populate=*`
+const { data: identity } = await useFetch(
+  `${config.public.strapiUrl}/api/identity?populate=deep`
 )
 
 const formatImageUrl = (url) => {
@@ -349,6 +345,9 @@ const formatImageUrl = (url) => {
     } catch (e) {
       return false
     }
+  }
+  if (url === undefined) {
+    return null
   }
   if (isUrl(url)) {
     return url

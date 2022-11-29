@@ -21,7 +21,7 @@
             >
               <span class="flex w-full flex-col pt-10">
                 <span class="block sm:text-center xl:inline">
-                  {{ error ? 'Welcome' : hero.data.attributes.welcome }}
+                  {{ hero?.data.attributes.welcome ?? 'Welcome' }}
                 </span>
                 <span class="block flex min-h-[7rem] md:min-h-[12rem]">
                   <span
@@ -41,17 +41,14 @@
               class="mt-3 text-base text-gray-500 dark:text-slate-200 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0"
             >
               {{
-                error
-                  ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet ante dapibus, ultrices risus in, tristique ligula. Nunc fermentum felis convallis lorem mollis, nec mattis est mollis.'
-                  : hero.data.attributes.about_me
+                hero?.data.attributes.about_me ??
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet ante dapibus, ultrices risus in, tristique ligula. Nunc fermentum felis convallis lorem mollis, nec mattis est mollis.'
               }}
             </p>
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
               <div class="rounded-md shadow">
                 <a
-                  :href="
-                    error ? '#' : hero.data.attributes.cv.data.attributes.url
-                  "
+                  :href="hero?.data.attributes.cv.data?.attributes.url ?? '#'"
                   target="_blank"
                   class="flex w-full items-center justify-center overflow-hidden rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-gray-50 transition duration-150 ease-in-out hover:bg-indigo-700 dark:bg-indigo-800 dark:text-slate-100 dark:hover:bg-indigo-900 md:py-4 md:px-10 md:text-lg"
                 >
@@ -86,13 +83,13 @@ import VueWriterEsm from 'vue-writer'
 import { useFetch, useRuntimeConfig } from 'nuxt/app'
 const config = useRuntimeConfig()
 
-const { data: hero, error } = await useFetch(
+const { data: hero } = await useFetch(
   `${config.public.strapiUrl}/api/hero?populate=deep`
 )
 
 const writer = computed(() => {
   let values
-  if (hero.value) {
+  if (hero.value?.data.attributes.writer.length > 0) {
     values = hero.value.data.attributes.writer.map((x) => x.title)
   } else {
     values = ['Job Title', 'Enthusiast']
