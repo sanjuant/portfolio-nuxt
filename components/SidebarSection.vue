@@ -2,32 +2,32 @@
   <div id="navbar" class="sticky top-0 z-40 md:block">
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog
-        as="div"
-        class="fixed inset-0 z-40 flex md:hidden"
-        @close="sidebarOpen = false"
+          as="div"
+          class="fixed inset-0 z-40 flex md:hidden"
+          @close="sidebarOpen = false"
       >
         <TransitionChild
-          as="template"
-          enter="transition-opacity ease-linear duration-300"
-          enter-from="opacity-0"
-          enter-to="opacity-100"
-          leave="transition-opacity ease-linear duration-300"
-          leave-from="opacity-100"
-          leave-to="opacity-0"
+            as="template"
+            enter="transition-opacity ease-linear duration-300"
+            enter-from="opacity-0"
+            enter-to="opacity-100"
+            leave="transition-opacity ease-linear duration-300"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
         >
           <DialogOverlay class="fixed inset-0 bg-gray-600 bg-opacity-75" />
         </TransitionChild>
         <TransitionChild
-          as="template"
-          enter="transition ease-in-out duration-300 transform"
-          enter-from="-translate-x-full"
-          enter-to="translate-x-0"
-          leave="transition ease-in-out duration-300 transform"
-          leave-from="translate-x-0"
-          leave-to="-translate-x-full"
+            as="template"
+            enter="transition ease-in-out duration-300 transform"
+            enter-from="-translate-x-full"
+            enter-to="translate-x-0"
+            leave="transition ease-in-out duration-300 transform"
+            leave-from="translate-x-0"
+            leave-to="-translate-x-full"
         >
           <div
-            class="relative flex w-64 flex-col bg-gradient-to-b from-indigo-600 to-indigo-700 dark:from-indigo-800 dark:to-indigo-900"
+              class="relative flex w-[270px] flex-col bg-gradient-to-b from-indigo-600 to-indigo-700 dark:from-indigo-800 dark:to-indigo-900"
           >
             <div class="flex-1 overflow-y-auto pt-5 pb-4">
               <div class="flex items-center">
@@ -35,21 +35,21 @@
                   <div class="flex items-center justify-center">
                     <div class="relative">
                       <span
-                        class="absolute top-0 right-0 z-10 h-[3.5rem] w-[3.5rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
+                          class="absolute top-0 right-0 z-10 h-[3.5rem] w-[3.5rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
                       />
                       <span
-                        class="absolute -top-2 -right-2 h-[15rem] w-[15rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
+                          class="absolute -top-2 -right-2 h-[15rem] w-[15rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
                       />
                       <img
-                        class="relative mx-auto h-[14rem] w-[14rem] flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
-                        :src="
+                          class="relative mx-auto h-[14rem] w-[14rem] flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
+                          :src="
                           formatImageUrl(
                             identity?.data.attributes.picture.data?.attributes
                               .url
                           ) ??
                           'https://via.placeholder.com/224?text=Picture+224x224'
                         "
-                        :alt="
+                          :alt="
                           identity?.data.attributes.picture.data?.attributes
                             .alternativeText ??
                           'Photo de profil en 224*224 minimum, ratio de 1/1'
@@ -59,7 +59,7 @@
                   </div>
 
                   <h3
-                    class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
+                      class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
                   >
                     {{ identity?.data.attributes.first_name ?? 'FirstName' }}
                     {{ identity?.data.attributes.last_name ?? 'LastName' }}
@@ -67,14 +67,14 @@
                   <dl class="mt-1 flex flex-grow flex-col justify-between">
                     <!--                    <dt class="sr-only">Title</dt>-->
                     <dd
-                      class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
+                        class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
                     >
                       {{ identity?.data.attributes.job ?? 'JobTitle' }}
                     </dd>
                     <!--                    <dt class="sr-only">Role</dt>-->
                     <dd class="mt-4 flex flex-wrap justify-center">
                       <span
-                        v-for="skill in identity?.data.attributes.soft_skills
+                          v-for="skill in identity?.data.attributes.soft_skills
                           .length > 0
                           ? identity.data.attributes.soft_skills
                           : [
@@ -84,9 +84,9 @@
                               { id: 4, quality: 'Quality' },
                               { id: 5, quality: 'Quality' },
                             ]"
-                        :key="skill.id"
-                        class="mx-1 mt-2 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800 dark:bg-purple-500 dark:text-slate-100"
-                        >{{ skill.quality }}</span
+                          :key="skill.id"
+                          class="mx-1 mt-2 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800 dark:bg-purple-500 dark:text-slate-100"
+                      >{{ skill.quality }}</span
                       >
                     </dd>
                   </dl>
@@ -94,57 +94,60 @@
               </div>
               <nav class="mt-5 space-y-1 px-2">
                 <a
-                  v-for="item in navigation"
-                  :key="item.name"
-                  :href="item.href"
-                  :class="[
+                    v-for="item in navigation"
+                    :key="item.name"
+                    :href="item.href"
+                    :class="[
                     item.current
                       ? 'bg-indigo-800 text-gray-50 dark:bg-indigo-900 dark:text-slate-50'
                       : 'text-gray-100 hover:bg-indigo-600 hover:bg-opacity-75 dark:text-slate-100 dark:hover:bg-indigo-800',
                     'group flex items-center rounded-md px-2 py-2 text-base font-medium',
                   ]"
-                  @click="sidebarOpen = false"
+                    @click="sidebarOpen = false"
                 >
                   <component
-                    :is="item.icon"
-                    class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300 dark:text-indigo-500"
-                    aria-hidden="true"
+                      :is="item.icon"
+                      class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300 dark:text-indigo-500"
+                      aria-hidden="true"
                   />
                   {{ item.name }}
                 </a>
               </nav>
             </div>
             <div
-              class="flex flex-shrink-0 justify-center border-t border-indigo-800 p-4"
+                class="border-t border-indigo-800 p-4"
             >
-              <div class="mt-0">
-                <p class="text-center text-xs leading-6 text-gray-300">
-                  © 2022 Thibaut SANJUAN.
-                </p>
-                <p class="text-center text-xs leading-6 text-gray-300">
-                  All rights reserved.
-                </p>
+              <div class="flex justify-between">
+                <ThemeSwitcher />
+                <div class="mt-0 w-full">
+                  <p class="text-center text-xs leading-6 text-gray-300">
+                    © 2022 Thibaut SANJUAN.
+                  </p>
+                  <p class="text-center text-xs leading-6 text-gray-300">
+                    All rights reserved.
+                  </p>
+                </div>
               </div>
             </div>
             <TransitionChild
-              as="template"
-              enter="ease-in-out duration-300"
-              enter-from="opacity-0"
-              enter-to="opacity-100"
-              leave="ease-in-out duration-300"
-              leave-from="opacity-100"
-              leave-to="opacity-0"
+                as="template"
+                enter="ease-in-out duration-300"
+                enter-from="opacity-0"
+                enter-to="opacity-100"
+                leave="ease-in-out duration-300"
+                leave-from="opacity-100"
+                leave-to="opacity-0"
             >
               <div class="absolute top-0 right-0 -mr-12 pt-2">
                 <button
-                  type="button"
-                  class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                  @click="sidebarOpen = false"
+                    type="button"
+                    class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    @click="sidebarOpen = false"
                 >
                   <span class="sr-only">Close sidebar</span>
                   <XMarkIcon
-                    class="h-6 w-6 text-gray-100 hover:text-gray-300 dark:text-slate-100 dark:hover:text-slate-300"
-                    aria-hidden="true"
+                      class="h-6 w-6 text-gray-100 hover:text-gray-300 dark:text-slate-100 dark:hover:text-slate-300"
+                      aria-hidden="true"
                   />
                 </button>
               </div>
@@ -157,10 +160,10 @@
       </Dialog>
     </TransitionRoot>
     <div
-      class="z-30 hidden w-64 drop-shadow-[0_10px_5px_rgba(0,0,0,0.25)] md:fixed md:inset-y-0 md:flex md:flex-col"
+        class="z-30 hidden w-64 drop-shadow-[0_10px_5px_rgba(0,0,0,0.25)] md:fixed md:inset-y-0 md:flex md:flex-col"
     >
       <div
-        class="flex min-h-0 flex-1 flex-col bg-gradient-to-b from-indigo-600 to-indigo-700 dark:from-indigo-800 dark:to-indigo-900"
+          class="flex min-h-0 w-[270px] flex-1 flex-col bg-gradient-to-b from-indigo-600 to-indigo-700 dark:from-indigo-800 dark:to-indigo-900"
       >
         <div class="flex-1 overflow-y-auto pt-5 pb-4">
           <div class="flex items-center">
@@ -168,20 +171,20 @@
               <div class="flex items-center justify-center">
                 <div class="relative">
                   <span
-                    class="absolute top-0 right-0 z-10 h-[3.5rem] w-[3.5rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
+                      class="absolute top-0 right-0 z-10 h-[3.5rem] w-[3.5rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
                   />
                   <span
-                    class="absolute -top-2 -right-2 h-[15rem] w-[15rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
+                      class="absolute -top-2 -right-2 h-[15rem] w-[15rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
                   />
                   <img
-                    class="relative mx-auto h-[14rem] w-[14rem] flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
-                    :src="
+                      class="relative mx-auto h-[14rem] w-[14rem] flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
+                      :src="
                       formatImageUrl(
                         identity?.data.attributes.picture.data?.attributes.url
                       ) ??
                       'https://via.placeholder.com/224?text=Picture+224x224'
                     "
-                    :alt="
+                      :alt="
                       identity?.data.attributes.picture.data?.attributes
                         .alternativeText ??
                       'Photo de profil en 224*224 minimum, ratio de 1/1'
@@ -190,7 +193,7 @@
                 </div>
               </div>
               <h3
-                class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
+                  class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
               >
                 {{ identity?.data.attributes.first_name ?? 'FirstName' }}
                 {{ identity?.data.attributes.last_name ?? 'LastName' }}
@@ -198,14 +201,14 @@
               <dl class="mt-1 flex flex-grow flex-col justify-between">
                 <!--                <dt class="sr-only">Title</dt>-->
                 <dd
-                  class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
+                    class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
                 >
                   {{ identity?.data.attributes.job ?? 'JobTitle' }}
                 </dd>
                 <!--                <dt class="sr-only">Role</dt>-->
                 <dd class="mt-4 flex flex-wrap justify-center">
                   <span
-                    v-for="skill in identity?.data.attributes.soft_skills
+                      v-for="skill in identity?.data.attributes.soft_skills
                       .length > 0
                       ? identity.data.attributes.soft_skills
                       : [
@@ -215,9 +218,9 @@
                           { id: 4, quality: 'Quality' },
                           { id: 5, quality: 'Quality' },
                         ]"
-                    :key="skill.id"
-                    class="mx-1 mt-2 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800 dark:bg-purple-500 dark:text-slate-100"
-                    >{{ skill.quality }}</span
+                      :key="skill.id"
+                      class="mx-1 mt-2 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800 dark:bg-purple-500 dark:text-slate-100"
+                  >{{ skill.quality }}</span
                   >
                 </dd>
               </dl>
@@ -225,10 +228,10 @@
           </div>
           <nav class="mt-5 flex-1 space-y-1 px-2">
             <a
-              v-for="item in navigation"
-              :key="item.name"
-              :href="item.href"
-              :class="[
+                v-for="item in navigation"
+                :key="item.name"
+                :href="item.href"
+                :class="[
                 item.current
                   ? 'bg-indigo-800 text-gray-50 dark:bg-indigo-900 dark:text-slate-50'
                   : 'text-gray-100 hover:bg-indigo-600 hover:bg-opacity-75 dark:text-slate-100 dark:hover:bg-indigo-800',
@@ -236,41 +239,44 @@
               ]"
             >
               <component
-                :is="item.icon"
-                class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300 dark:text-indigo-500"
-                aria-hidden="true"
+                  :is="item.icon"
+                  class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300 dark:text-indigo-500"
+                  aria-hidden="true"
               />
               {{ item.name }}
             </a>
           </nav>
         </div>
         <div
-          class="flex flex-shrink-0 justify-center border-t border-indigo-800 p-4"
+            class="border-t border-indigo-800 p-4"
         >
-          <div class="mt-0">
-            <p class="text-center text-xs leading-6 text-gray-300">
-              © 2022 Thibaut SANJUAN.
-            </p>
-            <p class="text-center text-xs leading-6 text-gray-300">
-              All rights reserved.
-            </p>
+          <div class="flex justify-between">
+            <ThemeSwitcher />
+            <div class="mt-0 w-full">
+              <p class="text-center text-xs leading-6 text-gray-300">
+                © 2022 Thibaut SANJUAN.
+              </p>
+              <p class="text-center text-xs leading-6 text-gray-300">
+                All rights reserved.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div
-      class="top-0 z-40 flex w-full justify-between bg-gray-100 dark:bg-slate-800 md:hidden"
+        class="top-0 z-40 flex w-full justify-between bg-gray-100 dark:bg-slate-800 md:hidden"
     >
       <button
-        type="button"
-        class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 dark:text-slate-500 dark:hover:text-slate-300"
-        @click="sidebarOpen = true"
+          type="button"
+          class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 dark:text-slate-500 dark:hover:text-slate-300"
+          @click="sidebarOpen = true"
       >
         <span class="sr-only">Open sidebar</span>
         <Bars3Icon class="h-6 w-6" aria-hidden="true" />
       </button>
       <div
-        class="mr-2 flex flex-col items-end justify-center text-right text-xs text-gray-500 dark:text-slate-500"
+          class="mr-2 flex flex-col items-end justify-center text-right text-xs text-gray-500 dark:text-slate-500"
       >
         <div>
           {{ identity?.data.attributes.first_name ?? 'FirstName' }}
@@ -335,7 +341,7 @@ const navigation = [
 const sidebarOpen = ref(false)
 
 const { data: identity } = await useFetch(
-  `${config.public.strapiUrl}/api/identity?populate=deep`
+    `${config.public.strapiUrl}/api/identity?populate=deep`
 )
 
 const formatImageUrl = (url) => {

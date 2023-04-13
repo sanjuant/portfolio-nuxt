@@ -363,16 +363,6 @@ onMounted(() => {
   height: auto;
   max-height: none;
 }
-@media (prefers-color-scheme: dark) {
-  .read-more:after {
-    background-image: linear-gradient(
-      to bottom,
-      transparent,
-      theme('colors.slate.800')
-    );
-  }
-}
-
 .rmb {
   display: flex;
   align-items: center;
@@ -482,61 +472,67 @@ onMounted(() => {
   background-color: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  .rmb-text {
-    color: theme('colors.indigo.500');
-  }
-
-  .rmb-text:hover + .rmb-wrapper .rmb-end .circle-border {
-    border-color: theme('colors.slate.600');
-    background-color: theme('colors.slate.500');
-  }
-
-  .rmb.is-active {
-    opacity: 0.5;
-  }
-  .rmb.is-active .connector {
-    background-color: theme('colors.indigo.500');
-  }
-  .rmb.is-active .circle-border:hover {
-    background-color: theme('colors.slate.600');
-    border-color: theme('colors.indigo.500');
-  }
-  .rmb.is-active .rmb-end .circle-border {
-    background-color: theme('colors.slate.800');
-    border-color: theme('colors.indigo.500');
-  }
-  .rmb.is-active .rmb-end .circle-dot {
-    background-color: theme('colors.indigo.500');
-  }
-  .rmb.is-active .rmb-text:hover + .rmb-wrapper .rmb-start .circle-border {
-    background-color: theme('colors.slate.600');
-    border-color: theme('colors.indigo.500');
-  }
-  .rmb.is-active .rmb-text:hover + .rmb-wrapper .rmb-end .circle-border {
-    border-color: theme('colors.indigo.500');
-  }
-
-  .rmb-start .connector {
-    background-color: theme('colors.slate.400');
-  }
-
-  .circle-border {
-    background-color: theme('colors.slate.800');
-    border-color: theme('colors.indigo.500');
-  }
-
-  .circle-dot {
-    background-color: theme('colors.indigo.500');
-  }
-
-  .rmb-end .circle-border {
-    background-color: theme('colors.slate.800');
-    border-color: theme('colors.slate.400');
-  }
-  .rmb-end .circle-border:hover {
-    border-color: theme('colors.slate.600');
-    background-color: theme('colors.slate.500');
-  }
+/*******************************/
+/********** Dark Mode **********/
+/*******************************/
+html.dark .read-more:after {
+  background-image: linear-gradient(
+      to bottom,
+      transparent,
+      theme('colors.slate.800')
+  );
 }
+html.dark .rmb-text {
+  color: theme('colors.indigo.500');
+}
+html.dark .rmb-text:hover + .rmb-wrapper .rmb-end .circle-border {
+  border-color: theme('colors.slate.600');
+  background-color: theme('colors.slate.500');
+}
+html.dark .rmb.is-active {
+  opacity: 0.5;
+}
+html.dark .rmb.is-active .connector {
+  background-color: theme('colors.indigo.500');
+}
+html.dark .rmb.is-active .circle-border:hover {
+  background-color: theme('colors.slate.600');
+  border-color: theme('colors.indigo.500');
+}
+html.dark .rmb.is-active .rmb-end .circle-border {
+  background-color: theme('colors.slate.800');
+  border-color: theme('colors.indigo.500');
+}
+html.dark .rmb.is-active .rmb-end .circle-dot {
+  background-color: theme('colors.indigo.500');
+}
+html.dark .rmb.is-active .rmb-text:hover + .rmb-wrapper .rmb-start .circle-border {
+  background-color: theme('colors.slate.600');
+  border-color: theme('colors.indigo.500');
+}
+html.dark .rmb.is-active .rmb-text:hover + .rmb-wrapper .rmb-end .circle-border {
+  border-color: theme('colors.indigo.500');
+}
+html.dark .rmb-start .connector {
+  background-color: theme('colors.slate.400');
+}
+html.dark .circle-border {
+  background-color: theme('colors.slate.800');
+  border-color: theme('colors.indigo.500');
+}
+html.dark .circle-dot {
+  background-color: theme('colors.indigo.500');
+}
+html.dark .rmb-end .circle-border {
+  background-color: theme('colors.slate.800');
+  border-color: theme('colors.slate.400');
+}
+html.dark .rmb-end .circle-border:hover {
+  border-color: theme('colors.slate.600');
+  background-color: theme('colors.slate.500');
+}
+html.dark .rmb-end .circle-dot {
+  background-color: transparent;
+}
+
 </style>

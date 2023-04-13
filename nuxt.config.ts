@@ -1,6 +1,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss', '@tailwindcss/typography'],
+  modules: ['@nuxtjs/tailwindcss', '@tailwindcss/typography', '@nuxtjs/color-mode'],
+  colorMode: {classSuffix: ''},
   build: {
     transpile: ['@heroicons/vue'],
   },

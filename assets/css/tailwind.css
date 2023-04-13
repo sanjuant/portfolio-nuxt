@@ -2,62 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: theme('colors.slate.900');
-  }
-
-  /* # Scrollbar */
-  /* ### Firefox*/
-  :root,
-  .overflow-y-auto,
-  .overflow-x-auto {
-    scrollbar-color: theme('colors.indigo.600') theme('colors.indigo.800');
-    scrollbar-width: thin;
-  }
-  /* ### Chromium */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: theme('colors.indigo.800');
-  }
-  ::-webkit-scrollbar-thumb {
-    background: theme('colors.indigo.600');
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: theme('colors.indigo.700');
-  }
+body {
+  background-color: theme('colors.gray.50');
 }
 
-@media (prefers-color-scheme: light) {
-  body {
-    background-color: theme('colors.gray.50');
-  }
+/* # Scrollbar */
+/* ### Firefox*/
+:root,
+.overflow-y-auto,
+.overflow-x-auto {
+  scrollbar-color: theme('colors.indigo.400') theme('colors.indigo.600');
+  scrollbar-width: thin;
+}
 
-  /* # Scrollbar */
-  /* ### Firefox*/
-  :root,
-  .overflow-y-auto,
-  .overflow-x-auto {
-    scrollbar-color: theme('colors.indigo.400') theme('colors.indigo.600');
-    scrollbar-width: thin;
-  }
+/* ### Chromium */
+::-webkit-scrollbar {
+  width: 10px;
+  scrollbar-width: thin;
+}
 
-  /* ### Chromium */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
+::-webkit-scrollbar-track {
+  background: theme('colors.indigo.600');
+}
 
-  ::-webkit-scrollbar-track {
-    background: theme('colors.indigo.600');
-  }
+::-webkit-scrollbar-thumb {
+  background: theme('colors.indigo.400');
+  border-radius: 10px;
 
-  ::-webkit-scrollbar-thumb {
-    background: theme('colors.indigo.400');
-  }
+}
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: theme('colors.indigo.500');
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.indigo.500');
+}
+
+/*******************************/
+/********** Dark Mode **********/
+/*******************************/
+html.dark body {
+  background-color: theme('colors.slate.900');
+}
+
+/* # Scrollbar */
+/* ### Firefox*/
+html.dark ,
+html.dark .overflow-y-auto,
+html.dark .overflow-x-auto {
+  scrollbar-color: theme('colors.indigo.600') theme('colors.indigo.800') !important;
+  scrollbar-width: thin;
+}
+
+/* ### Chromium */
+html.dark ::-webkit-scrollbar {
+  width: 10px;
+  scrollbar-width: thin;
+}
+html.dark ::-webkit-scrollbar-track {
+  background: theme('colors.indigo.800');
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: theme('colors.indigo.600');
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.indigo.700');
 }

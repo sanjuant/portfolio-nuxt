@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss'
 import tailwindTypography from '@tailwindcss/typography'
 
 export default <Partial<Config>>{
+  darkMode: 'class',
   theme: {
     screens: {
       xs: '475px',
