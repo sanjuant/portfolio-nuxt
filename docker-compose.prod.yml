@@ -1,11 +1,8 @@
+version: '3.8'
+
 services:
   portfolio:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        NODE_VERSION: 18.19.0
-    image: portfolio:latest
+    image: ghcr.io/sanjuant/portfolio-nuxt:latest
     container_name: portfolio
     restart: unless-stopped
     
@@ -56,10 +53,6 @@ services:
       
       # Security headers
       - "traefik.http.middlewares.portfolio-headers.headers.customrequestheaders.X-Forwarded-Proto=https"
-      - "traefik.http.middlewares.portfolio-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT"
-      - "traefik.http.middlewares.portfolio-headers.headers.accesscontrolallowheaders=*"
-      - "traefik.http.middlewares.portfolio-headers.headers.accesscontrolmaxage=100"
-      - "traefik.http.middlewares.portfolio-headers.headers.addvaryheader=true"
       - "traefik.http.middlewares.portfolio-security.headers.frameDeny=true"
       - "traefik.http.middlewares.portfolio-security.headers.sslRedirect=true"
       - "traefik.http.middlewares.portfolio-security.headers.browserXSSFilter=true"
@@ -70,7 +63,7 @@ services:
       - "traefik.http.middlewares.portfolio-security.headers.stsSeconds=31536000"
       
       # Apply middlewares
-      - "traefik.http.routers.portfolio.middlewares=portfolio-headers,portfolio-security"
+      - "traefik.http.routers.portfolio.middlewares=portfolio-security"
 
 networks:
   web:

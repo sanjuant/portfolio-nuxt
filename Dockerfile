@@ -1,41 +1,47 @@
-ARG NODE_VERSION=node:16.18.1
+ARG NODE_VERSION=18.19.0
 
-FROM $NODE_VERSION AS dependency-base
+FROM node:${NODE_VERSION}-alpine AS base
+# Enable corepack for pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# install package manager
-RUN npm install -g pnpm
-
-# create destination directory
-RUN mkdir -p /app
+FROM base AS deps
 WORKDIR /app
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+# Install dependencies
+RUN pnpm install --frozen-lockfile --prefer-offline
 
-# copy the app, note .dockerignore
-COPY package.json .
-COPY pnpm-lock.yaml .
-RUN pnpm install --shamefully-hoist --frozen-lockfile
-
-FROM dependency-base AS production-base
-
-# build will also take care of building
-# if necessary
+FROM base AS builder
+WORKDIR /app
+# Copy dependencies
+COPY --from=deps /app/node_modules ./node_modules
+# Copy source code
 COPY . .
+# Build the application
 RUN pnpm run build
 
-FROM $NODE_VERSION-alpine AS production
+FROM base AS runtime
+WORKDIR /app
 
-COPY --from=production-base /app/.output /app/.output
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nuxtjs
 
-# Service hostname
-ENV NUXT_HOST=0.0.0.0
+# Copy built application
+COPY --from=builder --chown=nuxtjs:nodejs /app/.output /app/.output
 
-# Service version
-ARG NUXT_APP_VERSION
-ENV NUXT_APP_VERSION=${NUXT_APP_VERSION}
-
-# Run in production mode
+# Set environment variables
 ENV NODE_ENV=production
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD node /app/.output/server/index.mjs --health-check || exit 1
+
+# Switch to non-root user
+USER nuxtjs
 
 EXPOSE 3000
 
-# start the app
-CMD [ "node", "/app/.output/server/index.mjs" ]
+CMD ["node", "/app/.output/server/index.mjs"]
