@@ -39,7 +39,7 @@ jobs:
             rm -f pnpm-lock.yaml
             pnpm install --prefer-offline
             git config --local user.email "sanjuan.thibaut@gmail.com"
-            git config --local user.name "sanjuant
+            git config --local user.name "sanjuant"
             git add pnpm-lock.yaml
             git diff --staged --quiet || git commit -m "chore: update pnpm lockfile"
             git push
