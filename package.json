@@ -30,6 +30,7 @@
     "@heroicons/vue": "^2.0.13",
     "photoswipe": "^5.3.3",
     "swiper": "^8.4.4",
+    "vue": "^3.2.45",
     "vue-writer": "^1.2.0"
   }
 }

@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss'
-import tailwindTypography from '@tailwindcss/typography'
 
 export default <Partial<Config>>{
   darkMode: 'class',
@@ -13,5 +12,5 @@ export default <Partial<Config>>{
       '2xl': '1536px',
     },
   },
-  plugins: [tailwindTypography],
+  plugins: [require('@tailwindcss/typography')],
 }

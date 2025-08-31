@@ -8,7 +8,7 @@ services:
     image: portfolio:latest
     container_name: portfolio
     restart: unless-stopped
-    
+
     # Security
     read_only: true
     security_opt:
@@ -42,36 +42,36 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=100m
     
-    networks:
-      - web
+#    networks:
+#      - web
     
     # Traefik labels
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=web"
-      - "traefik.http.routers.portfolio.rule=Host(`sanjuant.fr`) || Host(`www.sanjuant.fr`)"
-      - "traefik.http.routers.portfolio.entrypoints=websecure"
-      - "traefik.http.routers.portfolio.tls.certresolver=myresolver"
-      - "traefik.http.services.portfolio.loadbalancer.server.port=3000"
-      
-      # Security headers
-      - "traefik.http.middlewares.portfolio-headers.headers.customrequestheaders.X-Forwarded-Proto=https"
-      - "traefik.http.middlewares.portfolio-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT"
-      - "traefik.http.middlewares.portfolio-headers.headers.accesscontrolallowheaders=*"
-      - "traefik.http.middlewares.portfolio-headers.headers.accesscontrolmaxage=100"
-      - "traefik.http.middlewares.portfolio-headers.headers.addvaryheader=true"
-      - "traefik.http.middlewares.portfolio-security.headers.frameDeny=true"
-      - "traefik.http.middlewares.portfolio-security.headers.sslRedirect=true"
-      - "traefik.http.middlewares.portfolio-security.headers.browserXSSFilter=true"
-      - "traefik.http.middlewares.portfolio-security.headers.contentTypeNosniff=true"
-      - "traefik.http.middlewares.portfolio-security.headers.forceSTSHeader=true"
-      - "traefik.http.middlewares.portfolio-security.headers.stsIncludeSubdomains=true"
-      - "traefik.http.middlewares.portfolio-security.headers.stsPreload=true"
-      - "traefik.http.middlewares.portfolio-security.headers.stsSeconds=31536000"
-      
-      # Apply middlewares
-      - "traefik.http.routers.portfolio.middlewares=portfolio-headers,portfolio-security"
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.docker.network=web"
+#      - "traefik.http.routers.portfolio.rule=Host(`sanjuant.fr`) || Host(`www.sanjuant.fr`)"
+#      - "traefik.http.routers.portfolio.entrypoints=websecure"
+#      - "traefik.http.routers.portfolio.tls.certresolver=myresolver"
+#      - "traefik.http.services.portfolio.loadbalancer.server.port=3000"
+#
+#      # Security headers
+#      - "traefik.http.middlewares.portfolio-headers.headers.customrequestheaders.X-Forwarded-Proto=https"
+#      - "traefik.http.middlewares.portfolio-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT"
+#      - "traefik.http.middlewares.portfolio-headers.headers.accesscontrolallowheaders=*"
+#      - "traefik.http.middlewares.portfolio-headers.headers.accesscontrolmaxage=100"
+#      - "traefik.http.middlewares.portfolio-headers.headers.addvaryheader=true"
+#      - "traefik.http.middlewares.portfolio-security.headers.frameDeny=true"
+#      - "traefik.http.middlewares.portfolio-security.headers.sslRedirect=true"
+#      - "traefik.http.middlewares.portfolio-security.headers.browserXSSFilter=true"
+#      - "traefik.http.middlewares.portfolio-security.headers.contentTypeNosniff=true"
+#      - "traefik.http.middlewares.portfolio-security.headers.forceSTSHeader=true"
+#      - "traefik.http.middlewares.portfolio-security.headers.stsIncludeSubdomains=true"
+#      - "traefik.http.middlewares.portfolio-security.headers.stsPreload=true"
+#      - "traefik.http.middlewares.portfolio-security.headers.stsSeconds=31536000"
+#
+#      # Apply middlewares
+#      - "traefik.http.routers.portfolio.middlewares=portfolio-headers,portfolio-security"
 
-networks:
-  web:
-    external: true
+#networks:
+#  web:
+#    external: true
