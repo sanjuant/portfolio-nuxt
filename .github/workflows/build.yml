@@ -29,19 +29,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.19.0'
+          node-version: '22.19.0'
           cache: 'pnpm'
       
       - name: Update pnpm lockfile if needed
         run: |
-          if ! pnpm install --frozen-lockfile --prefer-offline 2>/dev/null; then
+          if ! pnpm install --frozen-lockfile --shamefully-hoist 2>/dev/null; then
             echo "Lockfile incompatible, regenerating..."
             rm -f pnpm-lock.yaml
-            pnpm install --prefer-offline
+            pnpm install --shamefully-hoist
             git config --local user.email "sanjuan.thibaut@gmail.com"
             git config --local user.name "sanjuant"
             git add pnpm-lock.yaml
-            git diff --staged --quiet || git commit -m "chore: update pnpm lockfile"
+            git diff --staged --quiet || git commit -m "chore: update pnpm lockfile and add oxc-parser binding"
             git push
           fi
       
@@ -69,5 +69,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            NODE_VERSION=18.19.0
