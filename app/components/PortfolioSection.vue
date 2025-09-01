@@ -3,7 +3,7 @@
     id="portfolio"
     class="overflow-hidden bg-white py-12 dark:bg-slate-900 lg:pb-16 lg:pt-20"
   >
-    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-(--breakpoint-xl) px-4 sm:px-6 lg:px-8">
       <p
         class="mb-4 text-base font-semibold uppercase leading-6 tracking-wide text-indigo-600"
       >
@@ -61,7 +61,7 @@
             }"
             :pagination="paginationCustom"
             :auto-height="true"
-            class="w-[99.9%] !pb-4"
+            class="w-[99.9%] pb-4!"
           >
             <template #wrapper-start></template>
             <swiper-slide
@@ -268,7 +268,7 @@
             </button>
           </div>
           <div
-            class="custom-pagination-item relative w-full max-w-[4rem]"
+            class="custom-pagination-item relative w-full max-w-16"
           ></div>
         </div>
       </div>
@@ -388,7 +388,7 @@ function renderCarouselHorizontalPaginationBullets(swiper, current, total) {
     const liEl = document.createElement('li')
     liEl.className =
       'custom-pagination-item relative' +
-      (index !== total ? ' w-full max-w-[4rem] xl:max-w-[8rem]' : '')
+      (index !== total ? ' w-full max-w-16 xl:max-w-32' : '')
     const divEl = document.createElement('div')
     divEl.className = 'absolute inset-0 flex items-center'
     divEl.setAttribute('aria-hidden', 'true')

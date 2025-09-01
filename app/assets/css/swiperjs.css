@@ -1,3 +1,5 @@
+@import 'tailwindcss';
+
 .sbutton-next,
 .sbutton-prev {
   margin-top: calc(0px - (1.875rem / 2));
@@ -45,11 +47,11 @@
 }
 
 .swiper-lazy-preloader {
-  --swiper-preloader-color: theme('colors.indigo.500');
+  --swiper-preloader-color: var(--color-indigo-500);
 }
 
 @media (prefers-color-scheme: dark) {
   .swiper-lazy-preloader {
-    --swiper-preloader-color: theme('colors.indigo.700');
+    --swiper-preloader-color: var(--color-indigo-700);
   }
 }

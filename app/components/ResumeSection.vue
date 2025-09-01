@@ -36,7 +36,7 @@
                 ]"
               >
                 <span
-                  class="absolute left-0 top-[0.350rem] h-[1.125rem] w-[1.125rem] rounded-full bg-gray-300 lg:left-[unset] lg:right-0"
+                  class="absolute left-0 top-[0.350rem] h-4.5 w-4.5 rounded-full bg-gray-300 lg:left-[unset] lg:right-0"
                 ></span>
                 <h3 class="mb-1 font-bold uppercase">
                   {{ education.attributes.title }}
@@ -90,7 +90,7 @@
                 >
                   <div v-html="education.attributes.description" />
                 </div>
-                <div class="rmb mt-2 !hidden lg:justify-end">
+                <div class="rmb mt-2 hidden! lg:justify-end">
                   <div class="rmb-text lg:order-2">Voir plus</div>
                   <div class="rmb-wrapper lg:order-1">
                     <div class="rmb-start">
@@ -110,7 +110,7 @@
                 </div>
                 <span
                   v-if="educationIdx === educations?.data.length - 1"
-                  class="absolute left-0 -bottom-4 h-[1.125rem] w-[1.125rem] rounded-full bg-gray-300 lg:left-[unset] lg:right-0"
+                  class="absolute left-0 -bottom-4 h-4.5 w-4.5 rounded-full bg-gray-300 lg:left-[unset] lg:right-0"
                 ></span>
               </li>
             </template>
@@ -142,7 +142,7 @@
                 ]"
               >
                 <span
-                  class="absolute left-0 top-[0.350rem] h-[1.125rem] w-[1.125rem] rounded-full bg-indigo-500"
+                  class="absolute left-0 top-[0.350rem] h-4.5 w-4.5 rounded-full bg-indigo-500"
                 ></span>
                 <h3
                   class="mb-1 font-bold uppercase text-gray-900 dark:text-slate-100"
@@ -193,7 +193,7 @@
                   <div v-html="experience.attributes.description" />
                 </div>
 
-                <div class="rmb mt-2 !hidden">
+                <div class="rmb mt-2 hidden!">
                   <div class="rmb-text">Voir plus</div>
 
                   <div class="rmb-wrapper">
@@ -215,7 +215,7 @@
 
                 <span
                   v-if="experienceIdx === experiences?.data.length - 1"
-                  class="absolute left-0 -bottom-4 h-[1.125rem] w-[1.125rem] rounded-full bg-indigo-500"
+                  class="absolute left-0 -bottom-4 h-4.5 w-4.5 rounded-full bg-indigo-500"
                 ></span>
               </li>
             </template>
@@ -266,7 +266,7 @@ onMounted(() => {
     const text = button.querySelector('div.rmb-text')
     if (readMore.offsetHeight < readMore.scrollHeight) {
       readMore.classList.add('read-more')
-      button.classList.remove('!hidden')
+      button.classList.remove('hidden!')
       button.addEventListener(
         'click',
         () => {
@@ -353,9 +353,9 @@ onMounted(() => {
   right: 0;
   content: ' ';
   background-image: linear-gradient(
-    to bottom,
-    transparent,
-    theme('colors.gray.50')
+      to bottom,
+      transparent,
+      var(--color-gray-50)
   );
   height: 50%;
 }
@@ -371,15 +371,15 @@ onMounted(() => {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   font-weight: 900;
-  color: theme('colors.indigo.600');
+  color: var(--color-indigo-600);
   font-size: 0.7rem;
   cursor: pointer;
   width: 6rem;
 }
 
 .rmb-text:hover + .rmb-wrapper .rmb-end .circle-border {
-  border-color: theme('colors.gray.400');
-  background-color: theme('colors.gray.300');
+  border-color: var(--color-gray-400);
+  background-color: var(--color-gray-300);
 }
 
 .rmb-wrapper {
@@ -395,28 +395,28 @@ onMounted(() => {
   opacity: 0.3;
 }
 .rmb.is-active .connector {
-  background-color: theme('colors.indigo.600');
+  background-color: var(--color-indigo-600);
 }
 .rmb.is-active .circle-dot {
   background-color: transparent;
 }
 .rmb.is-active .circle-border:hover {
-  background-color: theme('colors.gray.400');
-  border-color: theme('colors.indigo.600');
+  background-color: var(--color-gray-400);
+  border-color: var(--color-indigo-600);
 }
 .rmb.is-active .rmb-end .circle-border {
-  background-color: theme('colors.gray.50');
-  border-color: theme('colors.indigo.600');
+  background-color: var(--color-gray-50);
+  border-color: var(--color-indigo-600);
 }
 .rmb.is-active .rmb-end .circle-dot {
-  background-color: theme('colors.indigo.600');
+  background-color: var(--color-indigo-600);
 }
 .rmb.is-active .rmb-text:hover + .rmb-wrapper .rmb-start .circle-border {
-  background-color: theme('colors.gray.400');
-  border-color: theme('colors.indigo.600');
+  background-color: var(--color-gray-400);
+  border-color: var(--color-indigo-600);
 }
 .rmb.is-active .rmb-text:hover + .rmb-wrapper .rmb-end .circle-border {
-  border-color: theme('colors.indigo.600');
+  border-color: var(--color-indigo-600);
 }
 
 .rmb-start {
@@ -434,14 +434,14 @@ onMounted(() => {
   position: absolute;
 }
 .rmb-start .connector {
-  background-color: theme('colors.gray.200');
+  background-color: var(--color-gray-200);
   width: 100%;
   height: 0.125rem;
 }
 
 .circle-border {
-  background-color: theme('colors.gray.50');
-  border-color: theme('colors.indigo.600');
+  background-color: var(--color-gray-50);
+  border-color: var(--color-indigo-600);
   border-width: 2px;
   border-radius: 9999px;
   justify-content: center;
@@ -454,19 +454,19 @@ onMounted(() => {
 }
 
 .circle-dot {
-  background-color: theme('colors.indigo.600');
+  background-color: var(--color-indigo-600);
   border-radius: 9999px;
   width: 0.375rem;
   height: 0.375rem;
 }
 
 .rmb-end .circle-border {
-  background-color: theme('colors.gray.50');
-  border-color: theme('colors.gray.200');
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-200);
 }
 .rmb-end .circle-border:hover {
-  border-color: theme('colors.gray.400');
-  background-color: theme('colors.gray.300');
+  border-color: var(--color-gray-400);
+  background-color: var(--color-gray-300);
 }
 .rmb-end .circle-dot {
   background-color: transparent;
@@ -479,60 +479,59 @@ html.dark .read-more:after {
   background-image: linear-gradient(
       to bottom,
       transparent,
-      theme('colors.slate.800')
+      var(--color-slate-800)
   );
 }
 html.dark .rmb-text {
-  color: theme('colors.indigo.500');
+  color: var(--color-indigo-500);
 }
 html.dark .rmb-text:hover + .rmb-wrapper .rmb-end .circle-border {
-  border-color: theme('colors.slate.600');
-  background-color: theme('colors.slate.500');
+  border-color: var(--color-slate-600);
+  background-color: var(--color-slate-500);
 }
 html.dark .rmb.is-active {
   opacity: 0.5;
 }
 html.dark .rmb.is-active .connector {
-  background-color: theme('colors.indigo.500');
+  background-color: var(--color-indigo-500);
 }
 html.dark .rmb.is-active .circle-border:hover {
-  background-color: theme('colors.slate.600');
-  border-color: theme('colors.indigo.500');
+  background-color: var(--color-slate-600);
+  border-color: var(--color-indigo-500);
 }
 html.dark .rmb.is-active .rmb-end .circle-border {
-  background-color: theme('colors.slate.800');
-  border-color: theme('colors.indigo.500');
+  background-color: var(--color-slate-800);
+  border-color: var(--color-indigo-500);
 }
 html.dark .rmb.is-active .rmb-end .circle-dot {
-  background-color: theme('colors.indigo.500');
+  background-color: var(--color-indigo-500);
 }
 html.dark .rmb.is-active .rmb-text:hover + .rmb-wrapper .rmb-start .circle-border {
-  background-color: theme('colors.slate.600');
-  border-color: theme('colors.indigo.500');
+  background-color: var(--color-slate-600);
+  border-color: var(--color-indigo-500);
 }
 html.dark .rmb.is-active .rmb-text:hover + .rmb-wrapper .rmb-end .circle-border {
-  border-color: theme('colors.indigo.500');
+  border-color: var(--color-indigo-500);
 }
 html.dark .rmb-start .connector {
-  background-color: theme('colors.slate.400');
+  background-color: var(--color-slate-400);
 }
 html.dark .circle-border {
-  background-color: theme('colors.slate.800');
-  border-color: theme('colors.indigo.500');
+  background-color: var(--color-slate-800);
+  border-color: var(--color-indigo-500);
 }
 html.dark .circle-dot {
-  background-color: theme('colors.indigo.500');
+  background-color: var(--color-indigo-500);
 }
 html.dark .rmb-end .circle-border {
-  background-color: theme('colors.slate.800');
-  border-color: theme('colors.slate.400');
+  background-color: var(--color-slate-800);
+  border-color: var(--color-slate-400);
 }
 html.dark .rmb-end .circle-border:hover {
-  border-color: theme('colors.slate.600');
-  background-color: theme('colors.slate.500');
+  border-color: var(--color-slate-600);
+  background-color: var(--color-slate-500);
 }
 html.dark .rmb-end .circle-dot {
   background-color: transparent;
 }
-
 </style>

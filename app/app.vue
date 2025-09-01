@@ -15,6 +15,3 @@
   </div>
 </template>
 
-<script setup>
-import '~/assets/css/swiperjs.css'
-</script>

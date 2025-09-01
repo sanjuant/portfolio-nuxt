@@ -4,7 +4,7 @@
     id="about-me"
     class="overflow-hidden bg-gray-50 py-12 text-gray-500 dark:bg-slate-800 dark:text-slate-400 lg:py-16"
   >
-    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-(--breakpoint-xl) px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-prose lg:max-w-none">
         <p
           class="font-semibold uppercase leading-6 tracking-wide text-indigo-600 dark:text-indigo-500"
@@ -83,7 +83,7 @@
                     !aboutMe?.data.attributes.recommendation
                       ?.company_logo_is_colored
                   "
-                  class="max-h-[3rem] dark:invert"
+                  class="max-h-12 dark:invert"
                   :src="
                     formatImageUrl(
                       aboutMe?.data.attributes.recommendation?.company_logo.data
@@ -99,7 +99,7 @@
                 />
                 <img
                   v-else
-                  class="max-h-[3rem]"
+                  class="max-h-12"
                   :src="
                     formatImageUrl(
                       aboutMe?.data.attributes.recommendation?.company_logo.data
@@ -145,7 +145,7 @@
               class="flex items-center rounded-b-lg bg-indigo-600 py-5 px-6 not-italic dark:bg-indigo-900 sm:mt-10 sm:items-start sm:py-5 sm:pl-12 sm:pr-10"
             >
               <span
-                class="mr-4 rounded-full border-2 border-white dark:border-black sm:-mt-[3.75rem] sm:mr-6"
+                class="mr-4 rounded-full border-2 border-white dark:border-black sm:-mt-15 sm:mr-6"
               >
                 <img
                   class="h-12 w-12 max-w-none rounded-full bg-indigo-300 dark:bg-indigo-600 sm:h-20 sm:w-20"

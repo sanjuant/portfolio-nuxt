@@ -11,7 +11,7 @@
       <div class="mx-auto mt-3 max-w-7xl">
         <div class="max-w-3xl lg:ml-auto lg:mr-4">
           <p
-            class="relative z-[1] mb-6 text-base font-semibold uppercase leading-6 tracking-wide text-indigo-600 dark:text-indigo-500"
+            class="relative z-1 mb-6 text-base font-semibold uppercase leading-6 tracking-wide text-indigo-600 dark:text-indigo-500"
           >
             Contact
           </p>
@@ -89,7 +89,7 @@
             <div class="flex flex-col lg:flex-row">
               <!-- Contact information -->
               <div
-                class="relative flex w-fit flex-col rounded-t-lg bg-gradient-to-b from-indigo-600 to-indigo-700 py-4 py-4 px-4 dark:from-indigo-800 dark:to-indigo-900 sm:px-6 lg:max-w-min lg:rounded-l-lg lg:rounded-tr-none lg:py-8 xl:p-8"
+                class="relative flex w-fit flex-col rounded-t-lg bg-linear-to-b from-indigo-600 to-indigo-700 py-4 py-4 px-4 dark:from-indigo-800 dark:to-indigo-900 sm:px-6 lg:max-w-min lg:rounded-l-lg lg:rounded-tr-none lg:py-8 xl:p-8"
               >
                 <!-- Decorative angle backgrounds -->
                 <div
@@ -209,7 +209,7 @@
                 >
                   <div class="flex text-gray-100 dark:text-slate-100">
                     <PhoneIcon
-                      class="h-5 w-5 flex-shrink-0"
+                      class="h-5 w-5 shrink-0"
                       aria-hidden="true"
                     />
                     <div
@@ -235,7 +235,7 @@
                     class="mt-2 flex text-gray-100 dark:text-slate-100 sm:ml-8 sm:mt-0 lg:ml-0 lg:mt-2"
                   >
                     <EnvelopeIcon
-                      class="h-5 w-5 flex-shrink-0"
+                      class="h-5 w-5 shrink-0"
                       aria-hidden="true"
                     />
 

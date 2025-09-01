@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* Configuration equivalent to tailwind.config.ts */
+@theme {
+  --breakpoint-xs: 475px;
+  --breakpoint-sm: 640px; 
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  background-color: var(--color-gray-50);
+}
+
+/* # Scrollbar */
+/* ### Firefox*/
+:root,
+.overflow-y-auto,
+.overflow-x-auto {
+  scrollbar-color: var(--color-indigo-400) var(--color-indigo-600);
+  scrollbar-width: thin;
+}
+
+/* ### Chromium */
+::-webkit-scrollbar {
+  width: 10px;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-indigo-600);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-indigo-400);
+  border-radius: 10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-indigo-500);
+}
+
+/*******************************/
+/********** Dark Mode **********/
+/*******************************/
+html.darkbody {
+  background-color: var(--color-slate-900);
+}
+
+/* # Scrollbar */
+/* ### Firefox*/
+html.dark,
+html.dark.overflow-y-auto,
+html.dark.overflow-x-auto {
+  scrollbar-color: var(--color-indigo-600) var(--color-indigo-800) !important;
+  scrollbar-width: thin;
+}
+
+/* ### Chromium */
+html.dark::-webkit-scrollbar {
+  width: 10px;
+  scrollbar-width: thin;
+}
+html.dark::-webkit-scrollbar-track {
+  background: var(--color-indigo-800);
+}
+html.dark::-webkit-scrollbar-thumb {
+  background: var(--color-indigo-600);
+}
+html.dark::-webkit-scrollbar-thumb:hover {
+  background: var(--color-indigo-700);
+}

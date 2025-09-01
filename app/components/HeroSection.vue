@@ -23,7 +23,7 @@
                 <span class="block sm:text-center xl:inline">
                   {{ hero?.data.attributes.welcome ?? 'Welcome' }}
                 </span>
-                <span class="block flex min-h-[7rem] md:min-h-[12rem]">
+                <span class="block flex min-h-28 md:min-h-48">
                   <span
                     class="my-auto block overflow-hidden text-indigo-600 sm:m-auto sm:text-center"
                     >I'm
@@ -123,14 +123,14 @@ const writer = computed(() => {
   display: inline-block;
   width: 3px;
   align-items: flex-end;
-  background-color: theme('colors.indigo.600');
+  background-color: #4f46e5;
   animation: blink 1s infinite;
   transform: translateX(5px) translateY(5px);
 }
 
 .is-typed span.underscore {
   line-height: 2.75rem;
-  background-color: theme('colors.indigo.600');
+  background-color: #4f46e5;
   display: inline-flex;
   width: 20px;
   height: 3px;
@@ -145,7 +145,7 @@ const writer = computed(() => {
 
 @keyframes blink {
   49% {
-    background-color: theme('colors.indigo.600');
+    background-color: #4f46e5;
   }
   50% {
     background-color: transparent;

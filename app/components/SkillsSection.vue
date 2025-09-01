@@ -3,7 +3,7 @@
     id="skills"
     class="overflow-hidden bg-white py-12 dark:bg-slate-900 lg:pt-16 lg:pb-20"
   >
-    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-(--breakpoint-xl) px-4 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-prose lg:max-w-none">
         <p
           class="text-base font-semibold uppercase leading-6 tracking-wide text-indigo-600"
@@ -204,7 +204,7 @@ function renderCarouselVerticalPaginationBullets(swiper, current, total) {
     const liEl = document.createElement('li')
     liEl.className =
       'custom-pagination-item relative ' +
-      (index !== total ? 'h-full max-h-[4rem] xl:max-h-[8rem]' : '')
+      (index !== total ? 'h-full max-h-16 xl:max-h-32' : '')
     const divEl = document.createElement('div')
     divEl.className = 'absolute inset-0 flex items-center left-2 -ml-px h-full'
     divEl.setAttribute('aria-hidden', 'true')

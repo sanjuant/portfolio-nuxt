@@ -27,7 +27,7 @@
             leave-to="-translate-x-full"
         >
           <div
-              class="relative flex w-[270px] flex-col bg-gradient-to-b from-indigo-600 to-indigo-700 dark:from-indigo-800 dark:to-indigo-900"
+              class="relative flex w-[270px] flex-col bg-linear-to-b from-indigo-600 to-indigo-700 dark:from-indigo-800 dark:to-indigo-900"
           >
             <div class="flex-1 overflow-y-auto pt-5 pb-4">
               <div class="flex items-center">
@@ -35,13 +35,13 @@
                   <div class="flex items-center justify-center">
                     <div class="relative">
                       <span
-                          class="absolute top-0 right-0 z-10 h-[3.5rem] w-[3.5rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
+                          class="absolute top-0 right-0 z-10 h-14 w-14 rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
                       />
                       <span
-                          class="absolute -top-2 -right-2 h-[15rem] w-[15rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
+                          class="absolute -top-2 -right-2 h-60 w-60 rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
                       />
                       <img
-                          class="relative mx-auto h-[14rem] w-[14rem] flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
+                          class="relative mx-auto h-56 w-56 shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
                           :src="
                           formatImageUrl(
                             identity?.data.attributes.picture.data?.attributes
@@ -64,7 +64,7 @@
                     {{ identity?.data.attributes.first_name ?? 'FirstName' }}
                     {{ identity?.data.attributes.last_name ?? 'LastName' }}
                   </h3>
-                  <dl class="mt-1 flex flex-grow flex-col justify-between">
+                  <dl class="mt-1 flex grow flex-col justify-between">
                     <!--                    <dt class="sr-only">Title</dt>-->
                     <dd
                         class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
@@ -107,7 +107,7 @@
                 >
                   <component
                       :is="item.icon"
-                      class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300 dark:text-indigo-500"
+                      class="mr-3 h-6 w-6 shrink-0 text-indigo-300 dark:text-indigo-500"
                       aria-hidden="true"
                   />
                   {{ item.name }}
@@ -154,7 +154,7 @@
             </TransitionChild>
           </div>
         </TransitionChild>
-        <div class="w-14 flex-shrink-0" aria-hidden="true">
+        <div class="w-14 shrink-0" aria-hidden="true">
           <!-- FORCE SIDEBAR TO SHRINK TO FIT CLOSE ICON -->
         </div>
       </Dialog>
@@ -163,7 +163,7 @@
         class="z-30 hidden w-64 drop-shadow-[0_10px_5px_rgba(0,0,0,0.25)] md:fixed md:inset-y-0 md:flex md:flex-col"
     >
       <div
-          class="flex min-h-0 w-[270px] flex-1 flex-col bg-gradient-to-b from-indigo-600 to-indigo-700 dark:from-indigo-800 dark:to-indigo-900"
+          class="flex min-h-0 w-[270px] flex-1 flex-col bg-linear-to-b from-indigo-600 to-indigo-700 dark:from-indigo-800 dark:to-indigo-900"
       >
         <div class="flex-1 overflow-y-auto pt-5 pb-4">
           <div class="flex items-center">
@@ -171,13 +171,13 @@
               <div class="flex items-center justify-center">
                 <div class="relative">
                   <span
-                      class="absolute top-0 right-0 z-10 h-[3.5rem] w-[3.5rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
+                      class="absolute top-0 right-0 z-10 h-14 w-14 rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
                   />
                   <span
-                      class="absolute -top-2 -right-2 h-[15rem] w-[15rem] rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
+                      class="absolute -top-2 -right-2 h-60 w-60 rounded-full border-4 border-indigo-600 bg-green-100 dark:border-indigo-800 dark:bg-purple-500"
                   />
                   <img
-                      class="relative mx-auto h-[14rem] w-[14rem] flex-shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
+                      class="relative mx-auto h-56 w-56 shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
                       :src="
                       formatImageUrl(
                         identity?.data.attributes.picture.data?.attributes.url
@@ -198,7 +198,7 @@
                 {{ identity?.data.attributes.first_name ?? 'FirstName' }}
                 {{ identity?.data.attributes.last_name ?? 'LastName' }}
               </h3>
-              <dl class="mt-1 flex flex-grow flex-col justify-between">
+              <dl class="mt-1 flex grow flex-col justify-between">
                 <!--                <dt class="sr-only">Title</dt>-->
                 <dd
                     class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
@@ -240,7 +240,7 @@
             >
               <component
                   :is="item.icon"
-                  class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300 dark:text-indigo-500"
+                  class="mr-3 h-6 w-6 shrink-0 text-indigo-300 dark:text-indigo-500"
                   aria-hidden="true"
               />
               {{ item.name }}
