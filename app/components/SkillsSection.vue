@@ -110,13 +110,12 @@
                         class="h-12 w-32"
                         :src="
                           skill.logo?.data?.attributes.url ??
-                          'https://tailwindui.com/img/logos/workcation-logo-gray-400.svg'
+                          'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg'
                         "
                         :alt="
                           skill.logo?.data?.attributes
                             .alternativeText ?? 'Logo Workcation avec filigrane'
                         "
-                        loading="lazy"
                       />
                     </div>
                   </swiper-slide>
@@ -153,7 +152,7 @@
 import { ref } from 'vue'
 import { useFetch, useRuntimeConfig } from 'nuxt/app'
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y, Grid } from 'swiper/modules'
+import { Navigation, Pagination, Scrollbar, A11y, Grid } from 'swiper'
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -269,7 +268,7 @@ const skillsSample = [
       logo: {
         data: {
           attributes: {
-            url: 'https://tailwindui.com/img/logos/workcation-logo-gray-400.svg',
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
             alternativeText: 'Workcation',
           },
         },
@@ -288,7 +287,7 @@ const skillsSample = [
       logo: {
         data: {
           attributes: {
-            url: 'https://tailwindui.com/img/logos/mirage-logo-gray-400.svg',
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
             alternativeText: 'Mirage',
           },
         },
@@ -307,7 +306,7 @@ const skillsSample = [
       logo: {
         data: {
           attributes: {
-            url: 'https://tailwindui.com/img/logos/tuple-logo-gray-400.svg',
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
             alternativeText: 'Tuple',
           },
         },
@@ -326,7 +325,7 @@ const skillsSample = [
       logo: {
         data: {
           attributes: {
-            url: 'https://tailwindui.com/img/logos/laravel-logo-gray-400.svg',
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
             alternativeText: 'Laravel',
           },
         },
@@ -345,7 +344,7 @@ const skillsSample = [
       logo: {
         data: {
           attributes: {
-            url: 'https://tailwindui.com/img/logos/statickit-logo-gray-400.svg',
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
             alternativeText: 'StaticKit',
           },
         },
@@ -364,7 +363,7 @@ const skillsSample = [
       logo: {
         data: {
           attributes: {
-            url: 'https://tailwindui.com/img/logos/statamic-logo-gray-400.svg',
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
             alternativeText: 'Statamic',
           },
         },
@@ -383,7 +382,7 @@ const skillsSample = [
       logo: {
         data: {
           attributes: {
-            url: 'https://tailwindui.com/img/logos/workcation-logo-gray-400.svg',
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
             alternativeText: 'Workcation',
           },
         },
@@ -402,7 +401,102 @@ const skillsSample = [
       logo: {
         data: {
           attributes: {
-            url: 'https://tailwindui.com/img/logos/workcation-logo-gray-400.svg',
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
+            alternativeText: 'Workcation',
+          },
+        },
+      },
+      slug: '7',
+      position: 7,
+    },
+  },
+  {
+    attributes: {
+      title: 'Workcation',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue. ',
+      name: 'Workcation',
+      url: '#',
+      logo: {
+        data: {
+          attributes: {
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
+            alternativeText: 'Workcation',
+          },
+        },
+      },
+      slug: '7',
+      position: 7,
+    },
+  },
+  {
+    attributes: {
+      title: 'Workcation',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue. ',
+      name: 'Workcation',
+      url: '#',
+      logo: {
+        data: {
+          attributes: {
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
+            alternativeText: 'Workcation',
+          },
+        },
+      },
+      slug: '7',
+      position: 7,
+    },
+  },
+  {
+    attributes: {
+      title: 'Workcation',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue. ',
+      name: 'Workcation',
+      url: '#',
+      logo: {
+        data: {
+          attributes: {
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
+            alternativeText: 'Workcation',
+          },
+        },
+      },
+      slug: '7',
+      position: 7,
+    },
+  },
+  {
+    attributes: {
+      title: 'Workcation',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue. ',
+      name: 'Workcation',
+      url: '#',
+      logo: {
+        data: {
+          attributes: {
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
+            alternativeText: 'Workcation',
+          },
+        },
+      },
+      slug: '7',
+      position: 7,
+    },
+  },
+  {
+    attributes: {
+      title: 'Workcation',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue. ',
+      name: 'Workcation',
+      url: '#',
+      logo: {
+        data: {
+          attributes: {
+            url: 'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg',
             alternativeText: 'Workcation',
           },
         },
