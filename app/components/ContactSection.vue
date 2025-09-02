@@ -200,7 +200,7 @@
                   class="max-w-3xl text-justify text-sm text-gray-100 dark:text-slate-100"
                 >
                   {{
-                    contact?.data.attributes.disclaimer ??
+                    contact?.data?.disclaimer ??
                     "Je m'engage à respecter votre vie privée, en aucun cas votre adresse ne sera communiquée à un tiers."
                   }}
                 </p>
@@ -213,7 +213,7 @@
                       aria-hidden="true"
                     />
                     <div
-                      v-if="contact?.data.attributes.protectedPhone"
+                      v-if="contact?.data?.protectedPhone"
                       ref="protectedPhone"
                       class="ml-2 cursor-pointer text-sm"
                       @copy="copyProtected"
@@ -221,11 +221,11 @@
                         linkProtected(
                           $event,
                           'tel',
-                          contact?.data.attributes.protectedPhone
+                          contact?.data?.protectedPhone
                         )
                       "
                     >
-                      {{ contact?.data.attributes.protectedPhone }}
+                      {{ contact?.data?.protectedPhone }}
                     </div>
                     <span v-else class="ml-2 text-sm uppercase"
                       >+33 6 12 34 57 89</span
@@ -240,7 +240,7 @@
                     />
 
                     <div
-                      v-if="contact?.data.attributes.protectedEmail"
+                      v-if="contact?.data?.protectedEmail"
                       ref="protectedEmail"
                       class="ml-2 cursor-pointer text-sm"
                       @copy="copyProtected"
@@ -248,11 +248,11 @@
                         linkProtected(
                           $event,
                           'mailto',
-                          contact?.data.attributes.protectedEmail
+                          contact?.data?.protectedEmail
                         )
                       "
                     >
-                      {{ contact?.data.attributes.protectedEmail }}
+                      {{ contact?.data?.protectedEmail }}
                     </div>
                     <span v-else class="ml-2 text-sm uppercase"
                       >name@domain.tld</span
@@ -268,7 +268,7 @@
                     <a
                       class="text-indigo-200 hover:text-indigo-100 dark:text-indigo-300 dark:hover:text-indigo-200"
                       :href="`https://github.com/${
-                        contact?.data.attributes.github ?? ''
+                        contact?.data?.github ?? ''
                       }`"
                       target="_blank"
                     >
@@ -291,7 +291,7 @@
                     <a
                       class="text-indigo-200 hover:text-indigo-100 dark:text-indigo-300 dark:hover:text-indigo-200"
                       :href="`https://twitter.com/${
-                        contact?.data.attributes.twitter ?? ''
+                        contact?.data?.twitter ?? ''
                       }`"
                       target="_blank"
                     >
@@ -312,7 +312,7 @@
                     <a
                       class="text-indigo-200 hover:text-indigo-100 dark:text-indigo-300 dark:hover:text-indigo-200"
                       :href="`https://discordapp.com/users/${
-                        contact?.data.attributes.discord ?? ''
+                        contact?.data?.discord ?? ''
                       }`"
                       target="_blank"
                     >
@@ -336,7 +336,7 @@
                     <a
                       class="text-indigo-200 hover:text-indigo-100 dark:text-indigo-300 dark:hover:text-indigo-200"
                       :href="`https://www.root-me.org/${
-                        contact?.data.attributes.rootme ?? ''
+                        contact?.data?.rootme ?? ''
                       }`"
                       target="_blank"
                     >
@@ -448,12 +448,9 @@
 </template>
 
 <script setup>
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline'
-
-import { useFetch, useRuntimeConfig } from 'nuxt/app'
-import { onMounted, ref } from 'vue'
-
-const config = useRuntimeConfig()
+import {EnvelopeIcon, PhoneIcon} from '@heroicons/vue/24/outline'
+import {onMounted, ref} from 'vue'
+import {useStrapiApi} from "~~/composables/useStrapi.js";
 
 const protectedPhone = ref(null)
 const protectedEmail = ref(null)
@@ -462,14 +459,12 @@ const email = ref('')
 const subject = ref('')
 const message = ref('')
 
-const { data: contact } = await useFetch(
-  `${config.public.strapiUrl}/api/contact?populate=*`
-)
+const {data: contact} = await useStrapiApi('/api/contact?populate=*')
 
 function submitForm(e) {
   window.open(
     `mailto:${deobfuscateString(
-      contact.value.data.attributes.protectedEmail
+      contact.value.data?.protectedEmail
     )}?subject=${subject.value}&body=${message.value}`,
     '_blank'
   )
@@ -491,7 +486,7 @@ onMounted(() => {
   css.push(
     '.letter { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }'
   )
-  elements.forEach((el) => {
+  elements?.forEach((el) => {
     const html = []
     const string = deobfuscateString(el.innerText)
     const strArray = string.split('').reverse().join('')

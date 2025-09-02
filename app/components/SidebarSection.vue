@@ -44,13 +44,13 @@
                           class="relative mx-auto h-56 w-56 shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
                           :src="
                           formatImageUrl(
-                            identity?.data.attributes.picture.data?.attributes
+                            identity?.data?.picture?.data?.attributes
                               .url
                           ) ??
                           'https://via.placeholder.com/224?text=Picture+224x224'
                         "
                           :alt="
-                          identity?.data.attributes.picture.data?.attributes
+                          identity?.data?.picture?.data?.attributes
                             .alternativeText ??
                           'Photo de profil en 224*224 minimum, ratio de 1/1'
                         "
@@ -61,22 +61,22 @@
                   <h3
                       class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
                   >
-                    {{ identity?.data.attributes.first_name ?? 'FirstName' }}
-                    {{ identity?.data.attributes.last_name ?? 'LastName' }}
+                    {{ identity?.data?.first_name ?? 'FirstName' }}
+                    {{ identity?.data?.last_name ?? 'LastName' }}
                   </h3>
                   <dl class="mt-1 flex grow flex-col justify-between">
                     <!--                    <dt class="sr-only">Title</dt>-->
                     <dd
                         class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
                     >
-                      {{ identity?.data.attributes.job ?? 'JobTitle' }}
+                      {{ identity?.data?.job ?? 'JobTitle' }}
                     </dd>
                     <!--                    <dt class="sr-only">Role</dt>-->
                     <dd class="mt-4 flex flex-wrap justify-center">
                       <span
-                          v-for="skill in identity?.data.attributes.soft_skills
+                          v-for="skill in identity?.data?.soft_skills
                           .length > 0
-                          ? identity.data.attributes.soft_skills
+                          ? identity.data?.soft_skills
                           : [
                               { id: 1, quality: 'Quality' },
                               { id: 2, quality: 'Quality' },
@@ -180,12 +180,12 @@
                       class="relative mx-auto h-56 w-56 shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
                       :src="
                       formatImageUrl(
-                        identity?.data.attributes.picture.data?.attributes.url
+                        identity?.data?.picture?.data?.attributes.url
                       ) ??
                       'https://via.placeholder.com/224?text=Picture+224x224'
                     "
                       :alt="
-                      identity?.data.attributes.picture.data?.attributes
+                      identity?.data?.picture?.data?.attributes
                         .alternativeText ??
                       'Photo de profil en 224*224 minimum, ratio de 1/1'
                     "
@@ -195,22 +195,22 @@
               <h3
                   class="text-md mt-6 text-center font-bold text-gray-50 dark:text-slate-50"
               >
-                {{ identity?.data.attributes.first_name ?? 'FirstName' }}
-                {{ identity?.data.attributes.last_name ?? 'LastName' }}
+                {{ identity?.data?.first_name ?? 'FirstName' }}
+                {{ identity?.data?.last_name ?? 'LastName' }}
               </h3>
               <dl class="mt-1 flex grow flex-col justify-between">
                 <!--                <dt class="sr-only">Title</dt>-->
                 <dd
                     class="text-md text-center font-semibold text-gray-100 dark:text-slate-100"
                 >
-                  {{ identity?.data.attributes.job ?? 'JobTitle' }}
+                  {{ identity?.data?.job ?? 'JobTitle' }}
                 </dd>
                 <!--                <dt class="sr-only">Role</dt>-->
                 <dd class="mt-4 flex flex-wrap justify-center">
                   <span
-                      v-for="skill in identity?.data.attributes.soft_skills
+                      v-for="skill in identity?.data?.soft_skills
                       .length > 0
-                      ? identity.data.attributes.soft_skills
+                      ? identity.data?.soft_skills
                       : [
                           { id: 1, quality: 'Quality' },
                           { id: 2, quality: 'Quality' },
@@ -279,37 +279,33 @@
           class="mr-2 flex flex-col items-end justify-center text-right text-xs text-gray-500 dark:text-slate-500"
       >
         <div>
-          {{ identity?.data.attributes.first_name ?? 'FirstName' }}
-          {{ identity?.data.attributes.last_name ?? 'LastName' }}
+          {{ identity?.data?.first_name ?? 'FirstName' }}
+          {{ identity?.data?.last_name ?? 'LastName' }}
         </div>
-        <div>{{ identity?.data.attributes.job ?? 'JobTitle' }}</div>
+        <div>{{ identity?.data?.job ?? 'JobTitle' }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import {onMounted, ref} from 'vue'
 
 import {
-  BeakerIcon,
-  SwatchIcon,
-  HomeIcon,
-  BuildingLibraryIcon,
-  EnvelopeIcon,
-  BuildingOfficeIcon,
-  UserIcon,
   Bars3Icon,
+  BeakerIcon,
+  BuildingLibraryIcon,
+  BuildingOfficeIcon,
+  EnvelopeIcon,
+  HomeIcon,
+  SwatchIcon,
+  UserIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 
-import {
-  Dialog,
-  DialogOverlay,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue'
-import { useFetch, useRuntimeConfig } from 'nuxt/app'
+import {Dialog, DialogOverlay, TransitionChild, TransitionRoot,} from '@headlessui/vue'
+import {useRuntimeConfig} from 'nuxt/app'
+import {useStrapiApi} from "~~/composables/useStrapi.js";
 
 const config = useRuntimeConfig()
 
@@ -340,9 +336,7 @@ const navigation = [
 
 const sidebarOpen = ref(false)
 
-const { data: identity } = await useFetch(
-    `${config.public.strapiUrl}/api/identity?populate=deep`
-)
+const {data: identity} = await useStrapiApi('/api/identity?pLevel')
 
 const formatImageUrl = (url) => {
   const isUrl = (string) => {

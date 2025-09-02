@@ -227,24 +227,17 @@
 </template>
 
 <script setup>
-import {
-  ClockIcon,
-  BuildingLibraryIcon,
-  BuildingOfficeIcon,
-} from '@heroicons/vue/20/solid'
+import {BuildingLibraryIcon, BuildingOfficeIcon, ClockIcon,} from '@heroicons/vue/20/solid'
 
-import { ref, onMounted } from 'vue'
-import { useFetch, useRuntimeConfig } from 'nuxt/app'
-const config = useRuntimeConfig()
+import {onMounted, ref} from 'vue'
+import {useStrapiApi} from "~~/composables/useStrapi.js";
+
 const educationsAndExperiences = ref(null)
 
-const { data: educations } = await useFetch(
-  `${config.public.strapiUrl}/api/educations-and-trainings?populate=%2A&sort=start_date:DESC`
-)
-
-const { data: experiences } = await useFetch(
-  `${config.public.strapiUrl}/api/professionnal-experiences?populate=%2A&sort=start_date:DESC`
-)
+// const {data: educations} = await useStrapiApi('/api/educations-and-trainings?populate=%2A&sort=start_date:DESC')
+const {data: educations} = await useStrapiApi('/api/educations-and-trainings')
+// const {data: experiences} = await useStrapiApi('/api/professionnal-experiences?populate=%2A&sort=start_date:DESC')
+const {data: experiences} = await useStrapiApi('/api/professionnal-experiences')
 
 const formatDate = (date) => {
   if (date === null || new Date(date) > new Date()) {
@@ -259,7 +252,7 @@ const formatDate = (date) => {
 
 onMounted(() => {
   const elements = educationsAndExperiences.value
-  elements.forEach((el) => {
+  elements?.forEach((el) => {
     const readMore = el.querySelector('.has-read-more')
     if (readMore === null || undefined === readMore) return
     const button = el.querySelector('div.rmb')

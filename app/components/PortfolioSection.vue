@@ -83,7 +83,7 @@
                             portfolio.attributes.cover.data?.attributes.formats
                               .medium.url
                           )
-                        : portfolio.attributes.cover.data.attributes.url
+                        : portfolio.attributes.cover.data?.url
                     "
                     :src="
                       portfolios?.data.length > 0
@@ -91,7 +91,7 @@
                             portfolio.attributes.cover.data?.attributes.formats
                               .thumbnail.url
                           )
-                        : portfolio.attributes.cover.data.attributes.url
+                        : portfolio.attributes.cover.data?.url
                     "
                     :alt="
                       portfolio.attributes.cover.data?.attributes
@@ -277,13 +277,13 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-import { useFetch, useRuntimeConfig } from 'nuxt/app'
+import {onMounted, ref} from 'vue'
+import {useRuntimeConfig} from 'nuxt/app'
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y, Lazy } from 'swiper'
+import {A11y, Lazy, Navigation, Pagination, Scrollbar} from 'swiper'
 
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from 'swiper/vue'
+import {Swiper, SwiperSlide} from 'swiper/vue'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -292,14 +292,15 @@ import 'swiper/css/pagination'
 import 'swiper/css/lazy'
 import 'swiper/css/scrollbar'
 import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from '@heroicons/vue/20/solid'
 
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
+import {useStrapiApi} from "~~/composables/useStrapi.js";
 
 let lightbox = null
 
@@ -323,9 +324,7 @@ const setControlledSwiper = (swiper) => {
   controlledSwiper.value = swiper
 }
 
-const { data: portfolios } = await useFetch(
-  `${config.public.strapiUrl}/api/portfolios?populate=deep&sort=date:DESC`
-)
+const {data: portfolios} = await useStrapiApi('/api/portfolios?pLevel&sort=date:DESC')
 
 const paginationCustom = {
   el: '.custom-pagination-horizontal',
