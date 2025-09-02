@@ -152,7 +152,7 @@
 import { ref } from 'vue'
 import { useFetch, useRuntimeConfig } from 'nuxt/app'
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y, Grid } from 'swiper'
+import { Navigation, Pagination, Scrollbar, A11y, Grid } from 'swiper/modules'
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
