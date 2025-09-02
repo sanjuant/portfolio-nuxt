@@ -18,7 +18,6 @@
             :slides-per-view="1"
             :slides-per-group-auto="true"
             :preload-images="false"
-            :lazy="true"
             :breakpoints="{
               // xs: when window width is >= 475px
               475: {
@@ -76,7 +75,8 @@
               >
                 <div class="relative" @click="controlledSwiper.slideTo(index)">
                   <img
-                    class="swiper-lazy h-64 w-full rounded-t-lg object-cover"
+                    class="h-64 w-full rounded-t-lg object-cover"
+                    loading="lazy"
                     :data-src="
                       portfolios?.data.length > 0
                         ? formatImageUrl(
@@ -98,7 +98,6 @@
                         .alternativeText
                     "
                   />
-                  <div class="swiper-lazy-preloader"></div>
                 </div>
                 <div class="flex flex-1 flex-col justify-between">
                   <div
@@ -147,7 +146,6 @@
             :slides-per-view="1"
             :space-between="2"
             :preload-images="false"
-            :lazy="true"
             class="col-span-2 w-full"
             :navigation="{
               nextEl: '.sbutton-detached-next',
@@ -236,7 +234,8 @@
                     rel="noreferrer"
                   >
                     <img
-                      class="swiper-lazy h-24 w-full rounded-md border border-gray-100 object-cover dark:border-slate-800"
+                      class="h-24 w-full rounded-md border border-gray-100 object-cover dark:border-slate-800"
+                      loading="lazy"
                       :src="
                         portfolios?.data.length > 0
                           ? formatImageUrl(
@@ -246,8 +245,7 @@
                       "
                       :alt="pimg.attributes.alternativeText"
                     />
-                    <div class="swiper-lazy-preloader"></div>
-                  </a>
+                    </a>
                 </swiper-slide>
                 <template #wrapper-end></template>
                 <div class="sbutton-prev flex justify-center">
@@ -280,7 +278,7 @@
 import {onMounted, ref} from 'vue'
 import {useRuntimeConfig} from 'nuxt/app'
 // import Swiper core and required modules
-import {A11y, Lazy, Navigation, Pagination, Scrollbar} from 'swiper'
+import {A11y, Navigation, Pagination, Scrollbar} from 'swiper/modules'
 
 // Import Swiper Vue.js components
 import {Swiper, SwiperSlide} from 'swiper/vue'
@@ -289,7 +287,6 @@ import {Swiper, SwiperSlide} from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import 'swiper/css/lazy'
 import 'swiper/css/scrollbar'
 import {
   ChevronDoubleLeftIcon,
@@ -335,7 +332,7 @@ const paginationCustom = {
   renderCustom: renderCarouselHorizontalPaginationBullets,
 }
 
-const modules = [Navigation, Pagination, Scrollbar, A11y, Lazy]
+const modules = [Navigation, Pagination, Scrollbar, A11y]
 
 const formatDate = (date) => {
   if (date === null) return

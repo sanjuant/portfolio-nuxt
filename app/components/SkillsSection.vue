@@ -28,21 +28,21 @@
                 <h2
                   class="text-3xl font-extrabold leading-9 text-gray-900 dark:text-slate-200 sm:text-4xl sm:leading-10"
                 >
-                  {{ skill.attributes.title ?? 'Title' }}
+                  {{ skill.title ?? 'Title' }}
                 </h2>
                 <p
                   class="mt-3 max-w-3xl text-lg leading-7 text-gray-500 dark:text-slate-400"
                 >
                   {{
-                    skill.attributes.description ??
+                    skill.description ??
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue.'
                   }}
                 </p>
-                <div v-if="skill.attributes.url" class="mt-8 sm:flex">
+                <div v-if="skill.url" class="mt-8 sm:flex">
                   <div class="mt-3 sm:mt-0">
                     <a
                       class="focus:shadow-outline flex items-center justify-center rounded-md border border-transparent bg-indigo-100 px-5 py-3 text-base font-medium leading-6 text-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-50 hover:text-indigo-600 dark:bg-indigo-400 dark:text-indigo-900 dark:hover:bg-indigo-300 dark:hover:text-indigo-800"
-                      :href="skill.attributes.url"
+                      :href="skill.url"
                       target="_blank"
                       >Visiter le site web</a
                     >
@@ -109,13 +109,14 @@
                       <img
                         class="h-12 w-32"
                         :src="
-                          skill.attributes.logo.data?.attributes.url ??
+                          skill.logo?.data?.attributes.url ??
                           'https://tailwindui.com/img/logos/workcation-logo-gray-400.svg'
                         "
                         :alt="
-                          skill.attributes.logo.data?.attributes
+                          skill.logo?.data?.attributes
                             .alternativeText ?? 'Logo Workcation avec filigrane'
                         "
+                        loading="lazy"
                       />
                     </div>
                   </swiper-slide>
@@ -152,7 +153,7 @@
 import { ref } from 'vue'
 import { useFetch, useRuntimeConfig } from 'nuxt/app'
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y, Grid } from 'swiper'
+import { Navigation, Pagination, Scrollbar, A11y, Grid } from 'swiper/modules'
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -164,12 +165,9 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import 'swiper/css/grid'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
+import {useStrapiApi} from "~~/composables/useStrapi.js";
 
-const config = useRuntimeConfig()
-
-const { data: skills } = useFetch(
-  `${config.public.strapiUrl}/api/skills?populate=deep&sort=position:DESC`
-)
+const {data: skills} = await useStrapiApi('/api/skills?pLevel&sort=position:DESC')
 
 const controlledSwiper = ref(null)
 const setControlledSwiper = (swiper) => {
