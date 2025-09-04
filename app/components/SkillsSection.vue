@@ -149,13 +149,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useFetch, useRuntimeConfig } from 'nuxt/app'
+import {ref} from 'vue'
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y, Grid } from 'swiper/modules'
+import {A11y, Grid, Navigation, Pagination, Scrollbar} from 'swiper/modules'
 
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from 'swiper/vue'
+import {Swiper, SwiperSlide} from 'swiper/vue'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -163,10 +162,15 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import 'swiper/css/grid'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
+import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/vue/24/outline'
 import {useStrapiApi} from "~~/composables/useStrapi.js";
 
-const {data: skills} = await useStrapiApi('/api/skills?pLevel&sort=position:DESC')
+const {data: skills} = await useStrapiApi('/skills', {
+  query: { 
+    pLevel: '',
+    sort: 'position:DESC'
+  }
+})
 
 const controlledSwiper = ref(null)
 const setControlledSwiper = (swiper) => {

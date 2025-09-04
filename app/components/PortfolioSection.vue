@@ -321,7 +321,12 @@ const setControlledSwiper = (swiper) => {
   controlledSwiper.value = swiper
 }
 
-const {data: portfolios} = await useStrapiApi('/api/portfolios?pLevel&sort=date:DESC')
+const {data: portfolios} = await useStrapiApi('/portfolios', {
+  query: { 
+    pLevel: '',
+    sort: 'date:DESC'
+  }
+})
 
 const paginationCustom = {
   el: '.custom-pagination-horizontal',

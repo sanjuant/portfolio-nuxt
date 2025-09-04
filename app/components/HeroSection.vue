@@ -82,7 +82,9 @@
 import VueWriterEsm from 'vue-writer'
 import {useStrapiApi} from "~~/composables/useStrapi.js";
 
-const {data: hero} = await useStrapiApi('/api/hero?pLevel')
+const {data: hero} = await useStrapiApi('/hero', {
+  query: { pLevel: '' }
+})
 
 const writer = computed(() => {
   let values

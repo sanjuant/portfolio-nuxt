@@ -459,7 +459,9 @@ const email = ref('')
 const subject = ref('')
 const message = ref('')
 
-const {data: contact} = await useStrapiApi('/api/contact?populate=*')
+const { data: contact } = await useStrapiApi('/contact', {
+  query: { populate: '*' }
+});
 
 function submitForm(e) {
   window.open(
@@ -487,6 +489,9 @@ onMounted(() => {
     '.letter { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }'
   )
   elements?.forEach((el) => {
+    if (el == null) {
+      return
+    }
     const html = []
     const string = deobfuscateString(el.innerText)
     const strArray = string.split('').reverse().join('')

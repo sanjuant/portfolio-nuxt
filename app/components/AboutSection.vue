@@ -194,7 +194,9 @@ import {useRuntimeConfig} from 'nuxt/app'
 import {useStrapiApi} from "~~/composables/useStrapi.js";
 
 const config = useRuntimeConfig()
-const {data: aboutMe} = await useStrapiApi('/api/about-me?pLevel')
+const {data: aboutMe} = await useStrapiApi('/about-me', {
+  query: { pLevel: '' }
+})
 
 // Fonction utilitaire pour formater les URLs d'images
 const formatImageUrl = (url) => {

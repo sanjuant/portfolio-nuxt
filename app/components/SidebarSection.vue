@@ -336,7 +336,9 @@ const navigation = [
 
 const sidebarOpen = ref(false)
 
-const {data: identity} = await useStrapiApi('/api/identity?pLevel')
+const {data: identity} = await useStrapiApi('/identity', {
+  query: { pLevel: '' }
+})
 
 const formatImageUrl = (url) => {
   const isUrl = (string) => {

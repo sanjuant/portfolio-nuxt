@@ -1,14 +1,16 @@
-export const useStrapiApi = (endpoint: string, options = {}) => {
-  const config = useRuntimeConfig()
-
-  return useFetch(endpoint, {
-    baseURL: config.public.strapiUrl,
+export function useStrapiApi<T = any>(path: string, opts: any = {}) {
+  const config = useRuntimeConfig();
+  const url = `${config.strapiUrl}/api${path.startsWith('/') ? '' : '/'}${path}`;
+  
+  return useFetch<T>(url, {
+    key: `strapi-${path}`,
     headers: {
-      ...(config.public.strapiApiToken && {
-        Authorization: `Bearer ${config.public.strapiApiToken}`
+      ...(config.strapiApiToken && {
+        Authorization: `Bearer ${config.strapiApiToken}`
       })
     },
-    server: false,
-    ...options
-  })
+    server: true,
+    lazy: false, // Force l'attente côté serveur
+    ...opts
+  });
 }

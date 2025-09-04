@@ -235,9 +235,12 @@ import {useStrapiApi} from "~~/composables/useStrapi.js";
 const educationsAndExperiences = ref(null)
 
 // const {data: educations} = await useStrapiApi('/api/educations-and-trainings?populate=%2A&sort=start_date:DESC')
-const {data: educations} = await useStrapiApi('/api/educations-and-trainings')
-// const {data: experiences} = await useStrapiApi('/api/professionnal-experiences?populate=%2A&sort=start_date:DESC')
-const {data: experiences} = await useStrapiApi('/api/professionnal-experiences')
+const {data: educations} = await useStrapiApi('/educations-and-trainings', {
+  query: { populate: '*', sort: 'start_date:DESC' }
+})
+const {data: experiences} = await useStrapiApi('/professionnal-experiences', {
+  query: { populate: '*', sort: 'start_date:DESC' }
+})
 
 const formatDate = (date) => {
   if (date === null || new Date(date) > new Date()) {
