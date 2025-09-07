@@ -1,7 +1,7 @@
 export function useStrapiApi<T = any>(path: string, opts: any = {}) {
   const config = useRuntimeConfig();
   const url = `${config.strapiUrl}/api${path.startsWith('/') ? '' : '/'}${path}`;
-  
+
   return useFetch<T>(url, {
     key: `strapi-${path}`,
     headers: {
