@@ -89,7 +89,7 @@
                     :src="
                       portfolios?.data.length > 0
                         ? formatImageUrl(
-                            portfolio?.cover?.data?.formats?.thumbnail.url
+                            portfolio?.cover?.data?.formats?.thumbnail?.url
                           )
                         : portfolio?.cover?.data?.url
                     "
@@ -241,7 +241,7 @@
                       :src="
                         portfolios?.data.length > 0
                           ? formatImageUrl(
-                              pimg?.formats.thumbnail.url
+                              pimg?.formats.thumbnail?.url
                             )
                           : pimg?.url
                       "
