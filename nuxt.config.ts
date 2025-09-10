@@ -9,11 +9,10 @@ export default defineNuxtConfig({
   css: ['~/assets/css/swiperjs.css', '~/assets/css/tailwind.css'],
 
   runtimeConfig: {
-      strapiUrl: process.env.NUXT_STRAPI_URL || 'http://localhost:1337',
+      strapiUrl: process.env.NUXT_STRAPI_URL || 'https://strapi-new.sanjuant.fr',
       strapiApiToken: process.env.NUXT_STRAPI_API_TOKEN || '',
       public: {
-          strapiUrl: 'https://strapi-new.sanjuant.fr',
-          strapiApiToken: '00c24e5f8aa37e25105630bdd119d25065b9c62d4b56a3c5eace6d03a12fc74da74b9606dc3342a413f973369834a84324f063a3458d6b13bc3f11e64eef1c0c0eae63e6732842c6739f517313549c5571b9f7aec38f839f61d81eb13c24f9e84592d64a9eeaa0afce647b5dfa734c6b7dbcbf7f1236db8e2368d967df4cd111'
+          strapiUrl: '/api',
       }
   },
 
