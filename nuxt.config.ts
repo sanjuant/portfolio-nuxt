@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/swiperjs.css', '~/assets/css/tailwind.css'],
 
   runtimeConfig: {
-      strapiUrl: process.env.NUXT_STRAPI_URL || 'https://strapi-new.sanjuant.fr',
+      strapiUrl: process.env.NUXT_STRAPI_URL || 'http://portfolio-strapi:1337',
       strapiApiToken: process.env.NUXT_STRAPI_API_TOKEN || '',
       public: {
           strapiUrl: '/api',
