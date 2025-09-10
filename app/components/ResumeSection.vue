@@ -39,7 +39,7 @@
                   class="absolute left-0 top-[0.350rem] h-4.5 w-4.5 rounded-full bg-gray-300 lg:left-[unset] lg:right-0"
                 ></span>
                 <h3 class="mb-1 font-bold uppercase">
-                  {{ education.attributes.title }}
+                  {{ education?.title }}
                 </h3>
                 <div class="flex flex-row flex-wrap lg:justify-end">
                   <div
@@ -51,16 +51,16 @@
                     <span
                       class="text-xs uppercase text-gray-500 dark:text-slate-400"
                     >
-                      <template v-if="education.attributes.company_website">
+                      <template v-if="education?.company_website">
                         <a
-                          :href="education.attributes.company_website"
+                          :href="education?.company_website"
                           target="_blank"
                           class="hover:underline hover:underline-offset-4"
-                          >{{ education.attributes.company_name }}</a
+                          >{{ education?.company_name }}</a
                         >
                       </template>
                       <template v-else>
-                        {{ education.attributes.company_name }}
+                        {{ education?.company_name }}
                       </template>
                     </span>
                   </div>
@@ -73,22 +73,22 @@
                       class="text-xs uppercase text-gray-500 dark:text-slate-400"
                     >
                       De
-                      {{ formatDate(education.attributes.start_date) }} à
-                      {{ formatDate(education.attributes.end_date) }}
+                      {{ formatDate(education?.start_date) }} à
+                      {{ formatDate(education?.end_date) }}
                     </div>
                   </div>
                 </div>
                 <div
-                  v-if="education.attributes.graduating_certification"
+                  v-if="education?.graduating_certification"
                   class="mt-1 text-sm dark:text-slate-100"
                 >
-                  {{ education.attributes.graduating_certification }}
+                  {{ education?.graduating_certification }}
                 </div>
                 <div
-                  v-if="education.attributes.description"
+                  v-if="education?.description"
                   class="has-read-more mt-3 text-gray-500 dark:text-slate-400"
                 >
-                  <div v-html="education.attributes.description" />
+                  <div v-html="education?.description" />
                 </div>
                 <div class="rmb mt-2 hidden! lg:justify-end">
                   <div class="rmb-text lg:order-2">Voir plus</div>
@@ -147,7 +147,7 @@
                 <h3
                   class="mb-1 font-bold uppercase text-gray-900 dark:text-slate-100"
                 >
-                  {{ experience.attributes.title }}
+                  {{ experience?.title }}
                 </h3>
                 <div class="mb-3 flex flex-row flex-wrap">
                   <div
@@ -159,16 +159,16 @@
                     <span
                       class="text-xs uppercase text-gray-500 dark:text-slate-400"
                     >
-                      <template v-if="experience.attributes.company_website">
+                      <template v-if="experience?.company_website">
                         <a
-                          :href="experience.attributes.company_website"
+                          :href="experience?.company_website"
                           target="_blank"
                           class="hover:underline hover:underline-offset-4"
-                          >{{ experience.attributes.company_name }}</a
+                          >{{ experience?.company_name }}</a
                         >
                       </template>
                       <template v-else>
-                        {{ experience.attributes.company_name }}
+                        {{ experience?.company_name }}
                       </template>
                     </span>
                   </div>
@@ -180,17 +180,17 @@
                       class="text-xs uppercase text-gray-500 dark:text-slate-400"
                     >
                       De
-                      {{ formatDate(experience.attributes.start_date) }}
+                      {{ formatDate(experience?.start_date) }}
                       à
-                      {{ formatDate(experience.attributes.end_date) }}
+                      {{ formatDate(experience?.end_date) }}
                     </div>
                   </div>
                 </div>
                 <div
-                  v-if="experience.attributes.description"
+                  v-if="experience?.description"
                   class="has-read-more text-gray-500 dark:text-slate-400"
                 >
-                  <div v-html="experience.attributes.description" />
+                  <div v-html="experience?.description" />
                 </div>
 
                 <div class="rmb mt-2 hidden!">

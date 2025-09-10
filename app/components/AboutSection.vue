@@ -86,15 +86,12 @@
                     class="max-h-12 dark:invert"
                     :src="
                     formatImageUrl(
-                      aboutMe?.data?.recommendation?.company_logo.data
-                        ?.attributes?.url
+                      aboutMe?.data?.recommendation?.company_logo.data?.url
                     ) ??
                     'https://tailwindui.com/plus-assets/img/logos/158x48/workcation-color.svg'
                   "
                     :alt="
-                    aboutMe?.data?.recommendation?.company_logo.data
-                      ?.attributes?.alternativeText ??
-                    'Logo Workcation avec filigrane'
+                    aboutMe?.data?.recommendation?.company_logo.data?.alternativeText ?? 'Logo Workcation avec filigrane'
                   "
                 />
                 <img
@@ -108,7 +105,7 @@
                   "
                     :alt="
                     aboutMe?.data?.recommendation?.company_logo?.data
-                      ?.attributes?.alternativeText ??
+                      ?.alternativeText ??
                     'Logo Workcation avec filigrane'
                   "
                 />

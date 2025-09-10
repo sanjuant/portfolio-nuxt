@@ -48,7 +48,7 @@
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
               <div class="rounded-md shadow">
                 <a
-                    :href="hero?.data?.cv?.data?.attributes.url ?? '#'"
+                    :href="hero?.data?.cv?.data?.url ?? '#'"
                     target="_blank"
                     class="flex w-full items-center justify-center overflow-hidden rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-gray-50 transition duration-150 ease-in-out hover:bg-indigo-700 dark:bg-indigo-800 dark:text-slate-100 dark:hover:bg-indigo-900 md:py-4 md:px-10 md:text-lg"
                 >

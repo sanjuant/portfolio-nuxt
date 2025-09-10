@@ -12,6 +12,7 @@
         </p>
         <div class="mt-4 flex flex-col lg:flex-row">
           <div class="lg:w-1/2 lg:pr-4">
+            <ClientOnly>
             <swiper
               :modules="modules"
               :slides-per-view="1"
@@ -50,12 +51,14 @@
                 </div>
               </swiper-slide>
             </swiper>
+            </ClientOnly>
           </div>
           <div
             class="mt-8 flex w-[92.78%] flex-row sm:w-[94.595%] md:w-[93.105%] lg:mt-0 lg:ml-4 lg:w-[43.184%] xl:w-[45%] 2xl:w-[46.053%]"
           >
             <div class="w-full">
               <div class="flex h-full items-center justify-center">
+                <ClientOnly>
                 <swiper
                   :modules="modules"
                   :slides-per-view="2"
@@ -109,12 +112,11 @@
                       <img
                         class="h-12 w-32"
                         :src="
-                          skill.logo?.data?.attributes.url ??
+                          skill.logo?.data?.url ??
                           'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg'
                         "
                         :alt="
-                          skill.logo?.data?.attributes
-                            .alternativeText ?? 'Logo Workcation avec filigrane'
+                          skill.logo?.data?.alternativeText ?? 'Logo Workcation avec filigrane'
                         "
                       />
                     </div>
@@ -127,6 +129,7 @@
                     <ChevronRightIcon class="h-6 w-6" />
                   </div>
                 </swiper>
+                </ClientOnly>
               </div>
             </div>
             <div class="pl-4">

@@ -13,6 +13,7 @@
         <div
           class="col-span-10 sm:col-span-5 md:col-span-10 lg:col-span-5 xl:col-span-6"
         >
+          <ClientOnly>
           <swiper
             :modules="modules"
             :slides-per-view="1"
@@ -80,22 +81,20 @@
                     :data-src="
                       portfolios?.data.length > 0
                         ? formatImageUrl(
-                            portfolio.attributes.cover.data?.attributes.formats
+                            portfolio?.cover?.data?.formats
                               .medium.url
                           )
-                        : portfolio.attributes.cover.data?.url
+                        : portfolio?.cover?.data?.url
                     "
                     :src="
                       portfolios?.data.length > 0
                         ? formatImageUrl(
-                            portfolio.attributes.cover.data?.attributes.formats
-                              .thumbnail.url
+                            portfolio?.cover?.data?.formats?.thumbnail.url
                           )
-                        : portfolio.attributes.cover.data?.url
+                        : portfolio?.cover?.data?.url
                     "
                     :alt="
-                      portfolio.attributes.cover.data?.attributes
-                        .alternativeText
+                      portfolio?.cover?.data?.alternativeText
                     "
                   />
                 </div>
@@ -103,19 +102,19 @@
                   <div
                     class="mt-4 max-w-fit rounded-r-md bg-indigo-600 py-1 px-4 text-[0.7rem] font-semibold uppercase leading-loose tracking-wider text-white dark:bg-indigo-700 dark:text-slate-100"
                   >
-                    {{ portfolio.attributes.category ?? 'Cat.' }}
+                    {{ portfolio?.category ?? 'Cat.' }}
                   </div>
                   <a href="#">
                     <h5
                       class="mt-2 px-4 pt-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-slate-100"
                     >
-                      {{ portfolio.attributes.title ?? 'Title' }}
+                      {{ portfolio?.title ?? 'Title' }}
                     </h5>
                   </a>
                   <span
                     class="mt-4 pb-1 pr-2 text-right text-xs font-semibold uppercase text-gray-400 dark:text-slate-500 dark:text-slate-400"
                   >
-                    {{ formatDate(portfolio.attributes.date) ?? '1972' }}
+                    {{ formatDate(portfolio?.date) ?? '1972' }}
                   </span>
                 </div>
               </div>
@@ -128,6 +127,7 @@
             </div>
             <template #wrapper-end></template>
           </swiper>
+          </ClientOnly>
           <nav aria-label="Progress" class="z-10 w-full px-4">
             <ol
               role="list"
@@ -141,6 +141,7 @@
         <div
           class="col-span-10 space-y-4 px-4 sm:col-span-5 md:col-span-10 lg:col-span-5 xl:col-span-4"
         >
+          <ClientOnly>
           <swiper
             :modules="modules"
             :slides-per-view="1"
@@ -166,14 +167,15 @@
               <div
                 class="text-3xl font-extrabold capitalize leading-tight text-gray-900 dark:text-slate-200 sm:text-4xl"
               >
-                {{ portfolio.attributes.title ?? 'Title' }}
+                {{ portfolio?.title ?? 'Title' }}
               </div>
               <div class="my-8 text-gray-500 dark:text-slate-400">
                 {{
-                  portfolio.attributes.description ??
+                  portfolio?.description ??
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et posuere nisl, non tincidunt nunc. Nullam tempor metus ac arcu cursus, sed dignissim quam ultrices. Mauris quis tellus libero. Morbi tincidunt nunc a mi ornare accumsan. Donec in felis ultricies libero dignissim feugiat in vel odio. Fusce ac nunc sapien. Curabitur non pulvinar enim. Vivamus eget odio augue. Integer mollis nisl in condimentum posuere. Nullam id diam sit amet ligula suscipit ornare.'
                 }}
               </div>
+
               <swiper
                 :modules="modules"
                 :slides-per-view="2"
@@ -221,15 +223,15 @@
               >
                 <template #wrapper-start></template>
                 <swiper-slide
-                  v-for="(pimg, key) in portfolio.attributes.previews.data"
+                  v-for="(pimg, key) in portfolio?.previews?.data"
                   :key="key"
                   class="max-w-full"
                 >
                   <a
                     :key="key"
-                    :href="formatImageUrl(pimg.attributes.url)"
-                    :data-pswp-width="pimg.attributes.width"
-                    :data-pswp-height="pimg.attributes.height"
+                    :href="formatImageUrl(pimg?.url)"
+                    :data-pswp-width="pimg?.width"
+                    :data-pswp-height="pimg?.height"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -239,11 +241,11 @@
                       :src="
                         portfolios?.data.length > 0
                           ? formatImageUrl(
-                              pimg.attributes.formats.thumbnail.url
+                              pimg?.formats.thumbnail.url
                             )
-                          : pimg.attributes.url
+                          : pimg?.url
                       "
-                      :alt="pimg.attributes.alternativeText"
+                      :alt="pimg?.alternativeText"
                     />
                     </a>
                 </swiper-slide>
@@ -257,6 +259,7 @@
               </swiper>
             </swiper-slide>
           </swiper>
+          </ClientOnly>
           <div class="flex justify-end space-x-1 overflow-hidden">
             <button class="sbutton-detached-prev">
               <ChevronDoubleLeftIcon class="h-5 w-5" />

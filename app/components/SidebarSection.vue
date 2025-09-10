@@ -44,14 +44,12 @@
                           class="relative mx-auto h-56 w-56 shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
                           :src="
                           formatImageUrl(
-                            identity?.data?.picture?.data?.attributes
-                              .url
+                            identity?.data?.picture?.data?.url
                           ) ??
                           'https://via.placeholder.com/224?text=Picture+224x224'
                         "
                           :alt="
-                          identity?.data?.picture?.data?.attributes
-                            .alternativeText ??
+                          identity?.data?.picture?.data?.alternativeText ??
                           'Photo de profil en 224*224 minimum, ratio de 1/1'
                         "
                       />
@@ -180,13 +178,12 @@
                       class="relative mx-auto h-56 w-56 shrink-0 rounded-full border-4 border-solid border-indigo-600 dark:border-indigo-800"
                       :src="
                       formatImageUrl(
-                        identity?.data?.picture?.data?.attributes.url
+                        identity?.data?.picture?.data?.url
                       ) ??
                       'https://via.placeholder.com/224?text=Picture+224x224'
                     "
                       :alt="
-                      identity?.data?.picture?.data?.attributes
-                        .alternativeText ??
+                      identity?.data?.picture?.data?.alternativeText ??
                       'Photo de profil en 224*224 minimum, ratio de 1/1'
                     "
                   />
