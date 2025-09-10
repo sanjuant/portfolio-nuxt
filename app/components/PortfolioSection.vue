@@ -84,14 +84,14 @@
                             portfolio?.cover?.data?.formats
                               .medium.url
                           )
-                        : portfolio?.cover?.data?.url
+                        : portfolio?.cover?.url
                     "
                     :src="
                       portfolios?.data.length > 0
                         ? formatImageUrl(
                             portfolio?.cover?.data?.formats?.thumbnail?.url
                           )
-                        : portfolio?.cover?.data?.url
+                        : portfolio?.cover?.url
                     "
                     :alt="
                       portfolio?.cover?.data?.alternativeText

@@ -112,7 +112,7 @@
                       <img
                         class="h-12 w-32"
                         :src="
-                          skill.logo?.data?.url ??
+                          skill.logo?.url ??
                           'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg'
                         "
                         :alt="
