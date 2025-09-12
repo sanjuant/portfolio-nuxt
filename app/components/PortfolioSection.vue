@@ -13,7 +13,6 @@
         <div
           class="col-span-10 sm:col-span-5 md:col-span-10 lg:col-span-5 xl:col-span-6"
         >
-          <ClientOnly>
           <swiper
             :modules="modules"
             :slides-per-view="1"
@@ -78,18 +77,10 @@
                   <img
                     class="h-64 w-full rounded-t-lg object-cover"
                     loading="lazy"
-                    :data-src="
-                      portfolios?.data.length > 0
-                        ? formatImageUrl(
-                            portfolio?.cover?.data?.formats
-                              .medium.url
-                          )
-                        : portfolio?.cover?.url
-                    "
                     :src="
                       portfolios?.data.length > 0
                         ? formatImageUrl(
-                            portfolio?.cover?.data?.formats?.thumbnail?.url
+                            portfolio?.cover?.formats?.medium?.url
                           )
                         : portfolio?.cover?.url
                     "
@@ -127,7 +118,6 @@
             </div>
             <template #wrapper-end></template>
           </swiper>
-          </ClientOnly>
           <nav aria-label="Progress" class="z-10 w-full px-4">
             <ol
               role="list"
@@ -141,7 +131,6 @@
         <div
           class="col-span-10 space-y-4 px-4 sm:col-span-5 md:col-span-10 lg:col-span-5 xl:col-span-4"
         >
-          <ClientOnly>
           <swiper
             :modules="modules"
             :slides-per-view="1"
@@ -223,7 +212,7 @@
               >
                 <template #wrapper-start></template>
                 <swiper-slide
-                  v-for="(pimg, key) in portfolio?.previews?.data"
+                  v-for="(pimg, key) in portfolio?.previews"
                   :key="key"
                   class="max-w-full"
                 >
@@ -259,7 +248,6 @@
               </swiper>
             </swiper-slide>
           </swiper>
-          </ClientOnly>
           <div class="flex justify-end space-x-1 overflow-hidden">
             <button class="sbutton-detached-prev">
               <ChevronDoubleLeftIcon class="h-5 w-5" />
@@ -278,7 +266,7 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onMounted, onBeforeUnmount, ref} from 'vue'
 import {useRuntimeConfig} from 'nuxt/app'
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'
@@ -300,7 +288,7 @@ import {
 
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
-import {useStrapiApi} from "~~/composables/useStrapi.js";
+import {useStrapiApi} from "~~/composables/useStrapi.ts";
 
 let lightbox = null
 
@@ -316,6 +304,13 @@ onMounted(() => {
   }
 })
 
+onBeforeUnmount(() => {
+  if (lightbox) {
+    lightbox.destroy()
+    lightbox = null
+  }
+})
+
 const config = useRuntimeConfig()
 
 const controlledSwiper = ref(null)
@@ -327,7 +322,6 @@ const setControlledSwiper = (swiper) => {
 const {data: portfolios} = await useStrapiApi('/portfolios', {
   query: { 
     pLevel: '',
-    sort: 'date:DESC'
   }
 })
 
