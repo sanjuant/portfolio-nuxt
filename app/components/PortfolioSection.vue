@@ -322,6 +322,7 @@ const setControlledSwiper = (swiper) => {
 const {data: portfolios} = await useStrapiApi('/portfolios', {
   query: { 
     pLevel: '',
+    sort: 'date:DESC'
   }
 })
 
