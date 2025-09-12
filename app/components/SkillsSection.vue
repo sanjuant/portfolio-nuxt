@@ -113,7 +113,7 @@
                           'https://res.cloudinary.com/sanjuant/image/upload/v1689166970/portfolio/powershell_logo_watermark_6870cfd148.svg'
                         "
                         :alt="
-                          skill.logo?.data?.alternativeText ?? 'Logo Workcation avec filigrane'
+                          skill.logo?.alternativeText ?? 'Logo Workcation avec filigrane'
                         "
                       />
                     </div>

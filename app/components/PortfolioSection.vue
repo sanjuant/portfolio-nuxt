@@ -85,7 +85,7 @@
                         : portfolio?.cover?.url
                     "
                     :alt="
-                      portfolio?.cover?.data?.alternativeText
+                      portfolio?.cover?.alternativeText
                     "
                   />
                 </div>
