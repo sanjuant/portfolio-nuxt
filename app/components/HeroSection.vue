@@ -1,6 +1,6 @@
 <template>
   <div id="home" class="relative overflow-hidden bg-white dark:bg-slate-900">
-    <div class="lg:h-152 max-w-7xl xl:ml-32">
+    <div class="max-w-7xl xl:ml-32">
       <div
           class="relative z-10 mx-auto bg-white pb-12 dark:bg-slate-900 lg:w-full lg:max-w-2xl xl:mx-0"
       >
@@ -23,7 +23,7 @@
                 <span class="block sm:text-center xl:inline">
                   {{ hero?.data?.welcome ?? 'Welcome' }}
                 </span>
-                <span class="block flex min-h-28 md:min-h-48">
+                <span class="block flex min-h-[7rem] md:min-h-[12rem]">
                   <span
                       class="my-auto block overflow-hidden text-indigo-600 sm:m-auto sm:text-center"
                   >I'm
